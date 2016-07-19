@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "tsc -p ./",
-    "start": "npm run build && node ./dist/index.js"
+    "typings-install": "typings install",
+    "build": "tsc -p ./",
+    "build:watch": "tsc -p ./ -w",
+    "start": "npm run build && node ./dist/index.js",
+    "dev": "npm run build:watch & (sleep 5 && nodemon ./dist/index.js)",
+    "nodemon":""
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,10 @@
   "homepage": "https://github.com/zestxjest/clubo#readme",
   "dependencies": {
     "koa": "^2.0.0",
-    "koa-router": "^7.0.1"
+    "koa-router": "^7.0.1",
+    "thinky": "^2.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
   }
 }

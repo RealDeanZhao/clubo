@@ -11,6 +11,12 @@
     "files": [
         "./typings/index.d.ts",
         "./src/server/app.ts",
-        "./index.ts"
+        "./index.ts",
+        "./src/server/models/User.ts",
+        "./src/server/models/Topic.ts",
+        "./src/server/models/TopicCollect.ts",
+        "./src/server/models/Reply.ts",
+        "./src/server/models/Message.ts",
+        "./src/server/models/index.ts"
     ]
 }
