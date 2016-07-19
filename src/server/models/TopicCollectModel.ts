@@ -2,10 +2,10 @@ const thinky = require('thinky')();
 const type = thinky.type;
 const r = thinky.r;
 
-const TopicCollect = thinky.createModel('TopicCollect', {
+const TopicCollectModel = thinky.createModel('TopicCollect', {
     userId: String,
     topicId: String,
     createAt: type.date().default(r.now())
 });
 
-export {TopicCollect}
+export {TopicCollectModel}

@@ -2,7 +2,7 @@ const thinky = require('thinky')();
 const type = thinky.type;
 const r = thinky.r;
 
-const User = thinky.createModel('User', {
+const UserModel = thinky.createModel('User', {
     name: String,
     loginName: String,
     pass: String,
@@ -39,4 +39,6 @@ const User = thinky.createModel('User', {
     accessToken: String
 });
 
-export {User}
+
+
+export {UserModel}

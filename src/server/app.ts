@@ -1,26 +1,23 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
-import {User} from './models'
+import {UserModel} from './models';
+import {UserRepository} from './repositories/UserRepository';
+var userRepository = new UserRepository();
 
 const Thinky = require('thinky');
 
 const app = new Koa();
 const router = new Router();
- 
 
 
 
-router.get('/hi/:user', (ctx, next) => {
-    let user = new User({
-        name: 'Dean Zhao',
-        loginName: 'xiaozhao'
-    });
-     
 
-    user.saveAll().then(function (result: any) {
-
-    });
-    ctx.body = `hi, ${ctx.params.user}`;
+router.get('/user/:id', async (ctx, next) => {
+    var user = await userRepository.getUserById(ctx.params.id);
+    var haha = await userRepository.getUsersByNames(['dean', 'xiaozhao']);
+    //console.log(user);
+    console.log(haha);
+    ctx.body = `hi, ${user.id}`;
 });
 
 app.use(router.routes());

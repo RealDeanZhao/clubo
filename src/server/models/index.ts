@@ -1,7 +1,7 @@
-import {User} from './User';
-import {Topic} from './Topic';
-import {TopicCollect} from './TopicCollect';
-import {Reply}  from './Reply';
-import {Message}  from './Message';
+import {UserModel} from './UserModel';
+import {TopicModel} from './TopicModel';
+import {TopicCollectModel} from './TopicCollectModel';
+import {ReplyModel}  from './ReplyModel';
+import {MessageModel}  from './MessageModel';
 
-export {User, Topic, Reply, TopicCollect, Message}
+export {UserModel, TopicModel, ReplyModel, TopicCollectModel, MessageModel}

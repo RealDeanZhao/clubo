@@ -2,9 +2,9 @@ const thinky = require('thinky')();
 const type = thinky.type;
 const r = thinky.r;
 
-const Message = thinky.createModel('Message', {
+const MessageModel = thinky.createModel('Message', {
     type: String,
-    masterid: String,
+    masterId: String,
     authorId: String,
     topicId: String,
     replyId: String,
@@ -12,4 +12,4 @@ const Message = thinky.createModel('Message', {
     createAt: type.date().default(r.now())
 })
 
-export {Message}
+export {MessageModel}

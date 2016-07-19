@@ -2,7 +2,7 @@ const thinky = require('thinky')();
 const type = thinky.type;
 const r = thinky.r;
 
-const Reply = thinky.createModel('Reply', {
+const ReplyModel = thinky.createModel('Reply', {
     content: String,
     topicId: String,
     authorId: String,
@@ -14,4 +14,4 @@ const Reply = thinky.createModel('Reply', {
     delete: type.boolean().default(false)
 })
 
-export {Reply}
+export {ReplyModel}
