@@ -2,8 +2,8 @@
   "globalDependencies": {
     "koa": "registry:dt/koa#2.0.0+20160619030120",
     "koa-router": "registry:dt/koa-router#7.0.0+20160314083221",
-    "node": "registry:dt/node#6.0.0+20160709114037",
-    "react": "registry:dt/react#0.14.0+20160630100702",
+    "node": "registry:dt/node#6.0.0+20160720070758",
+    "react": "registry:dt/react#0.14.0+20160720060442",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-redux": "registry:dt/react-redux#4.4.0+20160720003245",
     "redux": "registry:dt/redux#3.5.2+20160703092728"

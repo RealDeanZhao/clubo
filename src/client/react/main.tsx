@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import {rootReducer} from './reducers/Reducers';
 import {ConnectedApp} from './containers/App';
 
-
 const initialState = {};
 
 const store: Store<any> = createStore(rootReducer, initialState);

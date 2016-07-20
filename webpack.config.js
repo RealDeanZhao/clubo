@@ -1,7 +1,14 @@
+var path = require('path');
+var webpack = require('webpack');
+
 module.exports = {
-    entry: "./src/client/react/main.tsx",
+    entry: [
+        'bootstrap/dist/css/bootstrap.min.css',
+        './src/client/react/main.tsx'
+    ],
     output: {
-        filename: "./dist/bundle.js",
+        path: path.join(__dirname, 'dist'),
+        filename: "bundle.js",
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -15,7 +22,13 @@ module.exports = {
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.css$/, loader: "style-loader!css-loader" },
+            { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/font-woff" },
+            { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/font-woff" },
+            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/octet-stream" },
+            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
+            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=image/svg+xml" }
         ],
 
         preLoaders: [
