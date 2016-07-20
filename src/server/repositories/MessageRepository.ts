@@ -1,3 +1,8 @@
+import {MessageModel} from '../models/MessageModel';
+const thinky = require('thinky')();
+const r = thinky.r;
+
+
 interface IMessageRepository {
     getMessagesCountByUserId(userId: String): any;
     getMessageById(id: String): any;

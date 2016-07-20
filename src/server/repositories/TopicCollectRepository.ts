@@ -1,7 +1,15 @@
 import {TopicCollectModel} from '../models/TopicCollectModel';
-import {ITopicCollectRepository} from './ITopicCollectRepository';
 const thinky = require('thinky')();
 const r = thinky.r;
+
+export {ITopicCollectRepository, TopicCollectRepository}
+
+interface ITopicCollectRepository {
+    getTopicCollect(userId: String, topicId: String): any;
+    getTopicCollectsByUserId(userId: string): any;
+    addOrUpdate(userId: string, topicId: string): void;
+    remove(userId: string, topicId: String): void;
+}
 
 class TopicCollectRepository implements ITopicCollectRepository {
     getTopicCollect(userId: String, topicId: String): any {
@@ -27,3 +35,5 @@ class TopicCollectRepository implements ITopicCollectRepository {
 
     }
 }
+
+
