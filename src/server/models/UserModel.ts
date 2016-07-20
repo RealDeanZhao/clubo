@@ -39,6 +39,4 @@ const UserModel = thinky.createModel('User', {
     accessToken: String
 });
 
-
-
 export {UserModel}

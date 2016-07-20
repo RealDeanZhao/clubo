@@ -10,7 +10,7 @@
     "build:watch": "tsc -p ./ -w",
     "start": "npm run build && node ./dist/index.js",
     "dev": "npm run build:watch & (sleep 5 && nodemon ./dist/index.js)",
-    "nodemon":""
+    "nodemon": ""
   },
   "repository": {
     "type": "git",
@@ -23,11 +23,18 @@
   },
   "homepage": "https://github.com/zestxjest/clubo#readme",
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "koa": "^2.0.0",
     "koa-router": "^7.0.1",
+    "koa-static": "^2.0.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
     "thinky": "^2.3.4"
   },
   "devDependencies": {
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "redux-devtools": "^3.3.1"
   }
 }

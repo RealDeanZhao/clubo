@@ -8,16 +8,24 @@
         "jsx": "react",
         "outDir": "./dist"
     },
-    "files": [
-        "./typings/index.d.ts",
-        "./src/server/app.ts",
-        "./index.ts",
-        "./src/server/models/UserModel.ts",
-        "./src/server/models/TopicModel.ts",
-        "./src/server/models/TopicCollectModel.ts",
-        "./src/server/models/ReplyModel.ts",
-        "./src/server/models/MessageModel.ts",
-        "./src/server/models/index.ts",
-        "./src/server/repositories/UserRepository.ts"
+    // "files": [
+    //     "./typings/index.d.ts",
+    //     "./src/server/app.ts",
+    //     "./index.ts",
+    //     "./src/server/models/UserModel.ts",
+    //     "./src/server/models/TopicModel.ts",
+    //     "./src/server/models/TopicCollectModel.ts",
+    //     "./src/server/models/ReplyModel.ts",
+    //     "./src/server/models/MessageModel.ts",
+    //     "./src/server/models/index.ts",
+    //     "./src/server/repositories/IUserRepository.ts",
+    //     "./src/server/repositories/UserRepository.ts",
+    //     "./src/server/repositories/ITopicCollectRepository.ts",
+    //     "./src/server/repositories/TopicCollectRepository.ts"
+    // ],
+    "exclude": [
+        "typings/globals",
+        "node_modules",
+        "dist"
     ]
 }
