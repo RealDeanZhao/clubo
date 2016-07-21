@@ -8,10 +8,14 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: "[name].js",
+        filename: "bundle.js",
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        })
     ],
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",

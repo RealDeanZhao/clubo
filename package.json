@@ -8,9 +8,8 @@
     "typings-install": "typings install",
     "build": "tsc -p ./",
     "build:watch": "tsc -p ./ -w",
-    "start": "webpack && npm run build && node ./dist/index.js",
-    "dev": "webpack && npm run build:watch & (sleep 5 && nodemon ./dist/index.js)",
-    "nodemon": ""
+    "start": "webpack  && node ./dist/index.js",
+    "dev": "webpack && npm run build && nodemon ./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -41,10 +40,14 @@
     "file-loader": "^0.9.0",
     "nodemon": "^1.9.2",
     "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.1"
   }
 }

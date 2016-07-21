@@ -6,6 +6,9 @@
     "react": "registry:dt/react#0.14.0+20160720060442",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
     "react-redux": "registry:dt/react-redux#4.4.0+20160720003245",
-    "redux": "registry:dt/redux#3.5.2+20160703092728"
+    "redux": "registry:dt/redux#3.5.2+20160703092728",
+    "redux-devtools": "registry:dt/redux-devtools#3.0.0+20160703120921",
+    "redux-devtools-dock-monitor": "registry:dt/redux-devtools-dock-monitor#1.0.1+20151216103641",
+    "redux-devtools-log-monitor": "registry:dt/redux-devtools-log-monitor#1.0.1+20151216103641"
   }
 }
