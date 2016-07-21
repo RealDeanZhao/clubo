@@ -8,7 +8,7 @@ export interface TopicListProps extends React.Props<any> {
     dispatch: any
 }
 
-class TopicList extends React.Component<TopicListProps, [{}]>{
+class TopicListBase extends React.Component<TopicListProps, [{}]>{
 
     componentWillMount = function (): any {
         const {topicList, dispatch} = this.props;
@@ -55,4 +55,4 @@ const mapStateToProps = (state: any, dispatch: any): TopicListProps => ({
     dispatch: dispatch
 });
 
-export const ConnectedTopicList = connect(mapStateToProps)(TopicList);
+export const TopicList = connect(mapStateToProps)(TopicListBase);

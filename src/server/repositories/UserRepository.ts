@@ -13,7 +13,7 @@ interface IUserRepository {
     getUserByMail(email: String): any;
     getUsersByQuery(query: String): any;
     getUserByNameAndKey(loginName: String, key: String): any;
-    addOrUpdate(): void;
+    addOrUpdate(user: any): void;
 }
 
 class UserRepository implements IUserRepository {
@@ -36,8 +36,8 @@ class UserRepository implements IUserRepository {
             .run();
     }
 
-    getUserByLoginName(loginName: String): any {
-        return UserModel.filter({ loginName: loginName })
+    async getUserByLoginName(loginName: String) {
+        return await UserModel.filter({ loginName: loginName })
             .run();
     }
 
@@ -55,7 +55,14 @@ class UserRepository implements IUserRepository {
             .run();
     }
 
-    addOrUpdate(): void {
+    async addOrUpdate(user: any) {
+        let userInDB = await this.getUserByLoginName(user.loginName);
 
+        if (userInDB.length > 0) {
+            userInDB.avatarUrl = user.avatar_url;
+            userInDB.save();
+        } else {
+            user.save();
+        }
     }
 }

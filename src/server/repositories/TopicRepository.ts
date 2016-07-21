@@ -19,8 +19,8 @@ interface ITopicRepository {
 }
 
 class TopicRepository implements ITopicRepository {
-    getTopics(): any {
-        return TopicModel.filter({})
+    async getTopics() {
+        return await TopicModel.filter({})
             .run();
     }
     getTopicById(id: String): any {

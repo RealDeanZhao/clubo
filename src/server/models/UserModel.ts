@@ -3,27 +3,39 @@ const type = thinky.type;
 const r = thinky.r;
 
 const UserModel = thinky.createModel('User', {
-    name: String,
+    //github
     loginName: String,
+    name: String,
+    avatarUrl: String,
     pass: String,
     email: type.string().email(),
     url: String,
-    avatarUrl: String,
+    htmlUrl: String,
+    followerUrl: String,
+    followingUrl: String,
+    gistsUrl: String,
+    starredUrl: String,
+    subscriptionsUrl: String,
+    organizationsUrl: String,
+    reposUrl: String,
+    eventsUrl: String,
+    receivedEventsUrl: String,
+
     location: String,
     signature: String,
     profile: String,
-    weibo: String,
-    avatar: String,
+    blog: String,
+    publicRepos: type.number().default(0),
     githubId: String,
     githubUsername: String,
     githubAccessToken: String,
-    isBlock: Boolean,
+    followerCount: type.number().default(0),
+    followingCount: type.number().default(0),
 
+    //clubo
     score: type.number().default(0),
     topicCount: type.number().default(0),
     replyCount: type.number().default(0),
-    followerCount: type.number().default(0),
-    followingCount: type.number().default(0),
     collectTagCount: type.number().default(0),
     collectTopicCount: type.number().default(0),
     createAt: type.date().default(Date.now()),
@@ -36,7 +48,12 @@ const UserModel = thinky.createModel('User', {
     fromWP: Boolean,
     retrieveTime: Number,
     retrieveKey: String,
-    accessToken: String
+    accessToken: String,
+
+    //other 
+    weibo: String,
+    isBlock: Boolean
+
 });
 
 export {UserModel}

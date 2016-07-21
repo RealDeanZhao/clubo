@@ -1,30 +1,26 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {TopicRowProps} from '../components/TopicRow';
-import {ConnectedTopicList, TopicListProps} from '../components/TopicList';
-import {NavBar} from '../components/NavBar';
+import * as C from '../components';
 
 export interface AppProps {
     dispatch: any
 }
 
-class App extends React.Component<AppProps, any>{
+class AppBase extends React.Component<AppProps, any>{
     render() {
-        
+
         return (
             <div>
-                <NavBar></NavBar>
+                <C.NavBar></C.NavBar>
                 <section className='content-wrap'>
                     <div className='containter'>
                         <div className='row'>
                             <main className='col-md-9 main-content'>
-                                <ConnectedTopicList></ConnectedTopicList>
+                                <C.TopicList></C.TopicList>
                             </main>
                             <aside className='col-md-3 sidebar'>
-                                <div className="panel panel-default">
-                                    <div className="panel-heading">Panel heading without title</div>
-                                    <div className="panel-body">Panel content</div>
-                                </div>
+                                <C.LoginPanel></C.LoginPanel>
+                                <C.UserInfoPanel></C.UserInfoPanel>
                             </aside>
                         </div>
                     </div>
@@ -38,4 +34,4 @@ const mapStateToProps = (state: any, dispatch: any): AppProps => ({
     dispatch: dispatch
 });
 
-export const ConnectedApp = connect(mapStateToProps)(App);
+export const App = connect(mapStateToProps)(AppBase);

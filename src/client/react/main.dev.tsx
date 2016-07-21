@@ -4,13 +4,11 @@ import { Store, StoreCreator, createStore, applyMiddleware, compose } from 'redu
 import { Provider } from 'react-redux';
 import thunkMiddleware    from 'redux-thunk';
 import {rootReducer} from './reducers/Reducers';
-import {ConnectedApp} from './components/App';
-import {DevTools} from './components/DevTools';
-
+import * as C from './components';
 
 const enhancer: any = compose(
   applyMiddleware(thunkMiddleware),
-  DevTools.instrument()
+  C.DevTools.instrument()
 );
 
 const initialState = {};
@@ -21,8 +19,8 @@ const store = createStore(rootReducer, {}, enhancer);
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      <ConnectedApp />
-      <DevTools/>
+      <C.App />
+      <C.DevTools/>
     </div>
   </Provider>,
   document.getElementById('app')
