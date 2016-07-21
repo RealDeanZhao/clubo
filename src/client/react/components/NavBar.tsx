@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+
 export interface NavBarProps extends React.Props<any> {
 
 }
@@ -31,3 +32,4 @@ export class NavBar extends React.Component<NavBarProps, {}>{
         )
     }
 }
+

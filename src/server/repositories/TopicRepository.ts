@@ -15,9 +15,14 @@ interface ITopicRepository {
     getTopic(id: String): any;
     reduceCount(id: String): any;
     addOrUpdate(): any;
+    getTopics(): any;
 }
 
 class TopicRepository implements ITopicRepository {
+    getTopics(): any {
+        return TopicModel.filter({})
+            .run();
+    }
     getTopicById(id: String): any {
 
     }

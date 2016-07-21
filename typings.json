@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
+    "isomorphic-fetch": "registry:dt/isomorphic-fetch#0.0.0+20160524142046",
     "koa": "registry:dt/koa#2.0.0+20160619030120",
     "koa-router": "registry:dt/koa-router#7.0.0+20160314083221",
     "node": "registry:dt/node#6.0.0+20160720070758",
@@ -9,6 +10,7 @@
     "redux": "registry:dt/redux#3.5.2+20160703092728",
     "redux-devtools": "registry:dt/redux-devtools#3.0.0+20160703120921",
     "redux-devtools-dock-monitor": "registry:dt/redux-devtools-dock-monitor#1.0.1+20151216103641",
-    "redux-devtools-log-monitor": "registry:dt/redux-devtools-log-monitor#1.0.1+20151216103641"
+    "redux-devtools-log-monitor": "registry:dt/redux-devtools-log-monitor#1.0.1+20151216103641",
+    "redux-thunk": "registry:dt/redux-thunk#2.1.0+20160703120921"
   }
 }

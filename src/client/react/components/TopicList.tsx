@@ -1,13 +1,22 @@
 import * as React from 'react';
 import {TopicRowProps, TopicRow} from './TopicRow';
+import {connect} from 'react-redux';
+import {fetchTopics} from '../actions/TopicAction';
 
-export interface TopicRowListProps extends React.Props<any> {
-    topicList: [TopicRowProps]
+export interface TopicListProps extends React.Props<any> {
+    topicList: [TopicRowProps],
+    dispatch: any
 }
 
-export class TopicRowList extends React.Component<TopicRowListProps, [{}]>{
+class TopicList extends React.Component<TopicListProps, [{}]>{
+
+    componentWillMount = function (): any {
+        const {topicList, dispatch} = this.props;
+        dispatch(fetchTopics());
+    };
     render() {
-        const {topicList} = this.props;
+
+        const {topicList, dispatch} = this.props;
         let key = 0;
         let list = topicList.map(function (topic) {
             return (
@@ -40,3 +49,10 @@ export class TopicRowList extends React.Component<TopicRowListProps, [{}]>{
         );
     }
 }
+
+const mapStateToProps = (state: any, dispatch: any): TopicListProps => ({
+    topicList: state.topicList,
+    dispatch: dispatch
+});
+
+export const ConnectedTopicList = connect(mapStateToProps)(TopicList);

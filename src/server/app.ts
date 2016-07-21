@@ -3,7 +3,11 @@ import * as Router from 'koa-router';
 import {resolve} from "path";
 import {UserModel} from './models';
 import {UserRepository} from './repositories/UserRepository';
+import {TopicRepository} from './repositories/TopicRepository';
+import {TopicApi} from './api/v1/TopicApi';
 var userRepository = new UserRepository();
+var topicRepository = new TopicRepository();
+var topicApi = new TopicApi();
 
 const Thinky = require('thinky');
 
@@ -20,6 +24,8 @@ router.get('/user/:id', async (ctx, next) => {
     console.log(haha);
     ctx.body = `hi, ${user.id}`;
 });
+
+router.get('/api/v1/topics/:page?', topicApi.getAll);
 
 app.use(statics('.'));
 console.log(__dirname);

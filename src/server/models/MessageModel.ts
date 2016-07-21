@@ -9,7 +9,7 @@ const MessageModel = thinky.createModel('Message', {
     topicId: String,
     replyId: String,
     hasRead: type.boolean().default(false),
-    createAt: type.date().default(r.now())
+    createAt: type.date().default(Date.now())
 })
 
 export {MessageModel}

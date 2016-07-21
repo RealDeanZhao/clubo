@@ -7,8 +7,8 @@ const ReplyModel = thinky.createModel('Reply', {
     topicId: String,
     authorId: String,
     replyId: String,
-    createAt: type.date().default(r.now()),
-    updateAt: type.date().default(r.now()),
+    createAt: type.date().default(Date.now()),
+    updateAt: type.date().default(Date.now()),
     contentIsHtml: type.boolean(),
     ups: String,
     delete: type.boolean().default(false)

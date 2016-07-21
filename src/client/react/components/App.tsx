@@ -1,17 +1,16 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Dispatch } from 'redux';
-import {TopicRowList, TopicRowListProps} from '../components/TopicRowList';
+import {TopicRowProps} from '../components/TopicRow';
+import {ConnectedTopicList, TopicListProps} from '../components/TopicList';
 import {NavBar} from '../components/NavBar';
 
 export interface AppProps {
-    topicList: TopicRowListProps
+    dispatch: any
 }
 
 class App extends React.Component<AppProps, any>{
     render() {
-        const {topicList} = this.props;
-        console.log(topicList.topicList);
+        
         return (
             <div>
                 <NavBar></NavBar>
@@ -19,7 +18,7 @@ class App extends React.Component<AppProps, any>{
                     <div className='containter'>
                         <div className='row'>
                             <main className='col-md-9 main-content'>
-                                <TopicRowList topicList={topicList.topicList}></TopicRowList>
+                                <ConnectedTopicList></ConnectedTopicList>
                             </main>
                             <aside className='col-md-3 sidebar'>
                                 <div className="panel panel-default">
@@ -35,8 +34,8 @@ class App extends React.Component<AppProps, any>{
     }
 }
 
-const mapStateToProps = (state: any): AppProps => ({
-    topicList: state.topicList
+const mapStateToProps = (state: any, dispatch: any): AppProps => ({
+    dispatch: dispatch
 });
 
 export const ConnectedApp = connect(mapStateToProps)(App);

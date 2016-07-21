@@ -5,7 +5,7 @@ const r = thinky.r;
 const TopicCollectModel = thinky.createModel('TopicCollect', {
     userId: String,
     topicId: String,
-    createAt: type.date().default(r.now())
+    createAt: type.date().default(Date.now())
 });
 
 export {TopicCollectModel}
