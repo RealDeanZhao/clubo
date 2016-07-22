@@ -25,6 +25,7 @@ class AppBase extends React.Component<AppProps, any>{
                         </div>
                     </div>
                 </section>
+                <C.SignInModal></C.SignInModal>
             </div>
         );
     }

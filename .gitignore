@@ -39,6 +39,7 @@ bower_components
 
 # Typescript
 typings/globals
+typings/modules
 
 # dist
 dist

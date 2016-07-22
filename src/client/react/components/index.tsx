@@ -5,3 +5,4 @@ export {TopicList} from './TopicList';
 export {TopicRow} from './TopicRow';
 export {UserInfoPanel} from './UserInfoPanel';
 export {LoginPanel} from './LoginPanel';
+export {SignInModal} from './SignInModal';

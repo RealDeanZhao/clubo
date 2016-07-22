@@ -1,23 +1,25 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as fetch from 'isomorphic-fetch';
-var passport = require('koa-passport');
-var GitHubStrategy = require('passport-github2');
-
+import * as bodyParser  from 'koa-bodyparser';
+import * as jwt from 'jsonwebtoken';
 import {resolve} from "path";
+
+const passport = require('koa-passport');
+const GitHubStrategy = require('passport-github2');
+const koaJwt = require('koa-jwt');
+const Thinky = require('thinky');
+const statics = require('koa-static');
+
 import * as M from './models';
 import * as R from './repositories';
 import * as A from './api/v1';
 
-var userRepository = new R.LocalUserRepository();
-var topicRepository = new R.TopicRepository();
-var topicApi = new A.TopicApi();
-
-const Thinky = require('thinky');
 
 const app = new Koa();
 const router = new Router();
-const statics = require('koa-static');
+
+const topicApi = new A.TopicApi();
 
 passport.serializeUser(function (user: any, done: any) {
     done(null, user.id)
@@ -26,7 +28,6 @@ passport.serializeUser(function (user: any, done: any) {
 passport.deserializeUser(function (id: any, done: any) {
     done(null, id)
 })
-
 
 passport.use(new GitHubStrategy({
     clientID: '185813c4f54bbe2c338e',
@@ -64,16 +65,28 @@ passport.use(new GitHubStrategy({
     done(null, profile);
 }));
 
-router.get('/', (ctx, next) => {
-    console.log('1');
-});
-router.get('/user/:id', async (ctx, next) => {
-    var user = await userRepository.getUserById(ctx.params.id);
-    var haha = await userRepository.getUsersByNames(['dean', 'xiaozhao']);
-    ctx.body = `hi, ${user.id}`;
+app.use(bodyParser());
+
+router.post('/auth/login', (ctx: any, next: any) => {
+    console.log(ctx.request.body);
+
+    if (!(ctx.request.body.username === '1' && ctx.request.body.password === '2')) {
+        ctx.body = 'Wrong user or password';
+        return;
+    }
+    var profile = {
+        username: ctx.request.body.username,
+        id: 111
+    }
+    var token = jwt.sign(profile, 'clubo-jwt-secret', { expiresIn: 60 * 5 });
+
+    ctx.body = token;
 });
 
-router.get('/api/v1/topics/:page?', topicApi.getAll);
+router.get('/api/v1/topics/:page?', koaJwt({
+    secret: 'clubo-jwt-secret',
+    passthrough: true
+}), topicApi.getAll);
 
 router.get('/auth/github', passport.authenticate('github'));
 
@@ -81,12 +94,10 @@ router.get('/auth/github/callback',
     passport.authenticate('github', { successRedirect: '/', failureRedirect: '/api/v1/topics' })
 );
 
-router.get('/logout', async (ctx: any, next: any) => {
+app.use(router.routes());
 
-});
 app.use(passport.initialize());
 
 app.use(statics('.'));
-app.use(router.routes());
 
 export {app};

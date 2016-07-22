@@ -1,20 +1,41 @@
 import * as React from 'react';
-
+import {connect} from 'react-redux';
+import {showSignInModal} from '../actions';
 
 export interface LoginPanelProps extends React.Props<any> {
-
+    dispatch: any
 }
 
-export class LoginPanel extends React.Component<LoginPanelProps, {}>{
+export class LoginPanelBase extends React.Component<LoginPanelProps, {}>{
+
+    showModal = (): any => {
+        const {dispatch} = this.props;
+        dispatch(showSignInModal());
+    };
+
     render() {
+        const {dispatch} = this.props;
+
         return (
             <div className="panel panel-default">
-                <div className="panel-heading">Panel heading without title</div>
+                <div className="panel-heading">Login: </div>
                 <div className="panel-body">
-                    <a href="/auth/github" className="btn btn-info" role="button">Login With Github</a>
+                    <div>
+                        <a href="#" onClick={this.showModal}>Sign In</a>
+                        <span> or </span>
+                        <a href="#" >Sign Up</a>
+                    </div>
+                    <div>
+                        <a href="/auth/github" className="btn btn-info" role="button">Login With Github</a>
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
+const mapStateToProps = (state: any, ownProps: any): any => ({
+
+});
+
+export const LoginPanel = connect(mapStateToProps)(LoginPanelBase);

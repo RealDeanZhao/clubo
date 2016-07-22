@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import {topicList} from './TopicListReducer';
+import * as All from '../reducers';
 
 const rootReducer = combineReducers({
-    topicList
+    topicList: All.topicList,
+    showSignInModal: All.showSignInModal
 });
 
 export { rootReducer};
