@@ -38,7 +38,7 @@ bower_components
 .node_repl_history
 
 # Typescript
-typings
+typings/globals
 
 # dist
 dist

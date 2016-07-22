@@ -1,8 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Store, StoreCreator, createStore, applyMiddleware, compose } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware    from 'redux-thunk';
+import {Router, Route, browserHistory} from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import {rootReducer} from './reducers/Reducers';
 import * as C from './components';
 
@@ -17,9 +20,15 @@ const enhancer: any = compose(
   ...composeParams
 );
 
-const initialState = {};
+const myWindow: any = window;
+myWindow.__INITIAL_STATE__ = myWindow.__INITIAL_STATE__ || {};
+const initialState = myWindow.__INITIAL_STATE__;
 
-const store = createStore(rootReducer, {}, enhancer);
+const store = createStore(
+  combineReducers({
+    rootReducer,
+    routing: routerReducer
+  }), initialState, enhancer);
 
 const devtools = () => {
   if (process.env.NODE_ENV !== 'production') {
@@ -28,11 +37,18 @@ const devtools = () => {
   }
 }
 
+const histroy = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
   <Provider store={store}>
     <div>
+      <Router history={histroy}>
+        <Route path="/" component = {C.App}>
+          <Route  path="/app" >
+          </Route>
+        </Route>
+      </Router>
       <div>
-        <C.App />
         {devtools() }
       </div>
     </div>

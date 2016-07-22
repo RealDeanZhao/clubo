@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import * as C from '../components';
 
-export interface AppProps {
+export interface AppProps extends React.Props<any> {
     dispatch: any
 }
 
@@ -30,8 +30,8 @@ class AppBase extends React.Component<AppProps, any>{
     }
 }
 
-const mapStateToProps = (state: any, dispatch: any): AppProps => ({
-    dispatch: dispatch
+const mapStateToProps = (state: any, ownProps: any): any => ({
+
 });
 
 export const App = connect(mapStateToProps)(AppBase);

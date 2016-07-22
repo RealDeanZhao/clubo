@@ -14,6 +14,7 @@ class TopicListBase extends React.Component<TopicListProps, [{}]>{
         const {topicList, dispatch} = this.props;
         dispatch(fetchTopics());
     };
+
     render() {
 
         const {topicList, dispatch} = this.props;
@@ -50,9 +51,9 @@ class TopicListBase extends React.Component<TopicListProps, [{}]>{
     }
 }
 
-const mapStateToProps = (state: any, dispatch: any): TopicListProps => ({
-    topicList: state.topicList,
-    dispatch: dispatch
+const mapStateToProps = (state: any, ownProps: any): any => ({
+    topicList: state.rootReducer.topicList
 });
+
 
 export const TopicList = connect(mapStateToProps)(TopicListBase);

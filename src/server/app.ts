@@ -5,14 +5,13 @@ var passport = require('koa-passport');
 var GitHubStrategy = require('passport-github2');
 
 import {resolve} from "path";
-import {UserModel} from './models';
-import {UserRepository} from './repositories/UserRepository';
-import {TopicRepository} from './repositories/TopicRepository';
-import {TopicApi} from './api/v1/TopicApi';
+import * as M from './models';
+import * as R from './repositories';
+import * as A from './api/v1';
 
-var userRepository = new UserRepository();
-var topicRepository = new TopicRepository();
-var topicApi = new TopicApi();
+var userRepository = new R.LocalUserRepository();
+var topicRepository = new R.TopicRepository();
+var topicApi = new A.TopicApi();
 
 const Thinky = require('thinky');
 
@@ -28,13 +27,14 @@ passport.deserializeUser(function (id: any, done: any) {
     done(null, id)
 })
 
+
 passport.use(new GitHubStrategy({
     clientID: '185813c4f54bbe2c338e',
     clientSecret: '8ed6179a384e4422d38c9afbd48f53040efc9e74',
     callbackURL: "http://localhost:3000/auth/github/callback"
-}, function (accessToken: any, tokenSecret: any, profile: any, done: any) {
+}, async (accessToken: any, tokenSecret: any, profile: any, done: any) => {
     const _json = profile._json;
-    var user = new UserModel({
+    let githubUser = new M.GithubUserModel({
         loginName: _json.login,
         name: _json.name,
         avatarUrl: _json.avatar_url,
@@ -53,12 +53,20 @@ passport.use(new GitHubStrategy({
         location: _json.location,
         publicRepos: _json.public_repos
     });
-    var userRepository = new UserRepository();
-    userRepository.addOrUpdate(user);
+    const githubUserRepository = new R.GithubUserRepository();
+    githubUser = await githubUserRepository.addOrUpdate(githubUser);
+    const userRepository = new R.LocalUserRepository();
+    let localUser = new M.LocalUserModel({
+        githubUserId: githubUser.id,
+        userName: githubUser.loginName
+    });
+    localUser = await userRepository.addOrUpdate(localUser);
     done(null, profile);
 }));
 
-
+router.get('/', (ctx, next) => {
+    console.log('1');
+});
 router.get('/user/:id', async (ctx, next) => {
     var user = await userRepository.getUserById(ctx.params.id);
     var haha = await userRepository.getUsersByNames(['dean', 'xiaozhao']);
@@ -73,13 +81,12 @@ router.get('/auth/github/callback',
     passport.authenticate('github', { successRedirect: '/', failureRedirect: '/api/v1/topics' })
 );
 
-router.get('/logout', async (ctx:any, next:any)=>{
+router.get('/logout', async (ctx: any, next: any) => {
 
 });
 app.use(passport.initialize());
 
 app.use(statics('.'));
-console.log(__dirname);
 app.use(router.routes());
 
 export {app};

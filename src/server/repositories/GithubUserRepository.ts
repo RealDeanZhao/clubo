@@ -1,11 +1,11 @@
-import {UserModel} from '../models/UserModel';
+import * as M from '../models';
 
 const thinky = require('thinky')();
 const r = thinky.r;
 
-export {IUserRepository, UserRepository}
+export {IGithubUserRepository, GithubUserRepository}
 
-interface IUserRepository {
+interface IGithubUserRepository {
     getUserById(id: string): any;
     getUsersByNames(names: [String]): any;
     getUsersByIds(ids: [String]): any;
@@ -13,36 +13,37 @@ interface IUserRepository {
     getUserByMail(email: String): any;
     getUsersByQuery(query: String): any;
     getUserByNameAndKey(loginName: String, key: String): any;
-    addOrUpdate(user: any): void;
+    addOrUpdate(user: any): any;
 }
 
-class UserRepository implements IUserRepository {
-    getUserById(id: string): any {
-        return UserModel.get(id)
+class GithubUserRepository implements IGithubUserRepository {
+    async getUserById(id: string) {
+        return await M.GithubUserModel.get(id)
             .run();
     }
 
     getUsersByNames(names: [String]): any {
-        return UserModel.filter(function (user: any) {
+        return M.GithubUserModel.filter(function (user: any) {
             return r.expr(names).contains(user("loginName"));
         })
             .run();
     }
 
     getUsersByIds(ids: [String]): any {
-        return UserModel.filter(function (user: any) {
+        return M.GithubUserModel.filter(function (user: any) {
             return r.expr(ids).contains(user("id"));
         })
             .run();
     }
 
     async getUserByLoginName(loginName: String) {
-        return await UserModel.filter({ loginName: loginName })
+        const result = await M.GithubUserModel.filter({ loginName: loginName })
             .run();
+        return result[0];
     }
 
     getUserByMail(email: String): any {
-        return UserModel.filter({ email: email })
+        return M.GithubUserModel.filter({ email: email })
             .run();
     }
 
@@ -51,18 +52,16 @@ class UserRepository implements IUserRepository {
     }
 
     getUserByNameAndKey(loginName: String, key: String): any {
-        return UserModel.filter({ loginName: loginName, retrieveKey: key })
+        return M.GithubUserModel.filter({ loginName: loginName, retrieveKey: key })
             .run();
     }
 
     async addOrUpdate(user: any) {
         let userInDB = await this.getUserByLoginName(user.loginName);
-
-        if (userInDB.length > 0) {
-            userInDB.avatarUrl = user.avatar_url;
-            userInDB.save();
+        if (userInDB) {
+            return await userInDB.save();
         } else {
-            user.save();
+            return await user.save();
         }
     }
 }

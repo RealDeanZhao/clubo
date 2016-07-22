@@ -2,6 +2,7 @@ import {MessageModel} from '../models/MessageModel';
 const thinky = require('thinky')();
 const r = thinky.r;
 
+export {IMessageRepository}
 
 interface IMessageRepository {
     getMessagesCountByUserId(userId: String): any;
@@ -12,4 +13,3 @@ interface IMessageRepository {
     updateMessagesToRead(userId: String): any;
 }
 
-export {IMessageRepository}

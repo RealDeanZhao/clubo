@@ -2,8 +2,7 @@ const thinky = require('thinky')();
 const type = thinky.type;
 const r = thinky.r;
 
-const UserModel = thinky.createModel('User', {
-    //github
+const GithubUserModel = thinky.createModel('GithubUser', {
     loginName: String,
     name: String,
     avatarUrl: String,
@@ -20,7 +19,6 @@ const UserModel = thinky.createModel('User', {
     reposUrl: String,
     eventsUrl: String,
     receivedEventsUrl: String,
-
     location: String,
     signature: String,
     profile: String,
@@ -32,28 +30,7 @@ const UserModel = thinky.createModel('User', {
     followerCount: type.number().default(0),
     followingCount: type.number().default(0),
 
-    //clubo
-    score: type.number().default(0),
-    topicCount: type.number().default(0),
-    replyCount: type.number().default(0),
-    collectTagCount: type.number().default(0),
-    collectTopicCount: type.number().default(0),
-    createAt: type.date().default(Date.now()),
-    updateAt: type.date().default(Date.now()),
-    isStart: Boolean,
-    level: String,
-    active: type.boolean().default(false),
-    receiveReplyMail: type.boolean().default(false),
-    receiveAtMail: type.boolean().default(false),
-    fromWP: Boolean,
-    retrieveTime: Number,
-    retrieveKey: String,
-    accessToken: String,
-
-    //other 
-    weibo: String,
-    isBlock: Boolean
-
+    localUserId: String
 });
 
-export {UserModel}
+export {GithubUserModel}
