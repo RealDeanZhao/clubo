@@ -3,7 +3,8 @@ const type = thinky.type;
 const r = thinky.r;
 
 const LocalUserModel = thinky.createModel('LocalUser', {
-    userName: String,
+    username: String,
+    password: String,
     score: type.number().default(0),
     topicCount: type.number().default(0),
     replyCount: type.number().default(0),

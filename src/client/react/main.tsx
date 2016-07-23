@@ -6,6 +6,8 @@ import thunkMiddleware    from 'redux-thunk';
 import {Router, Route, browserHistory} from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
+const RF = require('redux-form');
+
 import * as Reducers from './reducers';
 import * as C from './components';
 
@@ -28,7 +30,9 @@ const store = createStore(
   combineReducers({
     topicList: Reducers.topicList,
     showSignInModal: Reducers.showSignInModal,
-    routing: routerReducer
+    authencated: Reducers.authencated,
+    routing: routerReducer,
+    form: RF.reducer
   }), initialState, enhancer);
 
 const devtools = () => {

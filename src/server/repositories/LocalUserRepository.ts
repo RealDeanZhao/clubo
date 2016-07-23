@@ -3,57 +3,27 @@ import * as M from '../models';
 const thinky = require('thinky')();
 const r = thinky.r;
 
-export {ILocalUserRepository, LocalUserRepository}
+export { LocalUserRepository}
 
-interface ILocalUserRepository {
-    getUserById(id: string): any;
-    getUsersByNames(names: [String]): any;
-    getUsersByIds(ids: [String]): any;
-    getUserByLoginName(loginName: String): any;
-    getUserByMail(email: String): any;
-    getUsersByQuery(query: String): any;
-    getUserByNameAndKey(loginName: String, key: String): any;
-    addOrUpdate(user: any): void;
-}
-
-class LocalUserRepository implements ILocalUserRepository {
-    getUserById(id: string): any {
-        return M.LocalUserModel.get(id)
+class LocalUserRepository {
+    async getUserById(id: string) {
+        return await M.LocalUserModel.get(id)
             .run();
     }
 
-    getUsersByNames(names: [String]): any {
-        return M.LocalUserModel.filter(function (user: any) {
-            return r.expr(names).contains(user("loginName"));
+    async getUserByUserNameAndPassword(username: string, password: string) {
+        const users = await M.LocalUserModel.filter({
+            username,
+            password
         })
             .run();
-    }
-
-    getUsersByIds(ids: [String]): any {
-        return M.LocalUserModel.filter(function (user: any) {
-            return r.expr(ids).contains(user("id"));
-        })
-            .run();
+        return users[0];
     }
 
     async getUserByLoginName(loginName: String) {
-        const result = await M.LocalUserModel.filter({ loginName: loginName })
+        const users = await M.LocalUserModel.filter({ loginName: loginName })
             .run();
-        return result[0];
-    }
-
-    getUserByMail(email: String): any {
-        return M.LocalUserModel.filter({ email: email })
-            .run();
-    }
-
-    getUsersByQuery(query: String): any {
-
-    }
-
-    getUserByNameAndKey(loginName: String, key: String): any {
-        return M.LocalUserModel.filter({ loginName: loginName, retrieveKey: key })
-            .run();
+        return users[0];
     }
 
     async addOrUpdate(user: any) {

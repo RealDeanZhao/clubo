@@ -15,11 +15,11 @@ import * as M from './models';
 import * as R from './repositories';
 import * as A from './api/v1';
 
-
 const app = new Koa();
 const router = new Router();
 
 const topicApi = new A.TopicApi();
+const authApi = new A.AuthApi();
 
 passport.serializeUser(function (user: any, done: any) {
     done(null, user.id)
@@ -32,7 +32,7 @@ passport.deserializeUser(function (id: any, done: any) {
 passport.use(new GitHubStrategy({
     clientID: '185813c4f54bbe2c338e',
     clientSecret: '8ed6179a384e4422d38c9afbd48f53040efc9e74',
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    callbackURL: "http://localhost:3000/api/v1/auth/github/callback"
 }, async (accessToken: any, tokenSecret: any, profile: any, done: any) => {
     const _json = profile._json;
     let githubUser = new M.GithubUserModel({
@@ -59,7 +59,7 @@ passport.use(new GitHubStrategy({
     const userRepository = new R.LocalUserRepository();
     let localUser = new M.LocalUserModel({
         githubUserId: githubUser.id,
-        userName: githubUser.loginName
+        username: githubUser.loginName
     });
     localUser = await userRepository.addOrUpdate(localUser);
     done(null, profile);
@@ -67,7 +67,7 @@ passport.use(new GitHubStrategy({
 
 app.use(bodyParser());
 
-router.post('/auth/login', (ctx: any, next: any) => {
+router.post('/api/v1/auth/login', (ctx: any, next: any) => {
     console.log(ctx.request.body);
 
     if (!(ctx.request.body.username === '1' && ctx.request.body.password === '2')) {
@@ -88,9 +88,11 @@ router.get('/api/v1/topics/:page?', koaJwt({
     passthrough: true
 }), topicApi.getAll);
 
-router.get('/auth/github', passport.authenticate('github'));
+router.post('/api/v1/auth/local', authApi.auth);
 
-router.get('/auth/github/callback',
+router.get('/api/v1/auth/github', passport.authenticate('github'));
+
+router.get('/api/v1/auth/github/callback',
     passport.authenticate('github', { successRedirect: '/', failureRedirect: '/api/v1/topics' })
 );
 

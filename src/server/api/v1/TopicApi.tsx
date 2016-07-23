@@ -1,4 +1,4 @@
-import {TopicRepository} from '../../repositories/TopicRepository';
+import {TopicRepository} from '../../repositories';
 
 const topicRepository = new TopicRepository();
 
