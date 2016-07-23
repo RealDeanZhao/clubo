@@ -6,7 +6,7 @@ import thunkMiddleware    from 'redux-thunk';
 import {Router, Route, browserHistory} from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import {rootReducer} from './reducers/Reducers';
+import * as Reducers from './reducers';
 import * as C from './components';
 
 let composeParams: any[] = [];
@@ -26,7 +26,8 @@ const initialState = myWindow.__INITIAL_STATE__;
 
 const store = createStore(
   combineReducers({
-    rootReducer,
+    topicList: Reducers.topicList,
+    showSignInModal: Reducers.showSignInModal,
     routing: routerReducer
   }), initialState, enhancer);
 

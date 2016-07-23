@@ -5,7 +5,7 @@ export const topicList = (state: any = [], action: any) => {
     switch (action.type) {
 
         case RECEIVE_TOPICS:
-            return action.topics;
+            return action.topicList;
         case REQUEST_TOPICS:
             return [
                 {

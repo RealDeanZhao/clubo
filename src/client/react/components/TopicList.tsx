@@ -52,7 +52,7 @@ class TopicListBase extends React.Component<TopicListProps, [{}]>{
 }
 
 const mapStateToProps = (state: any, ownProps: any): any => ({
-    topicList: state.rootReducer.topicList
+    topicList: state.topicList
 });
 
 

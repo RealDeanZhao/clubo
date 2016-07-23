@@ -37,7 +37,7 @@ export class SignInModalBase extends React.Component<SignInModalProps, {}>{
 }
 
 const mapStateToProps = (state: any, ownProps: any): any => ({
-    showSignInModal: state.rootReducer.showSignInModal
+    showSignInModal: state.showSignInModal
 });
 
 export const SignInModal = connect(mapStateToProps)(SignInModalBase);

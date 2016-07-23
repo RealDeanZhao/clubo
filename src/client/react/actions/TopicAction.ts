@@ -8,18 +8,18 @@ function requestTopics() {
     }
 }
 
-function receiveTopics(topics: any) {
+function receiveTopics(topicList: any) {
     return {
         type: RECEIVE_TOPICS,
-        topics: topics
+        topicList: topicList
     }
 }
 
 export const fetchTopics: any = () => {
     return async (dispatch: any) => {      
         const response = await fetch('/api/v1/topics');
-        const topics = await response.json();
-        dispatch(receiveTopics(topics))
+        const topicList = await response.json();
+        dispatch(receiveTopics(topicList))
     }
 }
 
