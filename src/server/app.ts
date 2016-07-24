@@ -34,34 +34,35 @@ passport.use(new GitHubStrategy({
     clientSecret: '8ed6179a384e4422d38c9afbd48f53040efc9e74',
     callbackURL: "http://localhost:3000/api/v1/auth/github/callback"
 }, async (accessToken: any, tokenSecret: any, profile: any, done: any) => {
-    const _json = profile._json;
-    let githubUser = new M.GithubUserModel({
-        loginName: _json.login,
-        name: _json.name,
-        avatarUrl: _json.avatar_url,
-        email: _json.email,
-        url: _json.url,
-        htmlUrl: _json.html_url,
-        followerUrl: _json.followers_url,
-        followingUrl: _json.following_url,
-        gistsUrl: _json.gists_url,
-        starredUrl: _json.starred_url,
-        subscriptionsUrl: _json.subscriptions_url,
-        organizationsUrl: _json.organizations_url,
-        reposUrl: _json.repos_url,
-        eventsUrl: _json.events_url,
-        receivedEventsUrl: _json.received_events_url,
-        location: _json.location,
-        publicRepos: _json.public_repos
-    });
-    const githubUserRepository = new R.GithubUserRepository();
-    githubUser = await githubUserRepository.addOrUpdate(githubUser);
-    const userRepository = new R.LocalUserRepository();
-    let localUser = new M.LocalUserModel({
-        githubUserId: githubUser.id,
-        username: githubUser.loginName
-    });
-    localUser = await userRepository.addOrUpdate(localUser);
+    // const _json = profile._json;
+    // let githubUser = new M.GithubUserModel({
+    //     loginName: _json.login,
+    //     name: _json.name,
+    //     avatarUrl: _json.avatar_url,
+    //     email: _json.email,
+    //     url: _json.url,
+    //     htmlUrl: _json.html_url,
+    //     followerUrl: _json.followers_url,
+    //     followingUrl: _json.following_url,
+    //     gistsUrl: _json.gists_url,
+    //     starredUrl: _json.starred_url,
+    //     subscriptionsUrl: _json.subscriptions_url,
+    //     organizationsUrl: _json.organizations_url,
+    //     reposUrl: _json.repos_url,
+    //     eventsUrl: _json.events_url,
+    //     receivedEventsUrl: _json.received_events_url,
+    //     location: _json.location,
+    //     publicRepos: _json.public_repos
+    // });
+    // const githubUserRepository = new R.GithubUserRepository();
+    // githubUser = await githubUserRepository.addOrUpdate(githubUser);
+    // const userRepository = new R.LocalUserRepository();
+    // let localUser = new M.LocalUserModel({
+    //     githubUserId: githubUser.id,
+    //     username: githubUser.loginName
+    // });
+    // localUser = await userRepository.addOrUpdate(localUser);
+    console.log('step 2');
     done(null, profile);
 }));
 
@@ -93,8 +94,17 @@ router.post('/api/v1/auth/local', authApi.auth);
 router.get('/api/v1/auth/github', passport.authenticate('github'));
 
 router.get('/api/v1/auth/github/callback',
-    passport.authenticate('github', { successRedirect: '/', failureRedirect: '/api/v1/topics' })
+    async (ctx: any, next: any) => {
+        return passport.authenticate('github', (user: any, info: any, status: any) => {
+            ctx.redirect('/');
+        })(ctx, next);
+    }
 );
+
+router.get('/api/v1/auth/haha', async (ctx: any, next: any) => {
+    console.log('5');
+    console.log(ctx);
+});
 
 app.use(router.routes());
 

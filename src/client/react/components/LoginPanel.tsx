@@ -21,12 +21,7 @@ export class LoginPanelBase extends React.Component<LoginPanelProps, {}>{
                 <div className="panel-heading">Login: </div>
                 <div className="panel-body">
                     <div>
-                        <a href="#" onClick={this.showModal}>Sign In</a>
-                        <span> or </span>
-                        <a href="#" >Sign Up</a>
-                    </div>
-                    <div>
-                        <a href="/api/v1/auth/github" className="btn btn-info" role="button">Login With Github</a>
+                        <a href='/api/v1/auth/github' target='_blank' className='btn btn-info' role='button'>Login With Github</a>
                     </div>
                 </div>
             </div>
