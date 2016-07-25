@@ -1,3 +1,3 @@
-export {topicList} from './TopicListReducer';
+export {topicList, topicDetail} from './TopicReducer';
 export {showSignInModal} from './SignInModalReducer';
 export {authencated} from './AuthencatedReducer';

@@ -7,3 +7,4 @@ export {UserInfoPanel} from './UserInfoPanel';
 export {LoginPanel} from './LoginPanel';
 export {SignInModal} from './SignInModal';
 export {SignInForm} from './SignInForm';
+export {TopicDetail} from './TopicDetail';

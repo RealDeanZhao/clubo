@@ -1,4 +1,4 @@
-export {fetchTopics} from './TopicAction';
+export {fetchTopics, getTopic} from './TopicAction';
 
 export {showSignInModal, closeSignInModal} from './SignInModalAction';
 

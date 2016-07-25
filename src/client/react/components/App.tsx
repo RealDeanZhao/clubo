@@ -1,14 +1,12 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+import {Router, Route, browserHistory} from 'react-router';
+
 import * as C from '../components';
 
-export interface AppProps extends React.Props<any> {
-    dispatch: any
-}
-
-class AppBase extends React.Component<AppProps, any>{
+class AppBase extends React.Component<any, any>{
     render() {
-
+        const {children} = this.props;
         return (
             <div>
                 <C.NavBar></C.NavBar>
@@ -16,11 +14,11 @@ class AppBase extends React.Component<AppProps, any>{
                     <div className='containter'>
                         <div className='row'>
                             <main className='col-md-9 main-content'>
-                                <C.TopicList></C.TopicList>
+                                {children}
                             </main>
                             <aside className='col-md-3 sidebar'>
-                                <C.LoginPanel></C.LoginPanel>
-                                <C.UserInfoPanel></C.UserInfoPanel>
+                                <C.LoginPanel />
+                                <C.UserInfoPanel />
                             </aside>
                         </div>
                     </div>

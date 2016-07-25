@@ -5,45 +5,14 @@ const r = thinky.r;
 
 export {  TopicRepository}
 
-
 class TopicRepository {
     async getTopics() {
         return await TopicModel.filter({})
             .run();
     }
-    getTopicById(id: String): any {
-
-    }
-
-    getCountByQuery(query: String): any {
-
-    }
-
-    getTopicsByQuery(query: String): any {
-
-    }
-
-    getLimit5w(): any {
-
-    }
-
-    getFullTopic(id: String): any {
-
-    }
-
-    updateLastReply(topicId: String, replyId: String): any {
-
-    }
-
-    getTopic(id: String): any {
-
-    }
-
-    reduceCount(id: String): any {
-
-    }
-
-    addOrUpdate(): any {
-
+    async getTopicById(id: String) {
+        const result = await TopicModel.filter({ id })
+            .run();
+        return result[0];
     }
 }

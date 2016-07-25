@@ -2,6 +2,7 @@ import * as React from 'react';
 import {TopicRowProps, TopicRow} from './TopicRow';
 import {connect} from 'react-redux';
 import {fetchTopics} from '../actions/TopicAction';
+import {Router, Route, Link, browserHistory} from 'react-router';
 
 export interface TopicListProps extends React.Props<any> {
     topicList: [TopicRowProps],
@@ -25,28 +26,32 @@ class TopicListBase extends React.Component<TopicListProps, [{}]>{
             );
         }, this);
         return (
-            <ul className="list-group">
-                <li className="list-group-item"><a>{'All'}{'  '}</a><a>{'Good'}{'  '}</a><a>{'Share'}{'  '}</a></li>
-                {list}
+            <div>
+                <ul className="list-group">
 
-                <ul className="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo; </span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo; </span>
-                        </a>
-                    </li>
+                    <li className="list-group-item"><Link to='/auth/createLocalUser'>{'All'}{'  '}</Link><a>{'Good'}{'  '}</a><a>{'Share'}{'  '}</a></li>
+                    {list}
+
+                    <ul className="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo; </span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo; </span>
+                            </a>
+                        </li>
+                    </ul>
                 </ul>
-            </ul>
+                {this.props.children}
+            </div>
         );
     }
 }

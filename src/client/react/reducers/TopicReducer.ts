@@ -1,9 +1,9 @@
 import {REQUEST_TOPICS, RECEIVE_TOPICS} from '../constants';
+import {GET_TOPIC_FAILURE, GET_TOPIC_SUCCESS, GET_TOPIC} from '../constants';
+
 
 export const topicList = (state: any = [], action: any) => {
-
     switch (action.type) {
-
         case RECEIVE_TOPICS:
             return action.topicList;
         case REQUEST_TOPICS:
@@ -21,6 +21,15 @@ export const topicList = (state: any = [], action: any) => {
                     visitCount: 10
                 }
             ];
+        default:
+            return state;
+    }
+}
+
+export const topicDetail = (state: any = {}, action: any) => {
+    switch (action.type) {
+        case GET_TOPIC_SUCCESS:
+            return action.topicDetail;
         default:
             return state;
     }

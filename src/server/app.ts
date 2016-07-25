@@ -68,6 +68,10 @@ passport.use(new GitHubStrategy({
 
 app.use(bodyParser());
 
+// router.get('/auth/createLocalUser', async (ctx: any, next: any) => {
+//     ctx.redirect('/');
+// });
+
 router.post('/api/v1/auth/login', (ctx: any, next: any) => {
     console.log(ctx.request.body);
 
@@ -84,10 +88,12 @@ router.post('/api/v1/auth/login', (ctx: any, next: any) => {
     ctx.body = token;
 });
 
-router.get('/api/v1/topics/:page?', koaJwt({
+router.get('/api/v1/topics', koaJwt({
     secret: 'clubo-jwt-secret',
     passthrough: true
 }), topicApi.getAll);
+
+router.get('/api/v1/topics/:id/:page?', topicApi.getTopicById);
 
 router.post('/api/v1/auth/local', authApi.auth);
 
@@ -96,6 +102,7 @@ router.get('/api/v1/auth/github', passport.authenticate('github'));
 router.get('/api/v1/auth/github/callback',
     async (ctx: any, next: any) => {
         return passport.authenticate('github', (user: any, info: any, status: any) => {
+            console.log(user);
             ctx.redirect('/');
         })(ctx, next);
     }

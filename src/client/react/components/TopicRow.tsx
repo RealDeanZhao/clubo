@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Link} from 'react-router';
 
 export interface TopicRowProps extends React.Props<any> {
     replyCount: Number,
@@ -22,11 +23,11 @@ export class TopicRow extends React.Component<TopicRowProps, {}>{
                 <span className="reply_count pull-left">
                     <span   title="回复数">
 
-                    
+
                         {this.props.replyCount}
                     </span>
                     <span  >/</span>
-                    
+
                     <span   title='点击数'>
                         {this.props.visitCount}
                     </span>
@@ -37,11 +38,11 @@ export class TopicRow extends React.Component<TopicRowProps, {}>{
                 </span>
                 {'   '}
                 <div  >
-                    <a className='topic_title' href='{this.props.id}' title='{this.props.title}'>
+                    <Link className='topic_title' to={'/topics/' + this.props.id}>
                         {this.props.title}
-                    </a>
+                    </Link>
                 </div>
-            </li>
+            </li >
         )
     }
 }
