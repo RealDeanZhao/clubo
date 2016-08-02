@@ -4,7 +4,7 @@ import {Router, Route, browserHistory} from 'react-router';
 
 import * as C from '../components';
 
-class AppBase extends React.Component<any, any>{
+class App extends React.Component {
     render() {
         const {children} = this.props;
         return (
@@ -28,8 +28,8 @@ class AppBase extends React.Component<any, any>{
     }
 }
 
-const mapStateToProps = (state: any, ownProps: any): any => ({
+const mapStateToProps = (state, ownProps) => ({
 
 });
 
-export const App = connect(mapStateToProps)(AppBase);
+export default connect(mapStateToProps)(App);

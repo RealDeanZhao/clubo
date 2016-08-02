@@ -5,7 +5,7 @@ const RF = require('redux-form');
 const Field = RF.Field;
 const reduxForm = RF.reduxForm;
 
-class SignInFormBase extends React.Component<any, {}>{
+class SignInForm extends React.Component {
 
     render() {
         return (
@@ -27,6 +27,6 @@ class SignInFormBase extends React.Component<any, {}>{
     }
 }
 
-export const SignInForm = reduxForm({
+export default reduxForm({
     form: 'signInForm'
-})(SignInFormBase);
+})(SignInForm);

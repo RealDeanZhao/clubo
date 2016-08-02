@@ -1,18 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router';
 
-export interface TopicRowProps extends React.Props<any> {
-    replyCount: Number,
-    visitCount: Number,
-    avatarUrl: String,
-    loginName: String,
-    lastUpdateTime: Date,
-    title: String,
-    id: String
-}
-
-export class TopicRow extends React.Component<TopicRowProps, {}>{
-
+export class TopicRow extends React.Component {
     render() {
         return (
             <li className="list-group-item">
@@ -44,5 +33,5 @@ export class TopicRow extends React.Component<TopicRowProps, {}>{
                 </div>
             </li >
         )
-    }
+    };
 }

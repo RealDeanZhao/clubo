@@ -10,7 +10,7 @@ class TopicRepository {
         return await TopicModel.filter({})
             .run();
     }
-    async getTopicById(id: String) {
+    async getTopicById(id) {
         const result = await TopicModel.filter({ id })
             .run();
         return result[0];

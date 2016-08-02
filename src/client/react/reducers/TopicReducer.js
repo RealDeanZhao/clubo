@@ -2,7 +2,7 @@ import {REQUEST_TOPICS, RECEIVE_TOPICS} from '../constants';
 import {GET_TOPIC_FAILURE, GET_TOPIC_SUCCESS, GET_TOPIC} from '../constants';
 
 
-export const topicList = (state: any = [], action: any) => {
+export const topicList = (state = [], action) => {
     switch (action.type) {
         case RECEIVE_TOPICS:
             return action.topicList;
@@ -26,7 +26,7 @@ export const topicList = (state: any = [], action: any) => {
     }
 }
 
-export const topicDetail = (state: any = {}, action: any) => {
+export const topicDetail = (state = {}, action) => {
     switch (action.type) {
         case GET_TOPIC_SUCCESS:
             return action.topicDetail;

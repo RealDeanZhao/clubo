@@ -11,18 +11,18 @@ const RF = require('redux-form');
 import * as Reducers from './reducers';
 import * as C from './components';
 
-let composeParams: any[] = [];
+let composeParams = [];
 if (process.env.NODE_ENV !== 'production') {
   console.log('dev environment');
   composeParams.push(C.DevTools.instrument());
 }
 
-const enhancer: any = compose(
+const enhancer = compose(
   applyMiddleware(thunkMiddleware),
   ...composeParams
 );
 
-const myWindow: any = window;
+const myWindow = window;
 myWindow.__INITIAL_STATE__ = myWindow.__INITIAL_STATE__ || {};
 const initialState = myWindow.__INITIAL_STATE__;
 

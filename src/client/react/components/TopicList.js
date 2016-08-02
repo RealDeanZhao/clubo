@@ -4,20 +4,14 @@ import {connect} from 'react-redux';
 import {fetchTopics} from '../actions/TopicAction';
 import {Router, Route, Link, browserHistory} from 'react-router';
 
-export interface TopicListProps extends React.Props<any> {
-    topicList: [TopicRowProps],
-    dispatch: any
-}
+class TopicList extends React.Component {
 
-class TopicListBase extends React.Component<TopicListProps, [{}]>{
-
-    componentWillMount = function (): any {
+    componentWillMount() {
         const {topicList, dispatch} = this.props;
         dispatch(fetchTopics());
     };
 
     render() {
-
         const {topicList, dispatch} = this.props;
         let key = 0;
         let list = topicList.map(function (topic) {
@@ -53,12 +47,12 @@ class TopicListBase extends React.Component<TopicListProps, [{}]>{
                 {this.props.children}
             </div>
         );
-    }
+    };
 }
 
-const mapStateToProps = (state: any, ownProps: any): any => ({
+const mapStateToProps = (state, ownProps) => ({
     topicList: state.topicList
 });
 
 
-export const TopicList = connect(mapStateToProps)(TopicListBase);
+export default connect(mapStateToProps)(TopicList);

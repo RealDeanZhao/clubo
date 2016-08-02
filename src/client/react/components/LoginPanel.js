@@ -2,13 +2,9 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {showSignInModal} from '../actions';
 
-export interface LoginPanelProps extends React.Props<any> {
-    dispatch: any
-}
+export class LoginPanel extends React.Component {
 
-export class LoginPanelBase extends React.Component<LoginPanelProps, {}>{
-
-    showModal = (): any => {
+    showModal() {
         const {dispatch} = this.props;
         dispatch(showSignInModal());
     };
@@ -29,8 +25,8 @@ export class LoginPanelBase extends React.Component<LoginPanelProps, {}>{
     }
 }
 
-const mapStateToProps = (state: any, ownProps: any): any => ({
+const mapStateToProps = (state, ownProps) => ({
 
 });
 
-export const LoginPanel = connect(mapStateToProps)(LoginPanelBase);
+export default connect(mapStateToProps)(LoginPanel);

@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-
-export interface UserInfoPanelProps extends React.Props<any> {
-
-}
-
-export class UserInfoPanel extends React.Component<UserInfoPanelProps, {}>{
+export class UserInfoPanel extends React.Component {
     render() {
         return (
             <div className="panel panel-default">
@@ -13,6 +8,6 @@ export class UserInfoPanel extends React.Component<UserInfoPanelProps, {}>{
                 <div className="panel-body">Panel content</div>
             </div>
         )
-    }
+    };
 }
 

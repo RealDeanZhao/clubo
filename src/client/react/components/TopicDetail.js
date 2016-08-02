@@ -3,8 +3,8 @@ import {TopicRowProps, TopicRow} from './TopicRow';
 import {connect} from 'react-redux';
 import {getTopic} from '../actions/TopicAction';
 
-class TopicDetailBase extends React.Component<any, {}>{
-    componentWillMount = function (): any {
+class TopicDetail extends React.Component {
+    componentWillMount() {
         const {dispatch, id} = this.props;
         dispatch(getTopic(id));
     };
@@ -16,13 +16,13 @@ class TopicDetailBase extends React.Component<any, {}>{
                 {topicDetail.content}
             </div>
         )
-    }
+    };
 }
 
-const mapStateToProps = (state: any, ownProps: any): any => ({
+const mapStateToProps = (state, ownProps) => ({
     topicDetail: state.topicDetail,
     id: ownProps.params.id
 });
 
 
-export const TopicDetail = connect(mapStateToProps)(TopicDetailBase);
+export default connect(mapStateToProps)(TopicDetail);

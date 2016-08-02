@@ -9,15 +9,15 @@ function requestTopics() {
     }
 }
 
-function receiveTopics(topicList: any) {
+function receiveTopics(topicList) {
     return {
         type: RECEIVE_TOPICS,
         topicList: topicList
     }
 }
 
-export const fetchTopics: any = () => {
-    return async (dispatch: any) => {
+export const fetchTopics = () => {
+    return async (dispatch) => {
         const response = await fetch('/api/v1/topics');
         const topicList = await response.json();
         dispatch(receiveTopics(topicList))
@@ -25,15 +25,15 @@ export const fetchTopics: any = () => {
 }
 
 
-function getTopicSuccess(topicDetail: any) {
+function getTopicSuccess(topicDetail) {
     return {
         type: GET_TOPIC_SUCCESS,
         topicDetail: topicDetail
     }
 }
 
-export const getTopic: any = (id: string) => {
-    return async (dispatch: any) => {
+export const getTopic = (id: string) => {
+    return async (dispatch) => {
         const response = await fetch(`/api/v1/topics/${id}`);
         const topicDetail = await response.json();
         dispatch(getTopicSuccess(topicDetail))

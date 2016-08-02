@@ -4,22 +4,18 @@ import {connect} from 'react-redux';
 import {closeSignInModal, authUser} from '../actions';
 import {SignInForm} from './';
 
-export interface SignInModalProps extends React.Props<any> {
-    showSignInModal: any;
-    dispatch: any;
-    fields: any;
-}
-
-class SignInModalBase extends React.Component<any, {}>{
-    close = (): any => {
+class SignInModal extends React.Component {
+    close() {
         const {dispatch} = this.props;
         dispatch(closeSignInModal());
-    }
-    handleSignIn = (values: any): any => {
+    };
+
+    handleSignIn() {
         const {dispatch} = this.props;
         const {username, password} = values;
         dispatch(authUser(username, password));
-    }
+    };
+
     render() {
         const {showSignInModal, dispatch} = this.props;
 
@@ -38,12 +34,12 @@ class SignInModalBase extends React.Component<any, {}>{
                 </RBS.Modal.Footer>
             </div>
         )
-    }
+    };
 }
 
-const mapStateToProps = (state: any, ownProps: any): any => ({
+const mapStateToProps = (state, ownProps) => ({
     showSignInModal: state.showSignInModal
 });
 
-export const SignInModal = connect(mapStateToProps)(SignInModalBase);
+export default connect(mapStateToProps)(SignInModal);
 

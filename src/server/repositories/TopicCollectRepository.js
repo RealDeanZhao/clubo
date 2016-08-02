@@ -5,7 +5,7 @@ const r = thinky.r;
 export { TopicCollectRepository}
 
 class TopicCollectRepository {
-    getTopicCollect(userId: String, topicId: String): any {
+    getTopicCollect(userId, topicId) {
         return TopicCollectModel.filter({
             userId: userId,
             topicId: topicId
@@ -13,18 +13,18 @@ class TopicCollectRepository {
             .run();
     }
 
-    getTopicCollectsByUserId(userId: string): any {
+    getTopicCollectsByUserId(userId) {
         return TopicCollectModel.filter({
             userId: userId
         })
             .run();
     }
 
-    addOrUpdate(userId: string, topicId: string): void {
+    addOrUpdate(userId, topicId) {
 
     }
 
-    remove(userId: string, topicId: String): void {
+    remove(userId, topicId) {
 
     }
 }

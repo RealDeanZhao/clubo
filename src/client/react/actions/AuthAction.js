@@ -4,8 +4,8 @@ import {AUTH_USER} from '../constants';
 import {AUTH_USER_SUCCESS} from '../constants';
 import {AUTH_USER_FAILED} from '../constants';
 
-export const authUser = (username: string, password: string): any => {
-    return async (dispatch: any) => {
+export const authUser = (username, password) => {
+    return async (dispatch) => {
         const response = await fetch('/api/v1/auth/local', {
             method: "POST",
             headers: {
@@ -21,13 +21,13 @@ export const authUser = (username: string, password: string): any => {
     }
 }
 
-const authUserSuccess = (): any => {
+const authUserSuccess = () => {
     return {
         type: AUTH_USER_SUCCESS
     }
 }
 
-const authUserFailed = (): any => {
+const authUserFailed = () => {
     return {
         type: AUTH_USER_FAILED
     }
