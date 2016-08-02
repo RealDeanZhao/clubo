@@ -1,5 +1,7 @@
-export {GithubUserRepository} from './GithubUserRepository';
-export {LocalUserRepository} from './LocalUserRepository';
-export {TopicRepository} from './TopicRepository';
+import GithubUserRepository from './GithubUserRepository';
+import LocalUserRepository from './LocalUserRepository';
+import TopicRepository from './TopicRepository';
+
+export {GithubUserRepository, LocalUserRepository, TopicRepository}
 
 

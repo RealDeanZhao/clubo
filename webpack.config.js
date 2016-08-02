@@ -4,27 +4,29 @@ var webpack = require('webpack');
 module.exports = {
     entry: [
         'bootstrap/dist/css/bootstrap.min.css',
-        './src/client/react/main.tsx'
+        'webpack-hot-middleware/client',
+        './src/client/react/main.js'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: "bundle.js",
+        filename: "bundle.js"
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('development')
+            }
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ],
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
 
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
-    },
-
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.js$/, loaders: ["babel"], include: path.join(__dirname, "src") },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/font-woff" },
             { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=application/font-woff" },

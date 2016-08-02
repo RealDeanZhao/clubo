@@ -1,17 +1,14 @@
 import {TopicRepository} from '../../repositories';
 
-const topicRepository = new TopicRepository();
-
-export {TopicApi}
-
-class TopicApi {
+export default class TopicApi {
+ 
     async getAll(ctx, next) {
-        var topics = await topicRepository.getTopics();
+        var topics = await TopicRepository.getTopics();
         ctx.body = JSON.stringify(topics);
     }
 
     async getTopicById(ctx, next) {
-        var topic = await topicRepository.getTopicById(ctx.params.id);
+        var topic = await TopicRepository.getTopicById(ctx.params.id);
         ctx.body = JSON.stringify(topic);
     }
 }

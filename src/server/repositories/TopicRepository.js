@@ -2,10 +2,9 @@ import {TopicModel} from '../models/TopicModel';
 
 const thinky = require('thinky')();
 const r = thinky.r;
+ 
 
-export {  TopicRepository}
-
-class TopicRepository {
+export default class TopicRepository {
     async getTopics() {
         return await TopicModel.filter({})
             .run();

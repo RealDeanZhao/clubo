@@ -2,9 +2,7 @@ import {LocalUserRepository} from '../../repositories';
 
 const userRepository = new LocalUserRepository();
 
-export {LocalUserApi}
+export default class LocalUserApi {
 
-class LocalUserApi {
-     
 }
 

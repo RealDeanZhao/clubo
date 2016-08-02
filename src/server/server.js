@@ -1,25 +1,40 @@
-import * as Koa from 'koa';
-import * as Router from 'koa-router';
-import * as fetch from 'isomorphic-fetch';
-import * as bodyParser  from 'koa-bodyparser';
-import * as jwt from 'jsonwebtoken';
-import {resolve} from "path";
+import Koa from 'koa';
+import Router from 'koa-router';
+import fetch from 'isomorphic-fetch';
+import bodyParser  from 'koa-bodyparser';
+import jwt from 'jsonwebtoken';
+import path from "path";
 
 const passport = require('koa-passport');
 const GitHubStrategy = require('passport-github2');
 const koaJwt = require('koa-jwt');
 const Thinky = require('thinky');
-const statics = require('koa-static');
+const serve = require('koa-static');
 
 import * as M from './models';
 import * as R from './repositories';
-import * as A from './api/v1';
+import {TopicApi, AuthApi} from './api/v1';
 
 const app = new Koa();
+
+if (process.env.NODE_ENV != 'production') {
+    const webpack = require('webpack');
+    const webpackConfig = require('../../webpack.config');
+    const webpackDevMiddleware = require('koa-webpack-dev-middleware');
+    const webpackHostMiddleware = require('koa-webpack-hot-middleware');
+    const compiler = webpack(webpackConfig);
+
+    app.use(webpackDevMiddleware(compiler, {
+        noInfo: true
+    }));
+
+    app.use(webpackHostMiddleware(compiler));
+}
+
 const router = new Router();
 
-const topicApi = new A.TopicApi();
-const authApi = new A.AuthApi();
+const topicApi = new TopicApi();
+const authApi = new AuthApi();
 
 passport.serializeUser(function (user, done) {
     done(null, user.id)
@@ -114,9 +129,10 @@ router.get('/api/v1/auth/haha', async (ctx, next) => {
 });
 
 app.use(router.routes());
-
 app.use(passport.initialize());
+app.use(serve('.'));
 
-app.use(statics('.'));
 
-export {app};
+app.listen(3000, () => {
+    console.log('server is running');
+});

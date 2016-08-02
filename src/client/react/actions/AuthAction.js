@@ -20,7 +20,7 @@ export const authUser = (username, password) => {
         console.log(user);
     }
 }
-
+ 
 const authUserSuccess = () => {
     return {
         type: AUTH_USER_SUCCESS

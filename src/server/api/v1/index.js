@@ -1,5 +1,9 @@
-export {TopicApi} from './TopicApi';
+import TopicApi from './TopicApi';
+import AuthApi from './AuthApi';
+import LocalUserApi from './LocalUserApi';
 
-export {LocalUserApi} from './LocalUserApi';
+export {AuthApi};
 
-export {AuthApi} from './AuthApi';
+export {TopicApi};
+
+export {LocalUserApi};

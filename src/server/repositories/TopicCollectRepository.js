@@ -4,7 +4,7 @@ const r = thinky.r;
 
 export { TopicCollectRepository}
 
-class TopicCollectRepository {
+export default class TopicCollectRepository {
     getTopicCollect(userId, topicId) {
         return TopicCollectModel.filter({
             userId: userId,

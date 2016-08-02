@@ -2,9 +2,7 @@ import {LocalUserRepository} from '../../repositories';
 
 const userRepository = new LocalUserRepository();
 
-export {AuthApi}
-
-class AuthApi {
+export default class AuthApi {
     async auth(ctx, next) {
         const username = ctx.request.body.username;
         const password = ctx.request.body.password;
