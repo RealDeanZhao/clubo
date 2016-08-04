@@ -1,4 +1,4 @@
-import * as fetch from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 
 import {AUTH_USER} from '../constants';
 import {AUTH_USER_SUCCESS} from '../constants';

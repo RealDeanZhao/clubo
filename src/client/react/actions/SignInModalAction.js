@@ -1,4 +1,4 @@
-import * as fetch from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 
 import {SHOW_SIGNGIN_MODAL} from '../constants';
 import {CLOSE_SIGNGIN_MODAL} from '../constants';

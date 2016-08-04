@@ -23,9 +23,10 @@ if (process.env.NODE_ENV != 'production') {
     const webpackDevMiddleware = require('koa-webpack-dev-middleware');
     const webpackHostMiddleware = require('koa-webpack-hot-middleware');
     const compiler = webpack(webpackConfig);
-
+    
     app.use(webpackDevMiddleware(compiler, {
-        noInfo: true
+        noInfo: true,
+        publicPath: webpackConfig.output.publicPath
     }));
 
     app.use(webpackHostMiddleware(compiler));

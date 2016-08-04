@@ -1,4 +1,4 @@
-import * as fetch from 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 
 import {REQUEST_TOPICS, RECEIVE_TOPICS} from '../constants';
 import {GET_TOPIC, GET_TOPIC_SUCCESS, GET_TOPIC_FAILURE} from '../constants';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TopicRowProps, TopicRow} from './TopicRow';
+import * as C from './';
 import {connect} from 'react-redux';
 import {fetchTopics} from '../actions/TopicAction';
 import {Router, Route, Link, browserHistory} from 'react-router';
@@ -16,7 +16,7 @@ class TopicList extends React.Component {
         let key = 0;
         let list = topicList.map(function (topic) {
             return (
-                <TopicRow key ={key++} {...topic}></TopicRow>
+                <C.TopicRow key ={key++} {...topic}></C.TopicRow>
             );
         }, this);
         return (

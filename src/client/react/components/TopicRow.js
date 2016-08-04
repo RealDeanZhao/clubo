@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Link} from 'react-router';
 
-export class TopicRow extends React.Component {
+export default class TopicRow extends React.Component {
     render() {
         return (
             <li className="list-group-item">

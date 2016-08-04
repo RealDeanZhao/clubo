@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {showSignInModal} from '../actions';
 
-export class LoginPanel extends React.Component {
+class LoginPanel extends React.Component {
 
     showModal() {
         const {dispatch} = this.props;

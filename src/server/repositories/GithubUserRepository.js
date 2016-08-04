@@ -3,7 +3,7 @@ import * as M from '../models';
 const thinky = require('thinky')();
 const r = thinky.r;
 
-class GithubUserRepository {
+export default class GithubUserRepository {
     async getUserById(id) {
         return await M.GithubUserModel.get(id)
             .run();

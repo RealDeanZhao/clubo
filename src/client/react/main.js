@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import thunkMiddleware    from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import {Router, IndexRoute, Route, browserHistory} from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
@@ -12,6 +12,7 @@ const RF = require('redux-form');
 import * as Reducers from './reducers';
 import * as C from './components';
 
+console.log(C);
 let composeParams = [];
 if (process.env.NODE_ENV !== 'production') {
   console.log('dev environment');
@@ -45,12 +46,6 @@ const devtools = () => {
 }
 
 const histroy = syncHistoryWithStore(browserHistory, store);
-
-// <Route path="/" component = {C.App}>
-//           <IndexRoute components ={{ topicList: C.TopicList, loginPanel: C.LoginPanel, userInfoPanel: C.UserInfoPanel }} >
-//           </IndexRoute>
-//           <Route path="topic/oneTopic" components ={{ topicDetail: C.SignInForm, loginPanel: C.LoginPanel, userInfoPanel: C.UserInfoPanel }} ></Route>
-//         </Route>
 
 ReactDOM.render(
   <Provider store={store}>

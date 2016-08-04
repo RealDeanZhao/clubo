@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class UserInfoPanel extends React.Component {
+export default class UserInfoPanel extends React.Component {
     render() {
         return (
             <div className="panel panel-default">
@@ -10,4 +10,5 @@ export class UserInfoPanel extends React.Component {
         )
     };
 }
+
 
