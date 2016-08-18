@@ -54,7 +54,11 @@ ReactDOM.render(
         <Route path="/" component = {C.App}>
           <IndexRoute component ={ C.TopicList } >
           </IndexRoute>
-          <Route path="topics/:id" component ={C.TopicDetail} ></Route>
+          <Route path="topics/create" component = {C.CluboEditorHeader}>
+            <IndexRoute component = {C.CluboEditor}></IndexRoute>
+            <Route path="preview" component = {C.MarkdownPreviewer}></Route>
+          </Route>
+          <Route path="topics/detail/:id" component ={C.TopicDetail} ></Route>
         </Route>
       </Router>
       <div>

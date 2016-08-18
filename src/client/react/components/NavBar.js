@@ -15,6 +15,7 @@ export default class NavBar extends React.Component {
                             <ul className='nav navbar-nav pull-right'>
                                 <li><a href='/'>Index</a></li>
                                 <li><Link to='/createLocalUser'>Create Local User</Link></li>
+                                <li><Link to='/topics/create'> CreateTopic </Link></li>
                                 <li> <a href='/'> Unread </a> </li>
                                 <li><a href='/getstart'>Getting Started</a></li>
                                 <li><a href='/api'>API</a></li>

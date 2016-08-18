@@ -50,6 +50,7 @@ passport.use(new GitHubStrategy({
     clientSecret: '8ed6179a384e4422d38c9afbd48f53040efc9e74',
     callbackURL: "http://localhost:3000/api/v1/auth/github/callback"
 }, async (accessToken, tokenSecret, profile, done) => {
+    console.log('passport use');
     // const _json = profile._json;
     // let githubUser = new M.GithubUserModel({
     //     loginName: _json.login,
@@ -78,7 +79,7 @@ passport.use(new GitHubStrategy({
     //     username: githubUser.loginName
     // });
     // localUser = await userRepository.addOrUpdate(localUser);
-    console.log('step 2');
+    
     done(null, profile);
 }));
 
@@ -118,6 +119,7 @@ router.get('/api/v1/auth/github', passport.authenticate('github'));
 router.get('/api/v1/auth/github/callback',
     async (ctx, next) => {
         return passport.authenticate('github', (user, info, status) => {
+            console.log('github callback');
             console.log(user);
             ctx.redirect('/');
         })(ctx, next);

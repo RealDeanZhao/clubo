@@ -3,9 +3,14 @@ import {connect} from 'react-redux';
 import {Router, Route, browserHistory} from 'react-router';
 
 import * as C from '../components';
+import brace from 'brace';
+import AceEditor from 'react-ace';
+import 'brace/mode/markdown';
+import 'brace/theme/github';
 
 class App extends React.Component {
     render() {
+
         const {children} = this.props;
         return (
             <div>
@@ -22,6 +27,7 @@ class App extends React.Component {
                             </aside>
                         </div>
                     </div>
+                    
                 </section>
             </div>
         );

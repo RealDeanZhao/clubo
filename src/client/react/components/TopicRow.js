@@ -27,7 +27,7 @@ export default class TopicRow extends React.Component {
                 </span>
                 {'   '}
                 <div  >
-                    <Link className='topic_title' to={'/topics/' + this.props.id}>
+                    <Link className='topic_title' to={'/topics/detail/' + this.props.id}>
                         {this.props.title}
                     </Link>
                 </div>

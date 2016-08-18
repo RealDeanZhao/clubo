@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-import {REQUEST_TOPICS, RECEIVE_TOPICS} from '../constants';
+import {REQUEST_TOPICS, RECEIVE_TOPICS, SYNC_TOPIC_DRAFT} from '../constants';
 import {GET_TOPIC, GET_TOPIC_SUCCESS, GET_TOPIC_FAILURE} from '../constants';
 
 function requestTopics() {
@@ -21,6 +21,13 @@ export const fetchTopics = () => {
         const response = await fetch('/api/v1/topics');
         const topicList = await response.json();
         dispatch(receiveTopics(topicList))
+    }
+}
+
+export const syncTopicDraft = (topicDraft) => {
+    return {
+        type: SYNC_TOPIC_DRAFT,
+        topicDraft: topicDraft
     }
 }
 

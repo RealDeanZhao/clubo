@@ -23,7 +23,6 @@ class TopicList extends React.Component {
             <div>
                 <ul className="list-group">
 
-                    <li className="list-group-item"><Link to='/auth/createLocalUser'>{'All'}{'  '}</Link><a>{'Good'}{'  '}</a><a>{'Share'}{'  '}</a></li>
                     {list}
 
                     <ul className="pagination">

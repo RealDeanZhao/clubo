@@ -34,3 +34,12 @@ export const topicDetail = (state = {}, action) => {
             return state;
     }
 }
+
+export const topicDraft = (state = {}, action) => {
+    switch (action.type){
+        case SYNC_TOPIC_DRAFT:
+            return action.topicDraft;
+        default:
+            return state;
+    }
+}
