@@ -4,8 +4,8 @@ import {SHOW_SIGNGIN_MODAL} from '../constants';
 import {CLOSE_SIGNGIN_MODAL} from '../constants';
 import {CLEAR_SIGNGIN_MODAL} from '../constants';
 
-import {SHOW_CLUBO_EDITOR_MODAL} from '../constants';
-import {CLOSE_CLUBO_EDITOR_MODAL} from '../constants';
+import {SHOW_TOPIC_EDITOR_MODAL} from '../constants';
+import {CLOSE_TOPIC_EDITOR_MODAL} from '../constants';
 
 export const showSignInModal = () => {
     return {
@@ -25,15 +25,15 @@ export const clearSignInModal = () => {
     }
 }
 
-export const showCluboEditorModal = () => {
+export const showTopicEditorModal = () => {
     return {
-        type: SHOW_CLUBO_EDITOR_MODAL
+        type: SHOW_TOPIC_EDITOR_MODAL
     }
 }
 
-export const closeCluboEditorModal = () => {
+export const closeTopicEditorModal = () => {
     return {
-        type: CLOSE_CLUBO_EDITOR_MODAL
+        type: CLOSE_TOPIC_EDITOR_MODAL
     }
 }
 

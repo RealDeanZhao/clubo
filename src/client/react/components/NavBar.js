@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Router, Route, Link, browserHistory} from 'react-router';
-import {showCluboEditorModal} from '../actions';
+import {showTopicEditorModal} from '../actions';
 
 class NavBar extends React.Component {
     onCreateTopicClick(dispatch) {
         return function (e) {
             e.preventDefault();
-            dispatch(showCluboEditorModal());
+            dispatch(showTopicEditorModal());
         }
     }
     render() {

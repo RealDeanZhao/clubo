@@ -1,5 +1,5 @@
-export {fetchTopics, getTopic} from './TopicAction';
+export {fetchTopics, getTopic, syncTopicDraft} from './TopicAction';
 
-export {showSignInModal, closeSignInModal, showCluboEditorModal, closeCluboEditorModal} from './ModalAction';
+export {showSignInModal, closeSignInModal, showTopicEditorModal, closeTopicEditorModal} from './ModalAction';
 
 export {authUser} from './AuthAction';

@@ -12,7 +12,6 @@ const RF = require('redux-form');
 import * as Reducers from './reducers';
 import * as C from './components';
 
-console.log(C);
 let composeParams = [];
 if (process.env.NODE_ENV !== 'production') {
   console.log('dev environment');
@@ -32,8 +31,9 @@ const store = createStore(
   combineReducers({
     topicList: Reducers.topicList,
     topicDetail: Reducers.topicDetail,
+    topicDraft: Reducers.topicDraft,
     showSignInModal: Reducers.showSignInModal,
-    showCluboEditorModal: Reducers.showCluboEditorModal,
+    showTopicEditorModal: Reducers.showTopicEditorModal,
     authencated: Reducers.authencated,
     routing: routerReducer,
     form: RF.reducer

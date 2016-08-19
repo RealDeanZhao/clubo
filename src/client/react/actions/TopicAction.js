@@ -24,13 +24,6 @@ export const fetchTopics = () => {
     }
 }
 
-export const syncTopicDraft = (topicDraft) => {
-    return {
-        type: SYNC_TOPIC_DRAFT,
-        topicDraft: topicDraft
-    }
-}
-
 
 function getTopicSuccess(topicDetail) {
     return {
@@ -39,7 +32,7 @@ function getTopicSuccess(topicDetail) {
     }
 }
 
-export const getTopic = (id: string) => {
+export const getTopic = (id) => {
     return async (dispatch) => {
         const response = await fetch(`/api/v1/topics/${id}`);
         const topicDetail = await response.json();
