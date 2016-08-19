@@ -1,8 +1,18 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import {Router, Route, Link, browserHistory} from 'react-router';
+import {showCluboEditorModal} from '../actions';
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
+    onCreateTopicClick(dispatch) {
+        return function (e) {
+            e.preventDefault();
+            dispatch(showCluboEditorModal());
+        }
+    }
     render() {
+        const {dispatch} = this.props;
+
         return (
             <div>
                 <nav className='navbar navbar-default'>
@@ -15,8 +25,8 @@ export default class NavBar extends React.Component {
                             <ul className='nav navbar-nav pull-right'>
                                 <li><a href='/'>Index</a></li>
                                 <li><Link to='/createLocalUser'>Create Local User</Link></li>
-                                <li><Link to='/topics/create'> CreateTopic </Link></li>
-                                <li> <a href='/'> Unread </a> </li>
+                                <li><a onClick={this.onCreateTopicClick(dispatch)}>CreateTopic</a></li>
+                                <li><a href='/'> Unread </a> </li>
                                 <li><a href='/getstart'>Getting Started</a></li>
                                 <li><a href='/api'>API</a></li>
                             </ul>
@@ -29,3 +39,9 @@ export default class NavBar extends React.Component {
     }
 }
 
+const mapStateToProps = (state, ownProps) => ({
+
+});
+
+
+export default connect(mapStateToProps)(NavBar);

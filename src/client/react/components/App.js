@@ -29,6 +29,7 @@ class App extends React.Component {
                     </div>
                     
                 </section>
+                <C.CluboEditor></C.CluboEditor>
             </div>
         );
     }

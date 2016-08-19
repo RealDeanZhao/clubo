@@ -33,6 +33,7 @@ const store = createStore(
     topicList: Reducers.topicList,
     topicDetail: Reducers.topicDetail,
     showSignInModal: Reducers.showSignInModal,
+    showCluboEditorModal: Reducers.showCluboEditorModal,
     authencated: Reducers.authencated,
     routing: routerReducer,
     form: RF.reducer
