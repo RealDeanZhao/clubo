@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 import {REQUEST_TOPICS, RECEIVE_TOPICS, SYNC_TOPIC_DRAFT} from '../constants';
 import {GET_TOPIC, GET_TOPIC_SUCCESS, GET_TOPIC_FAILURE} from '../constants';
+import {CREATE_TOPIC_SUCCESS} from '../constants';
 
 function requestTopics() {
     return {
@@ -40,3 +41,24 @@ export const getTopic = (id) => {
     }
 }
 
+function createTopicSuccess(){
+    return {
+        type: CREATE_TOPIC_SUCCESS
+    }
+}
+
+export const createTopic = (topic) => {
+    return async (dispatch) => {
+        const response = await fetch(`/api/v1/topics`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(topic)
+        });
+        //const result = await response.json();
+        //console.log(result);
+        dispatch(createTopicSuccess());
+    }
+}

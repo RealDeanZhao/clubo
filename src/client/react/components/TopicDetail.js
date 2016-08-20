@@ -2,6 +2,7 @@ import * as React from 'react';
 import {TopicRowProps, TopicRow} from './TopicRow';
 import {connect} from 'react-redux';
 import {getTopic} from '../actions/TopicAction';
+import ReactMarkdown from 'react-markdown';
 
 class TopicDetail extends React.Component {
     componentWillMount() {
@@ -13,7 +14,7 @@ class TopicDetail extends React.Component {
         const {topicDetail} = this.props;
         return (
             <div>
-                {topicDetail.content}
+                <ReactMarkdown source={topicDetail.content}></ReactMarkdown>
             </div>
         )
     };

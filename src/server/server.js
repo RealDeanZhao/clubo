@@ -14,6 +14,7 @@ const serve = require('koa-static');
 import * as M from './models';
 import * as R from './repositories';
 import {TopicApi, AuthApi} from './api/v1';
+import routes from './routes';
 
 const app = new Koa();
 
@@ -89,52 +90,11 @@ app.use(bodyParser());
 //     ctx.redirect('/');
 // });
 
-router.post('/api/v1/auth/login', (ctx, next) => {
-    console.log(ctx.request.body);
 
-    if (!(ctx.request.body.username === '1' && ctx.request.body.password === '2')) {
-        ctx.body = 'Wrong user or password';
-        return;
-    }
-    var profile = {
-        username: ctx.request.body.username,
-        id: 111
-    }
-    var token = jwt.sign(profile, 'clubo-jwt-secret', { expiresIn: 60 * 5 });
+routes(app);
 
-    ctx.body = token;
-});
-
-router.get('/api/v1/topics', koaJwt({
-    secret: 'clubo-jwt-secret',
-    passthrough: true
-}), topicApi.getAll);
-
-router.get('/api/v1/topics/:id/:page?', topicApi.getTopicById);
-
-router.post('/api/v1/auth/local', authApi.auth);
-
-router.get('/api/v1/auth/github', passport.authenticate('github'));
-
-router.get('/api/v1/auth/github/callback',
-    async (ctx, next) => {
-        return passport.authenticate('github', (user, info, status) => {
-            console.log('github callback');
-            console.log(user);
-            ctx.redirect('/');
-        })(ctx, next);
-    }
-);
-
-router.get('/api/v1/auth/haha', async (ctx, next) => {
-    console.log('5');
-    console.log(ctx);
-});
-
-app.use(router.routes());
 app.use(passport.initialize());
 app.use(serve('.'));
-
 
 app.listen(3000, () => {
     console.log('server is running');

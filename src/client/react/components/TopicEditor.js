@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import 'brace/mode/markdown';
 import 'brace/theme/github';
 import {connect} from 'react-redux';
-import {closeTopicEditorModal} from '../actions';
+import {closeTopicEditorModal, createTopic} from '../actions';
 import '../../css/clubo-editor-modal.css';
 import * as C from '../components';
 
@@ -21,15 +21,19 @@ class TopicEditor extends React.Component {
         }
     }
 
-    handleDraftChange(input, dispatch) {
-        return input.onChange;
+    submit(dispatch) {
+        return function (values) {
+            //console.log(values);
+            dispatch(createTopic(values));
+        }
     }
+
     render() {
-        const {dispatch, showTopicEditorModal} = this.props;
+        const {dispatch, showTopicEditorModal, handleSubmit} = this.props;
 
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit}>
+                <form >
                     <RBS.Modal show={showTopicEditorModal} dialogClassName='clubo-editor-modal'>
                         <RBS.Modal.Body>
                             <div>
@@ -62,6 +66,7 @@ class TopicEditor extends React.Component {
                             </RBS.Tabs>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>
+                            <RBS.Button onClick={handleSubmit(this.submit(dispatch)) } className="btn btn-info">Submit</RBS.Button>
                             <RBS.Button onClick={this.close(dispatch) }>Close</RBS.Button>
                         </RBS.Modal.Footer>
                     </RBS.Modal>
