@@ -4,8 +4,9 @@ const replyRepository = new ReplyRepository();
 
 export default class ReplyApi {
     async getAll(ctx, next) {
-        let topics = await replyRepository.getAll();
-        ctx.body = JSON.stringify(topics);
+        const topicId = ctx.params.topicId;
+        let replies = await replyRepository.getAll(topicId);
+        ctx.body = JSON.stringify(replies);
     }
 
     async get(ctx, next) {

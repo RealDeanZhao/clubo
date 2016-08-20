@@ -1,0 +1,9 @@
+.reply-list {
+    margin-top: 2em;
+}
+
+.reply-list-header {
+    background-color: #f6f6f6;
+    height: 40px;
+    padding: 10px;
+}

@@ -32,6 +32,7 @@ const store = createStore(
     topicList: Reducers.topicList,
     topicDetail: Reducers.topicDetail,
     topicDraft: Reducers.topicDraft,
+    replyList: Reducers.replyList,
     showSignInModal: Reducers.showSignInModal,
     showTopicEditorModal: Reducers.showTopicEditorModal,
     authencated: Reducers.authencated,

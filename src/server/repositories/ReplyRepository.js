@@ -3,8 +3,8 @@ const thinky = require('thinky')();
 const r = thinky.r;
 
 export default class ReplyRepository {
-    async getAll() {
-        return await ReplyModel.filter({})
+    async getAll(topicId) {
+        return await ReplyModel.filter({topicId:topicId})
             .run();
     }
     async get(id) {

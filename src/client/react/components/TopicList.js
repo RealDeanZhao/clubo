@@ -7,7 +7,7 @@ import {Router, Route, Link, browserHistory} from 'react-router';
 class TopicList extends React.Component {
 
     componentWillMount() {
-        const {topicList, dispatch} = this.props;
+        const {dispatch} = this.props;
         dispatch(fetchTopics());
     };
 

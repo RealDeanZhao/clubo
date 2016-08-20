@@ -17,11 +17,11 @@ export default (app) => {
         .del('/api/v1/topics/:id', topicApi.delete);
 
     router
-        .get('/api/v1/replies', replyApi.getAll)
-        .get('/api/v1/replies/:id', replyApi.get)
-        .post('/api/v1/replies/', replyApi.create)
-        .put('/api/v1/replies/:id', replyApi.update)
-        .del('/api/v1/replies/:id', replyApi.delete);
+        .get('/api/v1/topics/:topicId/replies', replyApi.getAll)
+        .get('/api/v1/topics/:topicId/replies/:id', replyApi.get)
+        .post('/api/v1/topics/:topicId/replies/', replyApi.create)
+        .put('/api/v1/topics/:topicId/replies/:id', replyApi.update)
+        .del('/api/v1/topics/:topicId/replies/:id', replyApi.delete);
 
 // .get('/', function (ctx, next) {
 //     ctx.body = 'Hello World!';

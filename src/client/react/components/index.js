@@ -12,6 +12,8 @@ import TopicEditor from './TopicEditor';
 import EditorPreviewer from './EditorPreviewer';
 import Editor from './Editor';
 import ReplyEditor from './ReplyEditor';
+import ReplyList from './ReplyList';
+import ReplyRow from './ReplyRow';
 
 export {App};
 export {DevTools};
@@ -27,3 +29,5 @@ export {TopicEditor};
 export {EditorPreviewer};
 export {Editor};
 export {ReplyEditor};
+export {ReplyList};
+export {ReplyRow};

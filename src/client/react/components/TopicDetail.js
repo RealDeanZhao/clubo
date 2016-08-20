@@ -24,11 +24,15 @@ class TopicDetail extends React.Component {
             content = topicDetail.content;
             title = topicDetail.title;
         }
+
         return (
             <div>
                 <div className='topic-detail'>
                     <h2 className='topic-detail-title'>{title}</h2>
                     <ReactMarkdown source={content}></ReactMarkdown>
+                </div>
+                <div>
+                    <C.ReplyList topicId={id}></C.ReplyList>
                 </div>
                 <div>
                     <C.ReplyEditor initialValues={{ topicId: id }}></C.ReplyEditor>
