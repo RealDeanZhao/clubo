@@ -1,7 +1,5 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
-import brace from 'brace';
-import AceEditor from 'react-ace';
 import ReactMarkdown from 'react-markdown';
 import 'brace/mode/markdown';
 import 'brace/theme/github';

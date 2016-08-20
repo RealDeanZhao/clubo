@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
-import brace from 'brace';
+//import brace from '../../../wrappers/brace.wrapper';
 import AceEditor from 'react-ace';
-import 'brace/mode/markdown';
-import 'brace/theme/github';
 import '../../css/topic-editor.css';
 import * as C from '../components';
 
