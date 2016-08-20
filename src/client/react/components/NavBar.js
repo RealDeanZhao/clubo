@@ -18,17 +18,13 @@ class NavBar extends React.Component {
                 <nav className='navbar navbar-default'>
                     <div className='container'>
                         <div className='navbar-header'>
-                            <a className="navbar-brand" href="#">Clubo</a>
+                            <a className="navbar-brand" href="/">Clubo</a>
 
                         </div>
                         <div>
                             <ul className='nav navbar-nav pull-right'>
                                 <li><a href='/'>Index</a></li>
-                                <li><Link to='/createLocalUser'>Create Local User</Link></li>
                                 <li><a onClick={this.onCreateTopicClick(dispatch)}>CreateTopic</a></li>
-                                <li><a href='/'> Unread </a> </li>
-                                <li><a href='/getstart'>Getting Started</a></li>
-                                <li><a href='/api'>API</a></li>
                             </ul>
                         </div>
                     </div>

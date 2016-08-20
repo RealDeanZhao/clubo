@@ -1,0 +1,12 @@
+.topic-detail {
+    background-color: white;
+    padding: 2em;
+    border-color: #e1e1e1;
+}
+
+.topic-detail-title {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    padding-bottom: 10px;
+}

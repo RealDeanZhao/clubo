@@ -1,8 +1,9 @@
 import Router from 'koa-router';
-import {TopicApi, AuthApi} from '../api/v1';
+import {TopicApi, AuthApi, ReplyApi} from '../api/v1';
 
 const topicApi = new TopicApi();
 const authApi = new AuthApi();
+const replyApi = new ReplyApi();
 const router = new Router();
 
 
@@ -15,6 +16,12 @@ export default (app) => {
         .put('/api/v1/topics/:id', topicApi.update)
         .del('/api/v1/topics/:id', topicApi.delete);
 
+    router
+        .get('/api/v1/replies', replyApi.getAll)
+        .get('/api/v1/replies/:id', replyApi.get)
+        .post('/api/v1/replies/', replyApi.create)
+        .put('/api/v1/replies/:id', replyApi.update)
+        .del('/api/v1/replies/:id', replyApi.delete);
 
 // .get('/', function (ctx, next) {
 //     ctx.body = 'Hello World!';

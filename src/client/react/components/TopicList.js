@@ -19,6 +19,7 @@ class TopicList extends React.Component {
                 <C.TopicRow key ={key++} {...topic}></C.TopicRow>
             );
         }, this);
+        
         return (
             <div>
                 <ul className="list-group">

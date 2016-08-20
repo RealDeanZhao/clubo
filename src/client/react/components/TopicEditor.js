@@ -7,7 +7,7 @@ import 'brace/mode/markdown';
 import 'brace/theme/github';
 import {connect} from 'react-redux';
 import {closeTopicEditorModal, createTopic} from '../actions';
-import '../../css/clubo-editor-modal.css';
+import '../../css/topic-editor.css';
 import * as C from '../components';
 
 const RF = require('redux-form');
@@ -34,36 +34,19 @@ class TopicEditor extends React.Component {
         return (
             <div>
                 <form >
-                    <RBS.Modal show={showTopicEditorModal} dialogClassName='clubo-editor-modal'>
+                    <RBS.Modal show={showTopicEditorModal} dialogClassName='topic-editor'>
                         <RBS.Modal.Body>
                             <div>
                                 <Field component='input' className="form-control" placeholder="Title" name='title'/>
                             </div>
-
-                            <RBS.Tabs id="clubo-editor">
-                                <RBS.Tab eventKey={1} title='Edit'>
-                                    <div>
-                                        <Field name="content" component={props =>
-                                            <AceEditor onChange = {props.input.onChange}
-                                                onBlur = {props.input.onBlur}
-                                                onFocus = {props.input.onFocus}
-                                                mode='markdown'
-                                                theme='github'
-                                                name='haha-div'
-                                                width='100%'
-                                                value={props.input.value}
-                                                editorProps={{ $blockScrolling: true }}
-                                                fontSize={15}>
-                                            </AceEditor>
-                                        }/>
-                                    </div>
-                                </RBS.Tab>
-                                <RBS.Tab eventKey={2} title='Preview'>
-                                    <div>
-                                        <C.TopicEditorPreviewer></C.TopicEditorPreviewer>
-                                    </div>
-                                </RBS.Tab>
-                            </RBS.Tabs>
+                            <Field name="content" component={props =>
+                                <C.Editor 
+                                    onChange={props.input.onChange} 
+                                    value={props.input.value} 
+                                    id='clubo-topic-editor-id-1' 
+                                    name='clubo-topic-editor-name-1'>
+                                </C.Editor>
+                            }/>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>
                             <RBS.Button onClick={handleSubmit(this.submit(dispatch)) } className="btn btn-info">Submit</RBS.Button>
