@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import 'brace/mode/markdown';
 import 'brace/theme/github';
 import {connect} from 'react-redux';
-import {closeTopicEditorModal, createTopic} from '../actions';
+import {closeCluboEditorModal, createTopic} from '../actions';
 import '../../css/topic-editor.css';
 import * as C from '../components';
 
@@ -12,10 +12,20 @@ const RF = require('redux-form');
 const Field = RF.Field;
 const reduxForm = RF.reduxForm;
 
-class TopicEditor extends React.Component {
+const editorComponent = props => {
+    return (
+        <C.CluboEditor
+            onChange={props.input.onChange}
+            value={props.input.value}
+            >
+        </C.CluboEditor>
+    )
+}
+
+class EditorForm extends React.Component {
     close(dispatch) {
         return function () {
-            dispatch(closeTopicEditorModal());
+            dispatch(closeCluboEditorModal());
         }
     }
 
@@ -27,24 +37,17 @@ class TopicEditor extends React.Component {
     }
 
     render() {
-        const {dispatch, showTopicEditorModal, handleSubmit} = this.props;
+        const {dispatch, showCluboEditorModal, handleSubmit} = this.props;
 
         return (
             <div>
                 <form >
-                    <RBS.Modal show={showTopicEditorModal} dialogClassName='topic-editor'>
+                    <RBS.Modal show={showCluboEditorModal} dialogClassName='topic-editor'>
                         <RBS.Modal.Body>
                             <div>
                                 <Field component='input' className="form-control" placeholder="Title" name='title'/>
                             </div>
-                            <Field name="content" component={props =>
-                                <C.CluboEditor 
-                                    onChange={props.input.onChange} 
-                                    value={props.input.value} 
-                                    id='clubo-topic-editor-id-1' 
-                                    >
-                                </C.CluboEditor>
-                            }/>
+                            <Field name="content" component={editorComponent}/>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>
                             <RBS.Button onClick={handleSubmit(this.submit(dispatch)) } className="btn btn-info">Submit</RBS.Button>
@@ -58,12 +61,12 @@ class TopicEditor extends React.Component {
 }
 
 
-TopicEditor = reduxForm({
-    form: 'topicEditorForm'
-})(TopicEditor);
+EditorForm = reduxForm({
+    form: 'editorForm'
+})(EditorForm);
 
 const mapStateToProps = (state, ownProps) => ({
-    showTopicEditorModal: state.showTopicEditorModal
+    showCluboEditorModal: state.showCluboEditorModal
 });
 
-export default connect(mapStateToProps)(TopicEditor);
+export default connect(mapStateToProps)(EditorForm);

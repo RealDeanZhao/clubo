@@ -31,7 +31,7 @@ class App extends React.Component {
                     </div>
 
                 </section>
-                <C.TopicEditor></C.TopicEditor>
+                <C.CluboEditorForm></C.CluboEditorForm>
             </div>
         );
     }

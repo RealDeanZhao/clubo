@@ -34,7 +34,7 @@ const store = createStore(
     topicDraft: Reducers.topicDraft,
     replyList: Reducers.replyList,
     showSignInModal: Reducers.showSignInModal,
-    showTopicEditorModal: Reducers.showTopicEditorModal,
+    showCluboEditorModal: Reducers.showCluboEditorModal,
     authencated: Reducers.authencated,
     routing: routerReducer,
     form: RF.reducer

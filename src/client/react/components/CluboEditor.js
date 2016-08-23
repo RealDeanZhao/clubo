@@ -1,20 +1,20 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
-//import brace from '../../../wrappers/brace.wrapper';
-//import AceEditor from 'react-ace';
 import '../../css/topic-editor.css';
 import * as C from '../components';
-import RichTextEditor from 'react-rte';
-import { Editor, EditorState } from 'draft-js';
-
-
+import { Editor, EditorState, ContentState } from 'draft-js';
 
 export default class CluboEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { editorState: EditorState.createEmpty(), previewerState: '' };
-
-
+        let contentState = null;
+        if(props.value){
+            contentState = ContentState.createFromText(props.value);
+        }else{
+            contentState = ContentState.createFromText('');
+        }
+         
+        this.state = { editorState: EditorState.createWithContent(contentState), previewerState: contentState.getPlainText() };
     }
 
     onChange(editorState) {
@@ -24,21 +24,24 @@ export default class CluboEditor extends React.Component {
     };
 
     render() {
-        const {editorState, previewerState, onChange, id, value, editorValue, name} = this.state;
+
 
         return (
             <div>
-                <RBS.Tabs id={id}>
+                <RBS.Tabs id='clubo-editor-modal'>
                     <RBS.Tab eventKey={1} title='Edit'>
                         <div>
-                            <Editor editorState={editorState} value={previewerState} onChange={this.onChange.bind(this)}
+                            <Editor
+                                editorState={this.state.editorState}
+                                value={this.state.previewerState}
+                                onChange={this.onChange.bind(this) }
                                 >
                             </Editor>
                         </div>
                     </RBS.Tab>
                     <RBS.Tab eventKey={2} title='Preview'>
                         <div>
-                            <C.EditorPreviewer source={previewerState}></C.EditorPreviewer>
+                            <C.CluboEditorPreviewer source={this.state.previewerState}></C.CluboEditorPreviewer>
                         </div>
                     </RBS.Tab>
                 </RBS.Tabs>
