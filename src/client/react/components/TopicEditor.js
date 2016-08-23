@@ -38,12 +38,12 @@ class TopicEditor extends React.Component {
                                 <Field component='input' className="form-control" placeholder="Title" name='title'/>
                             </div>
                             <Field name="content" component={props =>
-                                <C.Editor 
+                                <C.CluboEditor 
                                     onChange={props.input.onChange} 
                                     value={props.input.value} 
                                     id='clubo-topic-editor-id-1' 
-                                    name='clubo-topic-editor-name-1'>
-                                </C.Editor>
+                                    >
+                                </C.CluboEditor>
                             }/>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>

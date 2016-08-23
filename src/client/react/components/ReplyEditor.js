@@ -24,10 +24,10 @@ class ReplyEditor extends React.Component {
             <div className='clubo-reply-editor'  >
                 <form>
                     <Field name="content" component={props =>
-                        <C.Editor onChange={props.input.onChange}
+                        <C.CluboEditor onChange={props.input.onChange}
                             value={props.input.value}
                             id='reply-editor-id-1'
-                            name='reply-editor-name-1'></C.Editor>
+                            name='reply-editor-name-1'></C.CluboEditor>
                     }/>
 
                     <button onClick={handleSubmit(this.submit(dispatch)) } className="btn btn-info">Submit</button>
