@@ -10,10 +10,9 @@ const reduxForm = RF.reduxForm;
 
 class ReplyEditor extends React.Component {
 
-    submit(dispatch) {
-        return function (values) {
-            dispatch(createReply(values));
-        }
+    submit(values) {
+        const {dispatch} = this.props;
+        dispatch(createReply(values));
     }
 
     render() {
@@ -30,7 +29,7 @@ class ReplyEditor extends React.Component {
                             name='reply-editor-name-1'></C.CluboEditor>
                     }/>
 
-                    <button onClick={handleSubmit(this.submit(dispatch)) } className="btn btn-info">Submit</button>
+                    <button onClick={handleSubmit(this.submit.bind(this)) } className="btn btn-info">Submit</button>
                 </form>
             </div>
         );

@@ -20,17 +20,14 @@ const editorComponent = props => {
 }
 
 class EditorForm extends React.Component {
-    close(dispatch) {
-        return function () {
-            dispatch(closeCluboEditorModal());
-        }
+    close() {
+        const {dispatch} = this.props;
+        dispatch(closeCluboEditorModal());
     }
 
-    submit(dispatch) {
-        return function (values) {
-            //console.log(values);
-            dispatch(createTopic(values));
-        }
+    submit() {
+        const {dispatch} = this.props;
+        dispatch(createTopic(values));
     }
 
     render() {
@@ -48,8 +45,8 @@ class EditorForm extends React.Component {
                             <Field name="content" component={editorComponent}/>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>
-                            <RBS.Button onClick={handleSubmit(this.submit(dispatch)) } className="btn btn-info">Submit</RBS.Button>
-                            <RBS.Button onClick={this.close(dispatch) }>Close</RBS.Button>
+                            <RBS.Button onClick={handleSubmit(this.submit.bind(this)) } className="btn btn-info">Submit</RBS.Button>
+                            <RBS.Button onClick={this.close.bind(this) }>Close</RBS.Button>
                         </RBS.Modal.Footer>
                     </RBS.Modal>
                 </form>

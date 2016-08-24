@@ -4,11 +4,10 @@ import {Router, Route, Link, browserHistory} from 'react-router';
 import {showCluboEditorModal} from '../actions';
 
 class NavBar extends React.Component {
-    onCreateTopicClick(dispatch) {
-        return function (e) {
-            e.preventDefault();
-            dispatch(showCluboEditorModal());
-        }
+    onCreateTopicClick(e) {
+        const {dispatch} = this.props;
+        e.preventDefault();
+        dispatch(showCluboEditorModal());
     }
     render() {
         const {dispatch} = this.props;
@@ -24,7 +23,7 @@ class NavBar extends React.Component {
                         <div>
                             <ul className='nav navbar-nav pull-right'>
                                 <li><a href='/'>Index</a></li>
-                                <li><a onClick={this.onCreateTopicClick(dispatch)}>CreateTopic</a></li>
+                                <li><a onClick={this.onCreateTopicClick.bind(this) }>CreateTopic</a></li>
                             </ul>
                         </div>
                     </div>
