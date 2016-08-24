@@ -23,18 +23,18 @@ export default (app) => {
         .put('/api/v1/topics/:topicId/replies/:id', replyApi.update)
         .del('/api/v1/topics/:topicId/replies/:id', replyApi.delete);
 
-// .get('/', function (ctx, next) {
-//     ctx.body = 'Hello World!';
-//   })
-//   .post('/users', function (ctx, next) {
-//     // ...
-//   })
-//   .put('/users/:id', function (ctx, next) {
-//     // ...
-//   })
-//   .del('/users/:id', function (ctx, next) {
-//     // ...
-//   });
+    // .get('/', function (ctx, next) {
+    //     ctx.body = 'Hello World!';
+    //   })
+    //   .post('/users', function (ctx, next) {
+    //     // ...
+    //   })
+    //   .put('/users/:id', function (ctx, next) {
+    //     // ...
+    //   })
+    //   .del('/users/:id', function (ctx, next) {
+    //     // ...
+    //   });
     //router.post('/api/v1/auth/local', authApi.auth);
 
     //router.get('/api/v1/auth/github', passport.authenticate('github'));
@@ -74,7 +74,9 @@ export default (app) => {
     //     secret: 'clubo-jwt-secret',
     //     passthrough: true
     // }), topicApi.getAll);
-
+  
     app.use(router.routes());
 }
+
+
 

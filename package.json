@@ -35,12 +35,11 @@
     "koa-static": "^2.0.0",
     "passport-github2": "^0.1.10",
     "react": "^15.2.1",
-    "react-ace": "^3.5.0",
     "react-bootstrap": "^0.30.0-rc.2",
     "react-dom": "^15.2.1",
     "react-markdown": "^2.4.2",
     "react-redux": "^4.4.5",
-    "react-router": "^2.6.0",
+    "react-router": "^2.7.0",
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-actions": "^0.10.1",
@@ -78,6 +77,7 @@
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.12.1"
+    "webpack-hot-middleware": "^2.12.1",
+    "webpack-isomorphic-tools": "^2.5.7"
   }
 }

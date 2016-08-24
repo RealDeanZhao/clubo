@@ -3,7 +3,6 @@ import * as C from '../components';
 import {connect} from 'react-redux';
 import {getTopic} from '../actions/TopicAction';
 import ReactMarkdown from 'react-markdown';
-import '../../css/topic-detail.css';
 
 const RF = require('redux-form');
 const Field = RF.Field;
@@ -16,6 +15,7 @@ class TopicDetail extends React.Component {
     };
 
     render() {
+        require('../../css/topic-detail.css');
         const {dispatch, topicDetail, handleSubmit, id} = this.props;
 
         let content = '';

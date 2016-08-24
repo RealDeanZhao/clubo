@@ -3,7 +3,6 @@ import * as C from './';
 import {connect} from 'react-redux';
 import {fetchReplies} from '../actions/ReplyAction';
 import {Router, Route, Link, browserHistory} from 'react-router';
-import '../../css/reply-list.css';
 
 class ReplyList extends React.Component {
 
@@ -13,6 +12,7 @@ class ReplyList extends React.Component {
     };
 
     render() {
+        require('../../css/reply-list.css');
         const {replyList, dispatch} = this.props;
         let key = 0;
         let list = replyList.map(function (reply) {

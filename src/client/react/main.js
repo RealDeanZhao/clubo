@@ -4,8 +4,9 @@ import * as ReactDOM from 'react-dom';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import {Router, IndexRoute, Route, browserHistory} from 'react-router';
+import {Router, IndexRoute, Route, browserHistory, match} from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import routes from './routes';
 
 const RF = require('redux-form');
 
@@ -49,19 +50,12 @@ const devtools = () => {
 
 const histroy = syncHistoryWithStore(browserHistory, store);
 
+
 ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router history={histroy}>
-        <Route path="/" component = {C.App}>
-          <IndexRoute component ={ C.TopicList } >
-          </IndexRoute>
-          <Route path="topics/create" component = {C.CluboEditorHeader}>
-            <IndexRoute component = {C.CluboEditor}></IndexRoute>
-            <Route path="preview" component = {C.MarkdownPreviewer}></Route>
-          </Route>
-          <Route path="topics/detail/:id" component ={C.TopicDetail} ></Route>
-        </Route>
+        {routes}
       </Router>
       <div>
         {devtools() }

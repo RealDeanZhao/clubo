@@ -1,0 +1,12 @@
+.clubo-editor {
+    height: 500px
+}
+
+.clubo-editor-modal {
+    width: 50%
+}
+
+.clubo-editor-previewer {
+    height: 500px;
+    background-color: white;
+}

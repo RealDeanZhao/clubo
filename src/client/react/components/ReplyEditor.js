@@ -2,7 +2,6 @@ import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import {createReply} from '../actions';
-import '../../css/reply-editor.css';
 import * as C from '../components';
 
 const RF = require('redux-form');
@@ -18,8 +17,9 @@ class ReplyEditor extends React.Component {
     }
 
     render() {
+        require('../../css/reply-editor.css');
         const {dispatch, handleSubmit} = this.props;
-         
+
         return (
             <div className='clubo-reply-editor'  >
                 <form>

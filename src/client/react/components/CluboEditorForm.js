@@ -1,11 +1,8 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
-import 'brace/mode/markdown';
-import 'brace/theme/github';
 import {connect} from 'react-redux';
 import {closeCluboEditorModal, createTopic} from '../actions';
-import '../../css/topic-editor.css';
 import * as C from '../components';
 
 const RF = require('redux-form');
@@ -37,12 +34,13 @@ class EditorForm extends React.Component {
     }
 
     render() {
+        require('../../css/clubo-editor.css');
         const {dispatch, showCluboEditorModal, handleSubmit} = this.props;
 
         return (
             <div>
                 <form >
-                    <RBS.Modal show={showCluboEditorModal} dialogClassName='topic-editor'>
+                    <RBS.Modal show={showCluboEditorModal} dialogClassName='clubo-editor-modal'>
                         <RBS.Modal.Body>
                             <div>
                                 <Field component='input' className="form-control" placeholder="Title" name='title'/>

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
-import '../../css/topic-editor.css';
 import * as C from '../components';
 import { Editor, EditorState, ContentState } from 'draft-js';
 
@@ -8,12 +7,12 @@ export default class CluboEditor extends React.Component {
     constructor(props) {
         super(props);
         let contentState = null;
-        if(props.value){
+        if (props.value) {
             contentState = ContentState.createFromText(props.value);
-        }else{
+        } else {
             contentState = ContentState.createFromText('');
         }
-         
+
         this.state = { editorState: EditorState.createWithContent(contentState), previewerState: contentState.getPlainText() };
     }
 
@@ -24,13 +23,12 @@ export default class CluboEditor extends React.Component {
     };
 
     render() {
-
-
+        require('../../css/clubo-editor.css');
         return (
             <div>
                 <RBS.Tabs id='clubo-editor-modal'>
                     <RBS.Tab eventKey={1} title='Edit'>
-                        <div>
+                        <div className='clubo-editor'>
                             <Editor
                                 editorState={this.state.editorState}
                                 value={this.state.previewerState}
