@@ -26,20 +26,6 @@ class TopicList extends React.Component {
 
                     {list}
 
-                    <ul className="pagination">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo; </span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo; </span>
-                            </a>
-                        </li>
-                    </ul>
                 </ul>
                 {this.props.children}
             </div>

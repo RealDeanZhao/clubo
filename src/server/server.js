@@ -4,7 +4,7 @@ import bodyParser  from 'koa-bodyparser';
 import jwt from 'jsonwebtoken';
 import path from "path";
 import thunkMiddleware from 'redux-thunk';
-
+import serialize from 'serialize-javascript';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
@@ -14,7 +14,7 @@ import { syncHistoryWithStore, routerReducer} from 'react-router-redux'
 import {renderToString} from 'react-dom/server';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import history from 'history';
-// ...
+
 const RF = require('redux-form');
 const passport = require('koa-passport');
 const GitHubStrategy = require('passport-github2');
@@ -49,8 +49,7 @@ const store = createStore(
         form: RF.reducer
     }), initialState, enhancer);
 
-if (process.env.NODE_ENV != 'production') {
-    console.log('init webpack hot');
+if (global.__DEVELOPMENT__) {
     const webpack = require('webpack');
     const webpackConfig = require('../../webpack.config');
     const webpackDevMiddleware = require('koa-webpack-dev-middleware');
@@ -96,8 +95,6 @@ app.use(serve('.'));
 app.use((ctx, next) => {
     const history = createHistory(ctx.request.url);
     console.log(ctx.request.url);
-    //const location = history.createLocation(ctx.request.url);
-    //console.log(history);
     match({ routes: reactRoutes, location: ctx.request.url }, (error, redirectLocation, renderProps) => {
         if (error) {
             console.log('500');
@@ -107,27 +104,36 @@ app.use((ctx, next) => {
             ctx.response.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
             console.log('200');
-            if (process.env.NODE_ENV != 'production') {
+            if (global.__DEVELOPMENT__ != 'production') {
                 global.webpackIsomorphicTools.refresh();
             }
+
             const serverRender = renderToString(
                 <Provider store={store}>
-                    <RouterContext {...renderProps} />
+                    <div>
+                        <RouterContext {...renderProps} />
+                        <div>
+                        </div>
+                    </div>
                 </Provider >
             );
+            const serverState = `<script charSet='UTF-8'>window.__INITIAL_STATE__=${serialize(store.getState())}</script>`;
+            const assets = global.webpackIsomorphicTools.assets();
+            const bundle = `<script src=${assets.javascript.main} charSet='UTF-8'></script>`;
             ctx.response.set('content-type', 'text/html');
             ctx.response.status = 200;
-            ctx.response.body =
-                `<!doctype html>
-<html lang="en" data-framework="typescript">
+            ctx.response.body = `
+<!doctype html>
+<html>
   <head>
     <meta charset="utf-8">
     <title>Clubo</title>
+    
   </head>
   <body>
-    <div id='app'> ${serverRender}</div>
-
-    <script src="/bundle.js"></script>
+    <div id='app'>${serverRender}</div>
+    ${serverState}
+    ${bundle}
   </body>
 </html>
             `;
@@ -136,8 +142,8 @@ app.use((ctx, next) => {
         }
     });
 });
-    // <script src="./node_modules/react/dist/react.js"></script>
-    // <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+// <script src="./node_modules/react/dist/react.js"></script>
+// <script src="./node_modules/react-dom/dist/react-dom.js"></script>
 app.listen(3000, () => {
     console.log('server is running');
 });
