@@ -2,12 +2,13 @@ import * as React from 'react';
 import * as RBS from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import {connect} from 'react-redux';
-import {closeCluboEditorModal, createTopic} from '../actions';
+import {Field, reduxForm} from 'redux-form';
+
+import {close} from '../modules/cluboEditorModal';
+import {_add} from '../modules/topics';
 import * as C from '../components';
 
-const RF = require('redux-form');
-const Field = RF.Field;
-const reduxForm = RF.reduxForm;
+
 
 const editorComponent = props => {
     return (
@@ -22,22 +23,22 @@ const editorComponent = props => {
 class EditorForm extends React.Component {
     close() {
         const {dispatch} = this.props;
-        dispatch(closeCluboEditorModal());
+        dispatch(close());
     }
 
-    submit() {
+    submit(values) {
         const {dispatch} = this.props;
-        dispatch(createTopic(values));
+        dispatch(_add(values));
     }
 
     render() {
         require('../../css/clubo-editor.css');
-        const {dispatch, showCluboEditorModal, handleSubmit} = this.props;
+        const {dispatch, show, handleSubmit} = this.props;
 
         return (
             <div>
                 <form >
-                    <RBS.Modal show={showCluboEditorModal} dialogClassName='clubo-editor-modal'>
+                    <RBS.Modal show={show} dialogClassName='clubo-editor-modal'>
                         <RBS.Modal.Body>
                             <div>
                                 <Field component='input' className="form-control" placeholder="Title" name='title'/>
@@ -61,7 +62,7 @@ EditorForm = reduxForm({
 })(EditorForm);
 
 const mapStateToProps = (state, ownProps) => ({
-    showCluboEditorModal: state.showCluboEditorModal
+    show: state.cluboEditorModal
 });
 
 export default connect(mapStateToProps)(EditorForm);

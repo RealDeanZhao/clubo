@@ -1,28 +1,26 @@
 import * as React from 'react';
 import * as C from '../components';
 import {connect} from 'react-redux';
-import {getTopic} from '../actions/TopicAction';
 import ReactMarkdown from 'react-markdown';
+import {Field, reduxForm} from 'redux-form';
 
-const RF = require('redux-form');
-const Field = RF.Field;
-const reduxForm = RF.reduxForm;
+import {_get} from '../modules/topics';
 
 class TopicDetail extends React.Component {
     componentWillMount() {
         const {dispatch, id} = this.props;
-        dispatch(getTopic(id));
+        dispatch(_get(id));
     };
 
     render() {
         require('../../css/topic-detail.css');
-        const {dispatch, topicDetail, handleSubmit, id} = this.props;
+        const {dispatch, detail, handleSubmit, id} = this.props;
 
         let content = '';
         let title = '';
-        if (topicDetail && topicDetail.content) {
-            content = topicDetail.content;
-            title = topicDetail.title;
+        if (detail && detail.content) {
+            content = detail.content;
+            title = detail.title;
         }
 
         return (
@@ -40,7 +38,7 @@ class TopicDetail extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    topicDetail: state.topicDetail,
+    detail: state.topics.detail,
     id: ownProps.params.id
 });
 

@@ -1,18 +1,15 @@
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
+import {Field, reduxForm} from 'redux-form';
 
-import {createReply} from '../actions';
+import {_add} from '../modules/replies';
 import * as C from '../components';
-
-const RF = require('redux-form');
-const Field = RF.Field;
-const reduxForm = RF.reduxForm;
 
 class ReplyEditor extends React.Component {
 
     submit(values) {
         const {dispatch} = this.props;
-        dispatch(createReply(values));
+        dispatch(_add(values));
     }
 
     render() {

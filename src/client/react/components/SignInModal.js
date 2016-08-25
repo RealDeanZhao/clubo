@@ -1,19 +1,19 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
 import {connect} from 'react-redux';
-import {closeSignInModal, authUser} from '../actions';
+
 import {SignInForm} from './';
 
 class SignInModal extends React.Component {
     close() {
         const {dispatch} = this.props;
-        dispatch(closeSignInModal());
+        //dispatch(closeSignInModal());
     };
 
     handleSignIn() {
         const {dispatch} = this.props;
         const {username, password} = values;
-        dispatch(authUser(username, password));
+        //dispatch(authUser(username, password));
     };
 
     render() {

@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
 import {connect} from 'react-redux';
-const RF = require('redux-form');
-const Field = RF.Field;
-const reduxForm = RF.reduxForm;
+import {Field, reduxForm} from 'redux-form';
 
 class SignInForm extends React.Component {
 

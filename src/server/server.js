@@ -28,6 +28,7 @@ import * as R from './repositories';
 import {TopicApi, AuthApi} from './api/v1';
 import koaRoutes from './routes';
 import * as Reducers from '../client/react/reducers';
+import reducers from '../client/react/modules/reducer';
 import reactRoutes from '../client/react/routes';
 
 const app = new Koa();
@@ -36,18 +37,8 @@ const initialState = {};
 const enhancer = compose(
     applyMiddleware(thunkMiddleware)
 );
-const store = createStore(
-    combineReducers({
-        topicList: Reducers.topicList,
-        topicDetail: Reducers.topicDetail,
-        topicDraft: Reducers.topicDraft,
-        replyList: Reducers.replyList,
-        showSignInModal: Reducers.showSignInModal,
-        showCluboEditorModal: Reducers.showCluboEditorModal,
-        authencated: Reducers.authencated,
-        routing: routerReducer,
-        form: RF.reducer
-    }), initialState, enhancer);
+
+const store = createStore(reducers, initialState, enhancer);
 
 if (global.__DEVELOPMENT__) {
     const webpack = require('webpack');

@@ -13,7 +13,10 @@ export const ADD_SUCCESS = 'clubo/topics/ADD_SUCCESS';
 export const ADD_FAILURE = 'clubo/topics/ADD_FAILURE';
 
 const initialState = {
-    done: false
+    done: false,
+    list: [],
+    detail: {
+    }
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -28,15 +31,15 @@ export default function reducer(state = initialState, action = {}) {
                 ...state,
                 done: true,
                 doing: false,
-                data: action.result,
+                list: action.result,
                 error: null
             };
-        case LOAD_ERROR:
+        case LOAD_FAILURE:
             return {
                 ...state,
                 done: true,
                 doing: false,
-                data: null,
+                list: null,
                 error: action.error
             };
         case GET:
@@ -49,15 +52,15 @@ export default function reducer(state = initialState, action = {}) {
                 ...state,
                 done: true,
                 doing: false,
-                data: action.result,
+                detail: action.result,
                 error: null
             };
-        case GET_ERROR:
+        case GET_FAILURE:
             return {
                 ...state,
                 done: true,
                 doing: false,
-                data: null,
+                detail: null,
                 error: action.error
             };
         case ADD:
@@ -70,10 +73,9 @@ export default function reducer(state = initialState, action = {}) {
                 ...state,
                 done: true,
                 doing: false,
-                data: action.result,
                 error: null
             };
-        case ADD_ERROR:
+        case ADD_FAILURE:
             return {
                 ...state,
                 done: true,
@@ -99,7 +101,7 @@ export function loadSuccess(result) {
     }
 }
 
-export function loadError(error) {
+export function loadFailure(error) {
     return {
         type: LOAD_FAILURE,
         error
@@ -111,7 +113,7 @@ export const _load = () => {
         dispatch(load());
         const response = await fetch('/api/v1/topics');
         const result = await response.json();
-        dispatch(loadSuccess(topicList))
+        dispatch(loadSuccess(result))
     }
 }
 
@@ -130,7 +132,7 @@ export function getSuccess(result) {
 
 export function getFailure(error) {
     return {
-        type: GET_SUCCESS,
+        type: GET_FAILURE,
         error
     }
 }
@@ -139,8 +141,8 @@ export const _get = (id) => {
     return async (dispatch) => {
         dispatch(get());
         const response = await fetch(`/api/v1/topics/${id}`);
-        const topicDetail = await response.json();
-        dispatch(getTopicSuccess(topicDetail))
+        const result = await response.json();
+        dispatch(getSuccess(result))
     }
 }
 
@@ -164,6 +166,7 @@ export function addFailure(error) {
 }
 
 export const _add = (topic) => {
+    console.log('adddd');
     return async (dispatch) => {
         dispatch(add());
         const response = await fetch(`/api/v1/topics`, {
