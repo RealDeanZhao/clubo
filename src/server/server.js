@@ -1,44 +1,28 @@
 import Koa from 'koa';
-import fetch from 'isomorphic-fetch';
 import bodyParser  from 'koa-bodyparser';
 import jwt from 'jsonwebtoken';
 import path from "path";
-import thunkMiddleware from 'redux-thunk';
 import serialize from 'serialize-javascript';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import {match, RouterContext, Router, IndexRoute, Route} from 'react-router';
-import { syncHistoryWithStore, routerReducer} from 'react-router-redux'
 import {renderToString} from 'react-dom/server';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import history from 'history';
 
-const RF = require('redux-form');
 const passport = require('koa-passport');
 const GitHubStrategy = require('passport-github2');
 const koaJwt = require('koa-jwt');
 const Thinky = require('thinky');
 const serve = require('koa-static');
 
-
-import * as M from './models';
-import * as R from './repositories';
-import {TopicApi, AuthApi} from './api/v1';
 import koaRoutes from './routes';
-import * as Reducers from '../client/react/reducers';
-import reducers from '../client/react/modules/reducer';
 import reactRoutes from '../client/react/routes';
+import finalCreateStore from '../client/react/createStore';
 
 const app = new Koa();
 
-const initialState = {};
-const enhancer = compose(
-    applyMiddleware(thunkMiddleware)
-);
-
-const store = createStore(reducers, initialState, enhancer);
+const store = finalCreateStore();
 
 if (global.__DEVELOPMENT__) {
     const webpack = require('webpack');
@@ -54,9 +38,6 @@ if (global.__DEVELOPMENT__) {
 
     app.use(webpackHostMiddleware(compiler));
 }
-
-const topicApi = new TopicApi();
-const authApi = new AuthApi();
 
 passport.serializeUser(function (user, done) {
     done(null, user.id)
@@ -103,8 +84,6 @@ app.use((ctx, next) => {
                 <Provider store={store}>
                     <div>
                         <RouterContext {...renderProps} />
-                        <div>
-                        </div>
                     </div>
                 </Provider >
             );
