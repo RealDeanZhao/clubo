@@ -19,7 +19,7 @@
       "_style": ".topic-detail {\n    background-color: white;\n    padding: 2em;\n    border-color: #e1e1e1;\n}\n\n.topic-detail-title {\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-bottom-color: black;\n    padding-bottom: 10px;\n}"
     },
     "./src/client/css/clubo-editor.css": {
-      "_style": ".clubo-editor {\n    height: 500px\n}\n\n.clubo-editor-modal {\n    width: 50%\n}\n\n.clubo-editor-previewer {\n    height: 500px;\n    background-color: white;\n}"
+      "_style": ".clubo-editor {\n    height: 500px;\n    display : block;\n    overflow-y:scroll;\n    width: 100%;\n}\n\n.clubo-editor-modal {\n    width: 77%;\n}\n\n.clubo-editor-previewer {\n    height: 500px;\n    display : block;\n    overflow-y:scroll;\n    width: 100%;\n    background-color: white;\n}"
     },
     "./src/client/css/reply-list.css": {
       "_style": ".reply-list {\n    margin-top: 2em;\n}\n\n.reply-list-header {\n    background-color: #f6f6f6;\n    height: 40px;\n    padding: 10px;\n}"

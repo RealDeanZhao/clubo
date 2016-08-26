@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {clear} from './replyEditorModal';
 
 export const LOAD = 'clubo/topics/LOAD';
 export const LOAD_SUCCESS = 'clubo/topics/LOAD_SUCCESS';
@@ -179,5 +180,7 @@ export const _add = (topic) => {
         });
 
         dispatch(addSuccess());
+        dispatch(_load());
+        dispatch(clear());
     }
 }

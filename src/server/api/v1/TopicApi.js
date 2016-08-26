@@ -10,6 +10,8 @@ export default class TopicApi {
 
     async get(ctx, next) {
         let topic = await topicRepository.get(ctx.params.id);
+        topic.visitCount += 1;
+        topic.save();
         ctx.body = JSON.stringify(topic);
     }
 

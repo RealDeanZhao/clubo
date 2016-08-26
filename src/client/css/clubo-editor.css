@@ -1,12 +1,18 @@
 .clubo-editor {
-    height: 500px
+    height: 500px;
+    display : block;
+    overflow-y:scroll;
+    width: 100%;
 }
 
 .clubo-editor-modal {
-    width: 50%
+    width: 77%;
 }
 
 .clubo-editor-previewer {
     height: 500px;
+    display : block;
+    overflow-y:scroll;
+    width: 100%;
     background-color: white;
 }

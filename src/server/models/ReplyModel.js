@@ -18,4 +18,6 @@ const ReplyModel = thinky.createModel('Reply', {
     delete: type.boolean().default(false)
 })
 
+ReplyModel.ensureIndex("updateAt");
+
 export {ReplyModel}

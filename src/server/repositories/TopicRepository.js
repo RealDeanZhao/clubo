@@ -6,7 +6,7 @@ const r = thinky.r;
 
 export default class TopicRepository {
     async getAll() {
-        return await TopicModel.filter({}).orderBy('lastReplyAt')
+        return await TopicModel.orderBy({ index: r.desc('lastReplyAt') }).filter({})
             .run();
     }
     async get(id) {
@@ -16,8 +16,8 @@ export default class TopicRepository {
     }
     async create(topic) {
         let model = new TopicModel({
-            title:topic.title,
-            content:topic.content
+            title: topic.title,
+            content: topic.content
         });
 
         await model.save();

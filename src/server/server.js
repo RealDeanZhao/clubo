@@ -66,16 +66,14 @@ app.use(serve('.'));
 
 app.use((ctx, next) => {
     const history = createHistory(ctx.request.url);
-    console.log(ctx.request.url);
+
     match({ routes: reactRoutes, location: ctx.request.url }, (error, redirectLocation, renderProps) => {
         if (error) {
             console.log('500');
-            //res.status(500).send(error.message);
+            console.log(error);
         } else if (redirectLocation) {
-            console.log('302');
             ctx.response.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
-            console.log('200');
             if (__DEVELOPMENT__) {
                 global.webpackIsomorphicTools.refresh();
             }

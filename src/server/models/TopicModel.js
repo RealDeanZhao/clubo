@@ -27,4 +27,6 @@ const TopicModel = thinky.createModel('Topic', {
     deleted: type.boolean().default(false)
 });
 
+TopicModel.ensureIndex("lastReplyAt");
+
 export {TopicModel}

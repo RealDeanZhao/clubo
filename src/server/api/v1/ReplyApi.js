@@ -1,6 +1,7 @@
-import {ReplyRepository} from '../../repositories';
+import {ReplyRepository, TopicRepository} from '../../repositories';
 
 const replyRepository = new ReplyRepository();
+const topicRepository = new TopicRepository();
 
 export default class ReplyApi {
     async getAll(ctx, next) {
@@ -16,6 +17,10 @@ export default class ReplyApi {
 
     async create(ctx, next) {
         let result = await replyRepository.create(ctx.request.body);
+        let topic = await topicRepository.get(ctx.request.body.topicId);
+        topic.replyCount += 1;
+        topic.lastReplyAt = new Date();
+        topic.save();
         ctx.body = 'haha';
     }
 
