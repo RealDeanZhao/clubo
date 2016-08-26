@@ -15,7 +15,6 @@ export default class ReplyApi {
     }
 
     async create(ctx, next) {
-        console.log(ctx.request.body);
         let result = await replyRepository.create(ctx.request.body);
         ctx.body = 'haha';
     }

@@ -12,10 +12,16 @@ const TopicModel = thinky.createModel('Topic', {
     replyCount: type.number().default(0),
     visitCount: type.number().default(0),
     collectCount: type.number().default(0),
-    createAt: type.date().default(Date.now()),
-    updateAt: type.date().default(Date.now()),
+    createAt: type.date().default(function () {
+        return new Date()
+    }),
+    updateAt: type.date().default(function () {
+        return new Date()
+    }),
     lastReplyId: String,
-    lastReplyAt: type.date().default(Date.now()),
+    lastReplyAt: type.date().default(function () {
+        return new Date()
+    }),
     contentIsHtml: type.boolean(),
     tab: String,
     deleted: type.boolean().default(false)

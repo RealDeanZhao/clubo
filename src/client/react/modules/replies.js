@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {clear} from './replyEditorModal';
 
 export const LOAD = 'clubo/replies/LOAD';
 export const LOAD_SUCCESS = 'clubo/replies/LOAD_SUCCESS';
@@ -150,5 +151,7 @@ export const _add = (reply) => {
             body: JSON.stringify(reply)
         });
         dispatch(addSuccess());
+        dispatch(_load(reply.topicId));
+        dispatch(clear());
     }
 }

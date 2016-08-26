@@ -6,7 +6,7 @@ const r = thinky.r;
 
 export default class TopicRepository {
     async getAll() {
-        return await TopicModel.filter({})
+        return await TopicModel.filter({}).orderBy('lastReplyAt')
             .run();
     }
     async get(id) {

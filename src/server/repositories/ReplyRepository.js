@@ -4,7 +4,7 @@ const r = thinky.r;
 
 export default class ReplyRepository {
     async getAll(topicId) {
-        return await ReplyModel.filter({topicId:topicId})
+        return await ReplyModel.filter({topicId:topicId}).orderBy('updateAt')
             .run();
     }
     async get(id) {
@@ -17,6 +17,7 @@ export default class ReplyRepository {
             title: reply.title,
             content: reply.content,
             topicId: reply.topicId,
+            replyId: reply.replyId,
             delete:false
         });
 

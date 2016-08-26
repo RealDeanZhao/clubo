@@ -1,5 +1,6 @@
 export const SHOW = 'clubo/replyEditorModal/SHOW';
 export const CLOSE = 'clubo/replyEditorModal/CLOSE';
+export const CLEAR = 'clubo/replyEditorModal/CLEAR';
 
 const initialState = {
     show: false,
@@ -20,6 +21,8 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 show: false
             };
+        case CLEAR:
+            return initialState;
         default:
             return state;
     }
@@ -38,4 +41,9 @@ export const close = () => {
     }
 }
 
+export const clear = () => {
+    return {
+        type: CLEAR
+    }
+}
 

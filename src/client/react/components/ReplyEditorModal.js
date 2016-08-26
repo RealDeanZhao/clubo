@@ -25,10 +25,11 @@ class ReplyEditorModal extends React.Component {
     }
 
     submit(values) {
-        const {dispatch, topicId} = this.props;
+        const {dispatch, topicId, id} = this.props;
         const reply = {
             ...values,
-            topicId
+            topicId,
+            replyId: id
         };
         dispatch(_add(reply));
     }
