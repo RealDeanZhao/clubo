@@ -98,11 +98,12 @@ app.use((ctx, next) => {
   <head>
     <meta charset="utf-8">
     <title>Clubo</title>
-    
   </head>
   <body>
     <div id='app'>${serverRender}</div>
     ${serverState}
+    <script src="//cdn.bootcss.com/react/15.2.1/react.js"></script>
+    <script src="//cdn.bootcss.com/react/15.2.1/react-dom.min.js"></script>
     ${bundle}
   </body>
 </html>
