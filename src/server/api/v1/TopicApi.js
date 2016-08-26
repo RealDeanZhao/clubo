@@ -4,8 +4,15 @@ const topicRepository = new TopicRepository();
 
 export default class TopicApi {
     async getAll(ctx, next) {
-        let topics = await topicRepository.getAll();
-        ctx.body = JSON.stringify(topics);
+
+        let query = {
+            page: ctx.request.query.page === 'undefined' ? 1 : ctx.request.query.page,
+            recordsPerPage: ctx.request.query.recordsPerPage === 'undefined' ? 20 : ctx.request.query.recordsPerPage
+        }
+
+        let list = await topicRepository.getAll(query);
+        let count = await topicRepository.count();
+        ctx.body = JSON.stringify({ list, count, recordsPerPage: 20 });
     }
 
     async get(ctx, next) {
@@ -16,7 +23,6 @@ export default class TopicApi {
     }
 
     async create(ctx, next) {
-        console.log(ctx.request.body);
         let result = await topicRepository.create(ctx.request.body);
         ctx.body = 'haha';
     }

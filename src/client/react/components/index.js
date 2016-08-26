@@ -2,6 +2,8 @@ import App from './App';
 import DevTools from './DevTools';
 import NavBar from './NavBar';
 import TopicList from './TopicList';
+import TopicListPagination from './TopicListPagination';
+import TopicListPaginationLink from './TopicListPaginationLink';
 import TopicRow from './TopicRow';
 import UserInfoPanel from './UserInfoPanel';
 import LoginPanel from './LoginPanel';
@@ -20,6 +22,8 @@ export {App};
 export {DevTools};
 export {NavBar};
 export {TopicList};
+export {TopicListPagination};
+export {TopicListPaginationLink}
 export {TopicRow};
 export {UserInfoPanel};
 export {LoginPanel};

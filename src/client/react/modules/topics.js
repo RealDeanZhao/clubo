@@ -16,6 +16,8 @@ export const ADD_FAILURE = 'clubo/topics/ADD_FAILURE';
 const initialState = {
     done: false,
     list: [],
+    count: 0,
+    recordsPerPage: 0,
     detail: {
     }
 };
@@ -32,7 +34,9 @@ export default function reducer(state = initialState, action = {}) {
                 ...state,
                 done: true,
                 doing: false,
-                list: action.result,
+                list: action.result.list,
+                count: action.result.count,
+                recordsPerPage: action.result.recordsPerPage,
                 error: null
             };
         case LOAD_FAILURE:
@@ -41,6 +45,7 @@ export default function reducer(state = initialState, action = {}) {
                 done: true,
                 doing: false,
                 list: null,
+                count: 0,
                 error: action.error
             };
         case GET:
@@ -109,10 +114,10 @@ export function loadFailure(error) {
     }
 }
 
-export const _load = () => {
+export const _load = (query) => {
     return async (dispatch) => {
         dispatch(load());
-        const response = await fetch('/api/v1/topics');
+        const response = await fetch(`/api/v1/topics?page=${query.page}&recordsPerPage=${query.recordsPerPage}`);
         const result = await response.json();
         dispatch(loadSuccess(result))
     }

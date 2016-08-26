@@ -15,12 +15,11 @@ class NavBar extends React.Component {
                 <nav className='navbar navbar-default'>
                     <div className='container'>
                         <div className='navbar-header'>
-                            <a className="navbar-brand" href="/">Clubo</a>
-
+                            <Link className="navbar-brand" to="/">Clubo</Link>
                         </div>
                         <div>
                             <ul className='nav navbar-nav pull-right'>
-                                <li><a href='/'>Index</a></li>
+                                <li><Link to='/'>Index</Link></li>
                                 <li><a onClick={this.onCreateTopicClick.bind(this) }>CreateTopic</a></li>
                             </ul>
                         </div>

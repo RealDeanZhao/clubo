@@ -6,6 +6,7 @@ import replies from './replies';
 import signInModal from './signInModal';
 import topicEditorModal from './topicEditorModal';
 import replyEditorModal from './replyEditorModal';
+import topicListPagination from './topicListPagination';
 
 export default combineReducers({
     topics,
@@ -13,6 +14,7 @@ export default combineReducers({
     signInModal,
     topicEditorModal,
     replyEditorModal,
+    topicListPagination,
     routing: routerReducer,
     form: formReducer
 });

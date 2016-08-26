@@ -5,8 +5,13 @@ const r = thinky.r;
 
 
 export default class TopicRepository {
-    async getAll() {
-        return await TopicModel.orderBy({ index: r.desc('lastReplyAt') }).filter({})
+    async getAll(query) {
+        const {recordsPerPage, page} = query;
+
+        return await TopicModel
+            .orderBy({ index: r.desc('lastReplyAt') })
+            .filter({})
+            .slice(recordsPerPage * (page - 1), recordsPerPage * (page))
             .run();
     }
     async get(id) {
@@ -21,5 +26,10 @@ export default class TopicRepository {
         });
 
         await model.save();
+    }
+    async count() {
+        return await TopicModel
+            .count()
+            .execute();
     }
 }

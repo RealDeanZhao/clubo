@@ -8,12 +8,13 @@ import {_load} from '../modules/topics';
 class TopicList extends React.Component {
 
     componentWillMount() {
-        const {dispatch} = this.props;
-        dispatch(_load());
+        const {dispatch, query} = this.props;
+        dispatch(_load(query));
     };
 
     render() {
-        const {list, dispatch} = this.props;
+        const {list} = this.props;
+
         let key = 0;
 
         let topicList = list.map(function (topic) {
@@ -27,6 +28,7 @@ class TopicList extends React.Component {
                 <ul className="list-group">
                     {topicList}
                 </ul>
+                <C.TopicListPagination></C.TopicListPagination>
                 {this.props.children}
             </div>
         );
@@ -34,7 +36,8 @@ class TopicList extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    list: state.topics.list
+    list: state.topics.list,
+    query: ownProps.location.query
 });
 
 
