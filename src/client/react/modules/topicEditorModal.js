@@ -1,5 +1,5 @@
-export const SHOW = 'clubo/cluboEditorModal/SHOW';
-export const CLOSE = 'clubo/cluboEditorModal/CLOSE';
+export const SHOW = 'clubo/topicEditorModal/SHOW';
+export const CLOSE = 'clubo/topicEditorModal/CLOSE';
 
 export default function reducer(state = false, action) {
     switch (action.type) {

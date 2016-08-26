@@ -28,6 +28,7 @@ class TopicDetail extends React.Component {
                 <div className='topic-detail'>
                     <h2 className='topic-detail-title'>{title}</h2>
                     <ReactMarkdown source={content}></ReactMarkdown>
+                    <C.ReplyButton topicId={id} id=''></C.ReplyButton>
                 </div>
                 <div>
                     <C.ReplyList topicId={id}></C.ReplyList>
@@ -41,6 +42,5 @@ const mapStateToProps = (state, ownProps) => ({
     detail: state.topics.detail,
     id: ownProps.params.id
 });
-
 
 export default connect(mapStateToProps)(TopicDetail);

@@ -3,32 +3,34 @@ import * as RBS from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-
-import {close} from '../modules/cluboEditorModal';
-import {_add} from '../modules/topics';
+import {close} from '../modules/replyEditorModal';
+import {_add} from '../modules/replies';
 import * as C from '../components';
-
-
 
 const editorComponent = props => {
     return (
         <C.CluboEditor
             onChange={props.input.onChange}
             value={props.input.value}
+            id='reply-editor-modal'
             >
         </C.CluboEditor>
     )
 }
 
-class EditorForm extends React.Component {
+class ReplyEditorModal extends React.Component {
     close() {
         const {dispatch} = this.props;
         dispatch(close());
     }
 
     submit(values) {
-        const {dispatch} = this.props;
-        dispatch(_add(values));
+        const {dispatch, topicId} = this.props;
+        const reply = {
+            ...values,
+            topicId
+        };
+        dispatch(_add(reply));
     }
 
     render() {
@@ -41,7 +43,7 @@ class EditorForm extends React.Component {
                     <RBS.Modal show={show} dialogClassName='clubo-editor-modal'>
                         <RBS.Modal.Body>
                             <div>
-                                <Field component='input' className="form-control" placeholder="Title" name='title'/>
+
                             </div>
                             <Field name="content" component={editorComponent}/>
                         </RBS.Modal.Body>
@@ -57,12 +59,12 @@ class EditorForm extends React.Component {
 }
 
 
-EditorForm = reduxForm({
-    form: 'editorForm'
-})(EditorForm);
+ReplyEditorModal = reduxForm({
+    form: 'replyEditorForm'
+})(ReplyEditorModal);
 
 const mapStateToProps = (state, ownProps) => ({
-    show: state.cluboEditorModal
+    ...state.replyEditorModal
 });
 
-export default connect(mapStateToProps)(EditorForm);
+export default connect(mapStateToProps)(ReplyEditorModal);

@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {Router, Route, browserHistory} from 'react-router';
 import * as C from '../components';
 
-
-
 class App extends React.Component {
     render() {
 
@@ -30,7 +28,8 @@ class App extends React.Component {
                         </div>
                     </div>
                 </section>
-                <C.CluboEditorForm></C.CluboEditorForm>
+                <C.TopicEditorModal></C.TopicEditorModal>
+                <C.ReplyEditorModal></C.ReplyEditorModal>
             </div>
         );
     }

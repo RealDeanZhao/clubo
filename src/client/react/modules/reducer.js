@@ -4,13 +4,15 @@ import {reducer as formReducer} from 'redux-form';
 import topics from './topics';
 import replies from './replies';
 import signInModal from './signInModal';
-import cluboEditorModal from './cluboEditorModal';
+import topicEditorModal from './topicEditorModal';
+import replyEditorModal from './replyEditorModal';
 
 export default combineReducers({
     topics,
     replies,
     signInModal,
-    cluboEditorModal,
+    topicEditorModal,
+    replyEditorModal,
     routing: routerReducer,
     form: formReducer
 });

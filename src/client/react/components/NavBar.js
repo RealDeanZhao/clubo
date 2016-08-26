@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Router, Route, Link, browserHistory} from 'react-router';
-import {show} from '../modules/cluboEditorModal';
+import {show} from '../modules/topicEditorModal';
 
 class NavBar extends React.Component {
     onCreateTopicClick(e) {
@@ -10,8 +10,6 @@ class NavBar extends React.Component {
         dispatch(show());
     }
     render() {
-        const {dispatch} = this.props;
-
         return (
             <div>
                 <nav className='navbar navbar-default'>

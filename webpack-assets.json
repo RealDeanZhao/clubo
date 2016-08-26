@@ -21,9 +21,6 @@
     "./src/client/css/clubo-editor.css": {
       "_style": ".clubo-editor {\n    height: 500px\n}\n\n.clubo-editor-modal {\n    width: 50%\n}\n\n.clubo-editor-previewer {\n    height: 500px;\n    background-color: white;\n}"
     },
-    "./src/client/css/reply-editor.css": {
-      "_style": ".clubo-reply-editor {\n    margin-top: 1em;\n    width: 100%\n}\n\n.clubo-reply-previewer {\n    height: 500px\n}"
-    },
     "./src/client/css/reply-list.css": {
       "_style": ".reply-list {\n    margin-top: 2em;\n}\n\n.reply-list-header {\n    background-color: #f6f6f6;\n    height: 40px;\n    padding: 10px;\n}"
     },

@@ -24,9 +24,10 @@ export default class CluboEditor extends React.Component {
 
     render() {
         require('../../css/clubo-editor.css');
+        const {id} = this.props;
         return (
             <div>
-                <RBS.Tabs id='clubo-editor-modal'>
+                <RBS.Tabs id={id}>
                     <RBS.Tab eventKey={1} title='Edit'>
                         <div className='clubo-editor'>
                             <Editor
