@@ -21,10 +21,10 @@ import reactRoutes from '../client/react/routes';
 import finalCreateStore from '../client/react/createStore';
 
 const app = new Koa();
-
 const store = finalCreateStore();
 
-if (global.__DEVELOPMENT__) {
+if (__DEVELOPMENT__) {
+    console.log('webpacking');
     const webpack = require('webpack');
     const webpackConfig = require('../../webpack.config');
     const webpackDevMiddleware = require('koa-webpack-dev-middleware');
@@ -76,7 +76,7 @@ app.use((ctx, next) => {
             ctx.response.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
             console.log('200');
-            if (global.__DEVELOPMENT__ != 'production') {
+            if (__DEVELOPMENT__) {
                 global.webpackIsomorphicTools.refresh();
             }
 
@@ -106,14 +106,13 @@ app.use((ctx, next) => {
     ${bundle}
   </body>
 </html>
-            `;
+`;
         } else {
 
         }
     });
 });
-// <script src="./node_modules/react/dist/react.js"></script>
-// <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+
 app.listen(3000, () => {
     console.log('server is running');
 });

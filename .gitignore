@@ -39,3 +39,6 @@ bower_components
 
 # dist
 dist
+
+# webpack-isomorphic-tools
+webpack-assets.json

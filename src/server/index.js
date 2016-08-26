@@ -1,6 +1,5 @@
-require('babel-core/register');
-require('babel-polyfill');
-//require('./server');
+require('../../server.babel');
+const webpackIsomorphicToolsConfig = require('../../webpack-isomorphic-tools.config.js')
 var rootDir = require('path').resolve(__dirname, '../..');
 
 global.__CLIENT__ = false;
@@ -10,8 +9,10 @@ global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../../webpack-isomorphic-tools.config'))
-    .development(__DEVELOPMENT__)
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfig)
+    .development(global.__DEVELOPMENT__)
     .server(rootDir, function () {
-        require('./server');
+        //require('./server');
     });
+
+require('./server');

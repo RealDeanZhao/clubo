@@ -5,7 +5,7 @@ const topicApi = new TopicApi();
 const authApi = new AuthApi();
 const replyApi = new ReplyApi();
 const router = new Router();
-
+ 
 
 export default (app) => {
 
