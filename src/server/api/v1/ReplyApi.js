@@ -6,8 +6,14 @@ const topicRepository = new TopicRepository();
 export default class ReplyApi {
     async getAll(ctx, next) {
         const topicId = ctx.params.topicId;
-        let replies = await replyRepository.getAll(topicId);
-        ctx.body = JSON.stringify(replies);
+        let query = {
+            page: ctx.request.query.page === 'undefined' ? 1 : ctx.request.query.page,
+            recordsPerPage: ctx.request.query.recordsPerPage === 'undefined' ? 20 : ctx.request.query.recordsPerPage,
+            topicId
+        }
+        let list = await replyRepository.getAll(query);
+        let count = await replyRepository.count(topicId);
+        ctx.body = JSON.stringify({ list, count, recordsPerPage: 20 });
     }
 
     async get(ctx, next) {

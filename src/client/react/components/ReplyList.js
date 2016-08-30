@@ -9,12 +9,13 @@ class ReplyList extends React.Component {
 
     componentWillMount() {
         const {dispatch, topicId} = this.props;
-        dispatch(_load(topicId));
+        dispatch(_load({ topicId }));
     };
 
     render() {
         require('../../css/reply-list.css');
-        const {list, dispatch} = this.props;
+        const {list, dispatch, topicId} = this.props;
+
         let key = 0;
         let replyList = list.map(function (reply) {
             return (
@@ -22,13 +23,15 @@ class ReplyList extends React.Component {
             );
         }, this);
 
-
         return (
-            <div className='reply-list'>
-                <div className='reply-list-header'>
-                    Replies
+            <div>
+                <div className='reply-list'>
+                    <div className='reply-list-header'>
+                        Replies
+                    </div>
+                    {replyList}
                 </div>
-                {replyList}
+                <C.ReplyListPagination topicId={topicId}></C.ReplyListPagination>
             </div>
         );
     };

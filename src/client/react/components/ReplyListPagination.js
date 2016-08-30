@@ -2,36 +2,35 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Router, Route, Link, browserHistory} from 'react-router';
 
-import {TopicListPaginationLink} from '../components';
-import {_jump} from '../modules/topicListPagination';
+import {ReplyListPaginationLink} from '../components';
+import {_jump} from '../modules/replyListPagination';
 
-class TopicListPagination extends React.Component {
+class ReplyListPagination extends React.Component {
     handlePreviousClick() {
-        const {dispatch, current, recordsPerPage} = this.props;
+        const {dispatch, current, recordsPerPage, topicId} = this.props;
         if (current != 1) {
-            dispatch(_jump({ page: current - 1, recordsPerPage }));
+            dispatch(_jump({ page: current - 1, recordsPerPage, topicId }));
         }
     }
     handleNextClick() {
-        const {dispatch, current, count, recordsPerPage} = this.props;
+        const {dispatch, current, count, recordsPerPage, topicId} = this.props;
         let pages = Math.round(count / recordsPerPage);
         if (current != pages) {
-            dispatch(_jump({ page: current + 1, recordsPerPage }));
+            dispatch(_jump({ page: current + 1, recordsPerPage, topicId }));
         }
     }
     handleFirstClick() {
-        const {dispatch, current, recordsPerPage} = this.props;
-        dispatch(_jump({ page: 1, recordsPerPage }));
+        const {dispatch, current, recordsPerPage, topicId} = this.props;
+        dispatch(_jump({ page: 1, recordsPerPage, topicId }));
     }
     handleLastClick() {
-        const {dispatch, count, recordsPerPage} = this.props;
+        const {dispatch, count, recordsPerPage, topicId} = this.props;
         let pages = Math.round(count / recordsPerPage);
-        dispatch(_jump({ page: pages, recordsPerPage }));
+        dispatch(_jump({ page: pages, recordsPerPage, topicId }));
     }
 
     render() {
-        const {current, offset, count, recordsPerPage} = this.props;
-
+        const {current, offset, count, recordsPerPage, topicId} = this.props;
         let pageArray = [];
         let pages = Math.round(count / recordsPerPage);
         if (current < offset + 1) {
@@ -54,7 +53,7 @@ class TopicListPagination extends React.Component {
 
         let pageList = pageArray.map(function (page) {
             return (
-                <TopicListPaginationLink key={page} page={page}></TopicListPaginationLink>
+                <ReplyListPaginationLink key={page} page={page} topicId={topicId}></ReplyListPaginationLink>
             );
         }, this);
 
@@ -63,23 +62,23 @@ class TopicListPagination extends React.Component {
                 <nav aria-label="Page navigation">
                     <ul className="pagination">
                         <li>
-                            <Link to='/' query={{ page: 1, recordsPerPage }} onClick={this.handleFirstClick.bind(this) } aria-label="Previous">
+                            <Link to={'/topics/detail/' + topicId} query={{ page: 1, recordsPerPage }} onClick={this.handleFirstClick.bind(this) } aria-label="Previous">
                                 <span aria-hidden="true">&laquo; </span>
                             </Link>
                         </li>
                         <li>
-                            <Link to='/' query={{ page: current - 1, recordsPerPage }}  onClick={this.handlePreviousClick.bind(this) } aria-label="Previous">
+                            <Link to={'/topics/detail/' + topicId} query={{ page: current - 1, recordsPerPage }}  onClick={this.handlePreviousClick.bind(this) } aria-label="Previous">
                                 <span aria-hidden="true">&lt; </span>
                             </Link>
                         </li>
                         {pageList}
                         <li>
-                            <Link to='/' query={{ page: current + 1, recordsPerPage }}  onClick={this.handleNextClick.bind(this) } aria-label="Previous">
+                            <Link to={'/topics/detail/' + topicId} query={{ page: current + 1, recordsPerPage }}  onClick={this.handleNextClick.bind(this) } aria-label="Previous">
                                 <span aria-hidden="true">&gt; </span>
                             </Link>
                         </li>
                         <li>
-                            <Link to='/' query={{ page: pages, recordsPerPage }}  onClick={this.handleLastClick.bind(this) } aria-label="Next">
+                            <Link to={'/topics/detail/' + topicId} query={{ page: pages, recordsPerPage }}  onClick={this.handleLastClick.bind(this) } aria-label="Next">
                                 <span aria-hidden="true">&raquo; </span>
                             </Link>
                         </li>
@@ -91,12 +90,12 @@ class TopicListPagination extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    offset: state.topicListPagination.offset,
-    current: state.topicListPagination.current,
-    count: state.topics.count,
-    recordsPerPage: state.topics.recordsPerPage
+    offset: state.replyListPagination.offset,
+    current: state.replyListPagination.current,
+    count: state.replies.count,
+    recordsPerPage: state.replies.recordsPerPage
 });
 
 
-export default connect(mapStateToProps)(TopicListPagination);
+export default connect(mapStateToProps)(ReplyListPagination);
 

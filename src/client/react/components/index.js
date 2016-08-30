@@ -15,6 +15,8 @@ import CluboEditorPreviewer from './CluboEditorPreviewer';
 import CluboEditor from './CluboEditor';
 import ReplyEditorModal from './ReplyEditorModal';
 import ReplyList from './ReplyList';
+import ReplyListPagination from './ReplyListPagination';
+import ReplyListPaginationLink from './ReplyListPaginationLink';
 import ReplyRow from './ReplyRow';
 import ReplyButton from './ReplyButton';
 
@@ -35,5 +37,7 @@ export {CluboEditorPreviewer};
 export {CluboEditor};
 export {ReplyEditorModal};
 export {ReplyList};
+export {ReplyListPagination};
+export {ReplyListPaginationLink};
 export {ReplyRow};
 export {ReplyButton};

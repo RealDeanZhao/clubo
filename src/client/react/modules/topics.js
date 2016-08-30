@@ -45,7 +45,6 @@ export default function reducer(state = initialState, action = {}) {
                 done: true,
                 doing: false,
                 list: null,
-                count: 0,
                 error: action.error
             };
         case GET:
@@ -119,7 +118,7 @@ export const _load = (query) => {
         dispatch(load());
         const response = await fetch(`/api/v1/topics?page=${query.page}&recordsPerPage=${query.recordsPerPage}`);
         const result = await response.json();
-        dispatch(loadSuccess(result))
+        dispatch(loadSuccess(result));
     }
 }
 

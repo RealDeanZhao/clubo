@@ -3,8 +3,13 @@ const thinky = require('thinky')();
 const r = thinky.r;
 
 export default class ReplyRepository {
-    async getAll(topicId) {
-        return await ReplyModel.orderBy({ index: r.desc('updateAt') }).filter({ topicId: topicId })
+    async getAll(query) {
+        const {topicId, recordsPerPage, page} = query;
+        
+        return await ReplyModel
+            .orderBy({ index: r.desc('updateAt') })
+            .filter({ topicId })
+            .slice(recordsPerPage * (page - 1), recordsPerPage * (page))
             .run();
     }
     async get(id) {
@@ -22,5 +27,12 @@ export default class ReplyRepository {
         });
 
         await model.save();
+    }
+
+    async count(topicId) {
+        return await ReplyModel
+            .filter({ topicId: topicId })
+            .count()
+            .execute();
     }
 }

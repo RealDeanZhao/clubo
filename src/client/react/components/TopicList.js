@@ -3,13 +3,14 @@ import * as C from './';
 import {connect} from 'react-redux';
 import {Router, Route, Link, browserHistory} from 'react-router';
 
-import {_load} from '../modules/topics';
+import {_jump} from '../modules/topicListPagination';
+
 
 class TopicList extends React.Component {
 
     componentWillMount() {
         const {dispatch, query} = this.props;
-        dispatch(_load(query));
+        dispatch(_jump(query));
     };
 
     render() {

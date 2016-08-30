@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
-import {_load} from './topics';
+import {_load} from './replies';
 
-export const JUMP = 'clubo/topicListPagination/JUMP';
+export const JUMP = 'clubo/replyListPagination/JUMP';
 
 const initialState = {
     offset: 2,
@@ -24,9 +24,8 @@ export default function reducer(state = initialState, action = {}) {
 
 export const _jump = (query) => {
     return async (dispatch) => {
-        let page = query.page == undefined ? 1 : query.page;
         await dispatch(_load(query));
-        dispatch(jump(page));
+        dispatch(jump(query.page));
     }
 }
 
