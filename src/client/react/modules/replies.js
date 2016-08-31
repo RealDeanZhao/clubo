@@ -155,7 +155,7 @@ export const _add = (reply) => {
             body: JSON.stringify(reply)
         });
         dispatch(addSuccess());
-        dispatch(_load({topicId:reply.topicId}));
+        dispatch(_load({ topicId: reply.topicId, page: reply.page, recordsPerPage: reply.recordsPerPage }));
         dispatch(clear());
     }
 }

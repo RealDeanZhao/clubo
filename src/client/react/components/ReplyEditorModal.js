@@ -6,6 +6,7 @@ import {Field, reduxForm} from 'redux-form';
 import {close} from '../modules/replyEditorModal';
 import {_add} from '../modules/replies';
 import * as C from '../components';
+import {browserHistory} from 'react-router';
 
 const editorComponent = props => {
     return (
@@ -26,12 +27,19 @@ class ReplyEditorModal extends React.Component {
 
     submit(values) {
         const {dispatch, topicId, id} = this.props;
-        const reply = {
-            ...values,
-            topicId,
-            replyId: id
-        };
-        dispatch(_add(reply));
+        const unlisten = browserHistory.listen(function(location){
+            let query = {};
+            query.page = location.query.page == undefined ? 1 : location.query.page;
+            query.recordsPerPage = location.query.recordsPerPage ? 20: location.recordsPerPage;
+            const reply = {
+                ...values,
+                ...query,
+                topicId,
+                replyId: id
+            };
+            dispatch(_add(reply));
+        });
+        unlisten();
     }
 
     render() {

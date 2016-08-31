@@ -10,6 +10,7 @@ class TopicListPagination extends React.Component {
         const {dispatch, current, recordsPerPage} = this.props;
         if (current != 1) {
             dispatch(_jump({ page: current - 1, recordsPerPage }));
+            window.scrollTo(0, 0);
         }
     }
     handleNextClick() {
@@ -17,16 +18,19 @@ class TopicListPagination extends React.Component {
         let pages = Math.round(count / recordsPerPage);
         if (current != pages) {
             dispatch(_jump({ page: current + 1, recordsPerPage }));
+            window.scrollTo(0, 0);
         }
     }
     handleFirstClick() {
         const {dispatch, current, recordsPerPage} = this.props;
         dispatch(_jump({ page: 1, recordsPerPage }));
+        window.scrollTo(0, 0);
     }
     handleLastClick() {
         const {dispatch, count, recordsPerPage} = this.props;
         let pages = Math.round(count / recordsPerPage);
         dispatch(_jump({ page: pages, recordsPerPage }));
+        window.scrollTo(0, 0);
     }
 
     render() {

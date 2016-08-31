@@ -9,6 +9,7 @@ class TopicListPaginationLink extends React.Component {
     handleClick() {
         const {dispatch, page, recordsPerPage} = this.props;
         dispatch(_jump({page, recordsPerPage}));
+        window.scrollTo(0, 0);
     }
 
     render() {

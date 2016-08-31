@@ -3,6 +3,7 @@ import * as RBS from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
+import {browserHistory} from 'react-router';
 
 import {close} from '../modules/topicEditorModal';
 import {_add} from '../modules/topics';
@@ -27,10 +28,17 @@ class TopicEditorModal extends React.Component {
 
     submit(values) {
         const {dispatch} = this.props;
-        dispatch(_add(values));
+        const unlisten = browserHistory.listen(function (location) {
+            let query = {};
+            query.page = location.query.page == undefined ? 1 : location.query.page;
+            query.recordsPerPage = location.query.recordsPerPage ? 20: location.recordsPerPage;
+            dispatch(_add({...values, ...query}));
+        });
+        unlisten();
     }
 
     render() {
+
         require('../../css/clubo-editor.css');
         const {dispatch, show, handleSubmit} = this.props;
 

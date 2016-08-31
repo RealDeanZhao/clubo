@@ -9,6 +9,7 @@ class ReplyListPaginationLink extends React.Component {
     handleClick() {
         const {dispatch, page, recordsPerPage, topicId} = this.props;
         dispatch(_jump({ page, recordsPerPage, topicId }));
+        window.scrollTo(0, 0);
     }
 
     render() {

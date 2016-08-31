@@ -171,7 +171,6 @@ export function addFailure(error) {
 }
 
 export const _add = (topic) => {
-    console.log('adddd');
     return async (dispatch) => {
         dispatch(add());
         const response = await fetch(`/api/v1/topics`, {
@@ -184,7 +183,7 @@ export const _add = (topic) => {
         });
 
         dispatch(addSuccess());
-        dispatch(_load());
+        dispatch(_load({page: topic.page, recordsPerPage: topic.recordsPerPage}));
         dispatch(clear());
     }
 }
