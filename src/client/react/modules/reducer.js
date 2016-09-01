@@ -8,6 +8,7 @@ import topicEditorModal from './topicEditorModal';
 import replyEditorModal from './replyEditorModal';
 import topicListPagination from './topicListPagination';
 import replyListPagination from './replyListPagination';
+import auth from './auth';
 
 export default combineReducers({
     topics,
@@ -18,5 +19,6 @@ export default combineReducers({
     topicListPagination,
     replyListPagination,
     routing: routerReducer,
-    form: formReducer
+    form: formReducer,
+    auth: auth
 });

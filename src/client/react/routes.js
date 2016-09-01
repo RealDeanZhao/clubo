@@ -8,5 +8,6 @@ export default (
         <IndexRoute component ={ C.TopicList } >
         </IndexRoute>
         <Route path="topics/detail/:id" component ={C.TopicDetail} ></Route>
+        <Route path="users" component = {C.UserCreate}></Route>
     </Route>
 )

@@ -1,24 +1,20 @@
 import Koa from 'koa';
 import bodyParser  from 'koa-bodyparser';
-import jwt from 'jsonwebtoken';
 import path from "path";
 import serialize from 'serialize-javascript';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import {match, RouterContext, Router, IndexRoute, Route} from 'react-router';
+import {match, RouterContext, Router, IndexRoute, Route, createMemoryHistory} from 'react-router';
 import {renderToString} from 'react-dom/server';
-import createHistory from 'react-router/lib/createMemoryHistory';
 
-const passport = require('koa-passport');
-const GitHubStrategy = require('passport-github2');
-const koaJwt = require('koa-jwt');
 const Thinky = require('thinky');
 const serve = require('koa-static');
 
 import koaRoutes from './routes';
 import reactRoutes from '../client/react/routes';
 import finalCreateStore from '../client/react/createStore';
+import {usePassport} from './middlewares';
 
 const app = new Koa();
 const store = finalCreateStore();
@@ -39,35 +35,18 @@ if (__DEVELOPMENT__) {
     app.use(webpackHostMiddleware(compiler));
 }
 
-passport.serializeUser(function (user, done) {
-    done(null, user.id)
-})
-
-passport.deserializeUser(function (id, done) {
-    done(null, id)
-})
-
-passport.use(new GitHubStrategy({
-    clientID: '185813c4f54bbe2c338e',
-    clientSecret: '8ed6179a384e4422d38c9afbd48f53040efc9e74',
-    callbackURL: "http://localhost:3000/api/v1/auth/github/callback"
-}, async (accessToken, tokenSecret, profile, done) => {
-    console.log('passport use');
-    done(null, profile);
-}));
-
 app.use(bodyParser());
 
-koaRoutes(app);
-
-app.use(passport.initialize());
+usePassport(app);
 
 app.use(serve('.'));
 
-app.use((ctx, next) => {
-    const history = createHistory(ctx.request.url);
+koaRoutes(app, store);
 
-    match({ routes: reactRoutes, location: ctx.request.url }, (error, redirectLocation, renderProps) => {
+app.use((ctx, next) => {
+    const location = ctx.request.url;
+    const history = createMemoryHistory(location);
+    match({ routes: reactRoutes, location, history }, (error, redirectLocation, renderProps) => {
         if (error) {
             console.log('500');
             console.log(error);
@@ -96,6 +75,7 @@ app.use((ctx, next) => {
   <head>
     <meta charset="utf-8">
     <title>Clubo</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div id='app'>${serverRender}</div>
@@ -107,7 +87,8 @@ app.use((ctx, next) => {
 </html>
 `;
         } else {
-
+            console.log('else');
+            next();
         }
     });
 });

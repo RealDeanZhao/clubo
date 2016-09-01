@@ -27,13 +27,12 @@ export default function reducer(state = initialState, action = {}) {
         case LOAD:
             return {
                 ...state,
-                doing: true
+                done: false
             };
         case LOAD_SUCCESS:
             return {
                 ...state,
                 done: true,
-                doing: false,
                 list: action.result.list,
                 count: action.result.count,
                 recordsPerPage: action.result.recordsPerPage,
@@ -43,20 +42,18 @@ export default function reducer(state = initialState, action = {}) {
             return {
                 ...state,
                 done: true,
-                doing: false,
                 list: null,
                 error: action.error
             };
         case GET:
             return {
                 ...state,
-                loading: true
+                done: false
             };
         case GET_SUCCESS:
             return {
                 ...state,
                 done: true,
-                doing: false,
                 detail: action.result,
                 error: null
             };
@@ -64,27 +61,24 @@ export default function reducer(state = initialState, action = {}) {
             return {
                 ...state,
                 done: true,
-                doing: false,
                 detail: null,
                 error: action.error
             };
         case ADD:
             return {
                 ...state,
-                doing: true
+                done: false
             };
         case ADD_SUCCESS:
             return {
                 ...state,
                 done: true,
-                doing: false,
                 error: null
             };
         case ADD_FAILURE:
             return {
                 ...state,
                 done: true,
-                doing: false,
                 data: null,
                 error: action.error
             };
@@ -116,7 +110,12 @@ export function loadFailure(error) {
 export const _load = (query) => {
     return async (dispatch) => {
         dispatch(load());
-        const response = await fetch(`/api/v1/topics?page=${query.page}&recordsPerPage=${query.recordsPerPage}`);
+        const response = await fetch(`/api/v1/topics?page=${query.page}&recordsPerPage=${query.recordsPerPage}`, {
+            credentials: 'include',
+            headers: {
+                'Authorization': `Bearer ${query.token}`
+            }
+        });
         const result = await response.json();
         dispatch(loadSuccess(result));
     }
@@ -183,7 +182,7 @@ export const _add = (topic) => {
         });
 
         dispatch(addSuccess());
-        dispatch(_load({page: topic.page, recordsPerPage: topic.recordsPerPage}));
+        dispatch(_load({ page: topic.page, recordsPerPage: topic.recordsPerPage }));
         dispatch(clear());
     }
 }

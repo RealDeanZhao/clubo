@@ -54,7 +54,6 @@ reactTransform[1].transforms.push({
 
 module.exports = {
     entry: [
-        'bootstrap/dist/css/bootstrap.min.css',
         'webpack-hot-middleware/client',
         './src/client/react/main.js'
     ],

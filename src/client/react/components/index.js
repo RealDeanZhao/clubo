@@ -19,6 +19,9 @@ import ReplyListPagination from './ReplyListPagination';
 import ReplyListPaginationLink from './ReplyListPaginationLink';
 import ReplyRow from './ReplyRow';
 import ReplyButton from './ReplyButton';
+import UserCreate from './UserCreate';
+import Authenticate from './Authenticate';
+import Authenticated from './Authenticated';
 
 export {App};
 export {DevTools};
@@ -41,3 +44,6 @@ export {ReplyListPagination};
 export {ReplyListPaginationLink};
 export {ReplyRow};
 export {ReplyButton};
+export {UserCreate};
+export {Authenticate};
+export {Authenticated};

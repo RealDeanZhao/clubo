@@ -3,13 +3,18 @@ import {connect} from 'react-redux';
 import {Router, Route, Link, browserHistory} from 'react-router';
 import {show} from '../modules/topicEditorModal';
 
+import {Authenticated} from '../components';
+
 class NavBar extends React.Component {
     onCreateTopicClick(e) {
         const {dispatch} = this.props;
         e.preventDefault();
         dispatch(show());
     }
+
     render() {
+        const {authenticated} = this.props;
+        const createTopicLink = (<li><a onClick={this.onCreateTopicClick.bind(this) }>CreateTopic</a></li>);
         return (
             <div>
                 <nav className='navbar navbar-default'>
@@ -20,7 +25,8 @@ class NavBar extends React.Component {
                         <div>
                             <ul className='nav navbar-nav pull-right'>
                                 <li><Link to='/'>Index</Link></li>
-                                <li><a onClick={this.onCreateTopicClick.bind(this) }>CreateTopic</a></li>
+                                <Authenticated authenticated={authenticated} component={createTopicLink}>
+                                </Authenticated>
                             </ul>
                         </div>
                     </div>
@@ -32,7 +38,7 @@ class NavBar extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-
+    authenticated: state.auth.authenticated
 });
 
 

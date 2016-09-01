@@ -1,10 +1,10 @@
 import {TopicRepository} from '../../repositories';
+import cookie from 'react-cookie';
 
 const topicRepository = new TopicRepository();
 
 export default class TopicApi {
     async getAll(ctx, next) {
-
         let query = {
             page: ctx.request.query.page === 'undefined' ? 1 : ctx.request.query.page,
             recordsPerPage: ctx.request.query.recordsPerPage === 'undefined' ? 20 : ctx.request.query.recordsPerPage

@@ -11,7 +11,7 @@ class LoginPanel extends React.Component {
                 <div className="panel-heading">Login: </div>
                 <div className="panel-body">
                     <div>
-                        <a href='/api/v1/auth/github' target='_blank' className='btn btn-info' role='button'>Login With Github</a>
+                        <a href='/api/v1/auth/github' className='btn btn-info' role='button'>Login With Github</a>
                     </div>
                 </div>
             </div>

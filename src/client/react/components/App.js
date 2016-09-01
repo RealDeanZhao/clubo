@@ -7,7 +7,8 @@ class App extends React.Component {
     render() {
 
         require('../../css/app.css');
-        const {children} = this.props;
+        const {children, authenticated} = this.props;
+        const loginPanel = (<C.UserInfoPanel />);
         return (
 
             <div className='app-clubo'>
@@ -22,7 +23,7 @@ class App extends React.Component {
                                 {children}
                             </main>
                             <aside className='col-md-2 sidebar'>
-                                <C.LoginPanel />
+                                <C.Authenticated authenticated={!authenticated} component={loginPanel}></C.Authenticated>
                                 <C.UserInfoPanel />
                             </aside>
                         </div>
@@ -30,13 +31,14 @@ class App extends React.Component {
                 </section>
                 <C.TopicEditorModal></C.TopicEditorModal>
                 <C.ReplyEditorModal></C.ReplyEditorModal>
+                <C.Authenticate></C.Authenticate>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-
+    authenticated: state.auth.authenticated
 });
 
 export default connect(mapStateToProps)(App);
