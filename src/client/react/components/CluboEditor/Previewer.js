@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown';
-import {connect} from 'react-redux';
 
 export default class EditorPreviewer extends React.Component {
     render() {

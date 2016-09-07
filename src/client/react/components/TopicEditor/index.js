@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as RBS from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import {observer} from 'mobx-react';
-import {Field, reduxForm} from 'redux-form';
 import {browserHistory} from 'react-router';
 
 import {CluboEditor} from '../';
@@ -42,20 +41,19 @@ export default class TopicEditorModal extends React.Component {
 
         return (
             <div>
-                <form >
+              
                     <RBS.Modal show={show} dialogClassName='topic-editor-modal'>
                         <RBS.Modal.Body>
                             <div>
-                                <Field component='input' className="form-control" placeholder="Title" name='title'/>
+                                
                             </div>
-                            <Field name="content" component={editorComponent}/>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>
                             <RBS.Button className="btn btn-info">Submit</RBS.Button>
                             <RBS.Button onClick={this.close.bind(this) }>Close</RBS.Button>
                         </RBS.Modal.Footer>
                     </RBS.Modal>
-                </form>
+                
             </div>
         );
     }
