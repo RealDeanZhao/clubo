@@ -4,19 +4,25 @@
   },
   "styles": {},
   "assets": {
-    "./src/client/css/app.css": {
+    "./src/client/react/components/App/app.css": {
       "_style": ".app-clubo {\n    background-color: #e1e1e1\n}"
     },
-    "./src/client/css/topic-detail.css": {
+    "./src/client/react/components/TopicDetail/topic-detail.css": {
       "_style": ".topic-detail {\n    background-color: white;\n    padding: 2em;\n    border-color: #e1e1e1;\n}\n\n.topic-detail-title {\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-bottom-color: black;\n    padding-bottom: 10px;\n}"
     },
-    "./src/client/css/clubo-editor.css": {
+    "./src/client/react/components/CluboEditor/clubo-editor.css": {
       "_style": ".clubo-editor {\n    height: 500px;\n    display : block;\n    overflow-y:scroll;\n    width: 100%;\n}\n\n.clubo-editor-modal {\n    width: 77%;\n}\n\n.clubo-editor-previewer {\n    height: 500px;\n    display : block;\n    overflow-y:scroll;\n    width: 100%;\n    background-color: white;\n}"
     },
-    "./src/client/css/reply-list.css": {
+    "./src/client/react/components/TopicEditor/topic-editor.css": {
+      "_style": ".topic-editor-modal {\n    width: 77%;\n}\n"
+    },
+    "./src/client/react/components/ReplyEditor/reply-editor.css": {
+      "_style": ".reply-editor-modal {\n    width: 77%;\n}\n"
+    },
+    "./src/client/react/components/ReplyList/reply-list.css": {
       "_style": ".reply-list {\n    margin-top: 2em;\n}\n\n.reply-list-header {\n    background-color: #f6f6f6;\n    height: 40px;\n    padding: 10px;\n}"
     },
-    "./src/client/css/reply-detail.css": {
+    "./src/client/react/components/ReplyList/reply-detail.css": {
       "_style": ".reply-detail {\n    background-color: white;\n    padding: 2em;\n    margin-bottom: 3px;\n}\n"
     }
   }

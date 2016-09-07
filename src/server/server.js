@@ -4,7 +4,7 @@ import path from "path";
 import serialize from 'serialize-javascript';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider } from 'mobx-react';
 import {match, RouterContext, Router, IndexRoute, Route, createMemoryHistory} from 'react-router';
 import {renderToString} from 'react-dom/server';
 
@@ -13,11 +13,12 @@ const serve = require('koa-static');
 
 import koaRoutes from './routes';
 import reactRoutes from '../client/react/routes';
-import finalCreateStore from '../client/react/createStore';
 import {usePassport} from './middlewares';
+import createState from './createState';
+import * as stores from '../client/react/stores';
 
 const app = new Koa();
-const store = finalCreateStore();
+const state = createState()
 
 if (__DEVELOPMENT__) {
     console.log('webpacking');
@@ -41,7 +42,7 @@ usePassport(app);
 
 app.use(serve('.'));
 
-koaRoutes(app, store);
+koaRoutes(app);
 
 app.use((ctx, next) => {
     const location = ctx.request.url;
@@ -58,13 +59,12 @@ app.use((ctx, next) => {
             }
 
             const serverRender = renderToString(
-                <Provider store={store}>
+                <Provider {...stores} >
                     <div>
                         <RouterContext {...renderProps} />
                     </div>
                 </Provider >
             );
-            const serverState = `<script charSet='UTF-8'>window.__INITIAL_STATE__=${serialize(store.getState())}</script>`;
             const assets = global.webpackIsomorphicTools.assets();
             const bundle = `<script src=${assets.javascript.main} charSet='UTF-8'></script>`;
             ctx.response.set('content-type', 'text/html');
@@ -79,7 +79,6 @@ app.use((ctx, next) => {
   </head>
   <body>
     <div id='app'>${serverRender}</div>
-    ${serverState}
     <script src="//cdn.bootcss.com/react/15.2.1/react.js"></script>
     <script src="//cdn.bootcss.com/react/15.2.1/react-dom.min.js"></script>
     ${bundle}

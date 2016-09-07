@@ -9,10 +9,9 @@ const authApi = new AuthApi();
 const replyApi = new ReplyApi();
 const router = new Router();
 
-import {auth} from '../client/react/modules/auth';
 import {isAuthencated} from './middlewares';
 
-export default (app, store) => {
+export default (app) => {
 
     router
         .get('/api/v1/topics', topicApi.getAll)
@@ -30,7 +29,7 @@ export default (app, store) => {
 
     router.get('/api/v1/auth/github', passport.authenticate('github'));
 
-    router.get('/api/v1/auth', isAuthencated, async function(ctx, next) {
+    router.get('/api/v1/auth', isAuthencated, async function (ctx, next) {
         ctx.response.status = 302;
     });
 
@@ -40,7 +39,6 @@ export default (app, store) => {
                 if (user) {
                     console.log('github callback');
                     let token = jwt.sign({ id: user.id }, 'aaaa');
-                    store.dispatch(auth(user, user, token));
                     ctx.redirect('/');
                 } else {
                     ctx.redirect('/');
@@ -50,7 +48,7 @@ export default (app, store) => {
         }
     );
 
-   
+
 
     app.use(router.routes());
 }

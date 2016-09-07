@@ -1,21 +1,18 @@
-import 'babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import {Router, IndexRoute, Route, browserHistory, match} from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { Provider } from 'mobx-react';
+import {Router, browserHistory} from 'react-router';
 
 import routes from './routes';
-import * as C from './components';
-import finalCreateStore from './createStore';
+import createState from './createState';
+import * as stores from './stores';
 
-const store = finalCreateStore();
-const histroy = syncHistoryWithStore(browserHistory, store);
+const state = createState();
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider {...stores}>
     <div>
-      <Router history={histroy}>
+      <Router history={browserHistory}>
         {routes}
       </Router>
     </div>
