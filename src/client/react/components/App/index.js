@@ -2,7 +2,7 @@ import * as React from 'react';
 import {observer} from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 
-import {LoginPanel, NavBar} from '../';
+import {LoginPanel, NavBar, TopicEditor, ReplyEditor} from '../';
 
 export default class App extends React.Component {
     render() {
@@ -29,6 +29,8 @@ export default class App extends React.Component {
                         </div>
                     </div>
                 </section>
+                <TopicEditor/>
+                <ReplyEditor/>
             </div>
         );
     }

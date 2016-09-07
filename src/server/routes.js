@@ -16,14 +16,14 @@ export default (app) => {
     router
         .get('/api/v1/topics', topicApi.getAll)
         .get('/api/v1/topics/:id', topicApi.get)
-        .post('/api/v1/topics/', isAuthencated, topicApi.create)
+        .post('/api/v1/topics/', topicApi.create)
         .put('/api/v1/topics/:id', isAuthencated, topicApi.update)
         .del('/api/v1/topics/:id', isAuthencated, topicApi.delete);
 
     router
         .get('/api/v1/topics/:topicId/replies', replyApi.getAll)
         .get('/api/v1/topics/:topicId/replies/:id', replyApi.get)
-        .post('/api/v1/topics/:topicId/replies/', isAuthencated, replyApi.create)
+        .post('/api/v1/topics/:topicId/replies/', replyApi.create)
         .put('/api/v1/topics/:topicId/replies/:id', isAuthencated, replyApi.update)
         .del('/api/v1/topics/:topicId/replies/:id', isAuthencated, replyApi.delete);
 

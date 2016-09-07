@@ -1,24 +1,30 @@
 import * as React from 'react';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import {Router, Route, Link, browserHistory} from 'react-router';
 
+@inject('topicEditorStore')
+@inject('topicStore')
 export default class NavBar extends React.Component {
-    onCreateTopicClick(e) {
-         
+    handleCreateTopic(e) {
+        const {showModal} = this.props.topicEditorStore;
+        showModal();
     }
-
+    handleFirstPage() {
+        const {fetchFirstPageTopics} = this.props.topicStore;
+        fetchFirstPageTopics();
+    }
     render() {
         return (
             <div>
                 <nav className='navbar navbar-default'>
                     <div className='container'>
                         <div className='navbar-header'>
-                            <Link className="navbar-brand" to="/">Clubo</Link>
+                            <Link className="navbar-brand" to="/" onClick={this.handleFirstPage.bind(this) }>Clubo</Link>
                         </div>
                         <div>
                             <ul className='nav navbar-nav pull-right'>
-                                <li><Link to='/'>Index</Link></li>
-                                <li><a onClick={this.onCreateTopicClick.bind(this) }>CreateTopic</a></li>
+                                <li><Link to='/' onClick={this.handleFirstPage.bind(this) }>Index</Link></li>
+                                <li><a onClick={this.handleCreateTopic.bind(this) }>CreateTopic</a></li>
                             </ul>
                         </div>
                     </div>

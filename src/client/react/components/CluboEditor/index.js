@@ -8,8 +8,8 @@ export default class CluboEditor extends React.Component {
     constructor(props) {
         super(props);
         let contentState = null;
-        if (props.value) {
-            contentState = ContentState.createFromText(props.value);
+        if (props.content) {
+            contentState = ContentState.createFromText(props.content);
         } else {
             contentState = ContentState.createFromText('');
         }

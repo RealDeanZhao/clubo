@@ -10,7 +10,8 @@ import PaginationContainer from './Pagination';
 export default class TopicListContainer extends React.Component {
     componentWillMount() {
         const {fetchTopics} = this.props.topicStore;
-        fetchTopics();
+        const {page} = this.props.location.query
+        fetchTopics({ current: page });
     }
 
     render() {

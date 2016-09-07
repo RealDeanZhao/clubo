@@ -12,7 +12,7 @@ class TopicStore {
     @observable count = 0;
 
     constructor() {
-        
+
     }
 
     @action fetchTopic = async (id) => {
@@ -23,13 +23,30 @@ class TopicStore {
         this.topic = result;
     }
 
-    @action fetchTopics = async () => {
+    @action fetchTopics = async (query) => {
         console.log('start to fetch topics');
-
+        if (query && query.current) {
+            this.current = query.current;
+        }
         const response = await fetch(`/api/v1/topics?page=${this.current}&recordsPerPage=${this.recordsPerPage}`);
         const result = await response.json();
         this.topics = result.list;
         this.count = result.count;
+    }
+
+    @action fetchFirstPageTopics = async () => {
+        this.fetchTopics({current: 1});
+    }
+
+    @action createTopic = async (topic) => {
+        const response = await fetch(`/api/v1/topics`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(topic)
+        });
     }
 
     @action go = (page) => {

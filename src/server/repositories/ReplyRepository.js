@@ -5,7 +5,6 @@ const r = thinky.r;
 export default class ReplyRepository {
     async getAll(query) {
         const {topicId, recordsPerPage, page} = query;
-        
         return await ReplyModel
             .orderBy({ index: r.desc('updateAt') })
             .filter({ topicId })

@@ -75,13 +75,13 @@ export default class PaginationContainer extends React.Component {
                             </Link>
                         </li>
                         <li>
-                            <Link to='/' query={{ page: current - 1, recordsPerPage }}  onClick={this.handlePreviousClick.bind(this) } aria-label="Previous">
+                            <Link to='/' query={current == 1 ? { page: current, recordsPerPage } : { page: current - 1, recordsPerPage }}  onClick={this.handlePreviousClick.bind(this) } aria-label="Previous">
                                 <span aria-hidden="true">&lt; </span>
                             </Link>
                         </li>
                         {pageList}
                         <li>
-                            <Link to='/' query={{ page: current + 1, recordsPerPage }}  onClick={this.handleNextClick.bind(this) } aria-label="Previous">
+                            <Link to='/' query={current == pages ? { page: current, recordsPerPage } : { page: current + 1, recordsPerPage }}  onClick={this.handleNextClick.bind(this) } aria-label="Previous">
                                 <span aria-hidden="true">&gt; </span>
                             </Link>
                         </li>

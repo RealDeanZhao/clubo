@@ -4,15 +4,20 @@ import {Router, Route, Link, browserHistory} from 'react-router';
 import ReactMarkdown from 'react-markdown';
 
 import PaginationContainer from './Pagination';
+import {ReplyButton} from '../';
 
 @inject('replyStore')
 @observer
 export default class ReplyList extends React.Component {
 
     componentWillMount() {
-        const {topicId, replyStore} = this.props;
-
-        replyStore.fetchReplies(topicId);
+        const {topicId} = this.props;
+        const {fetchReplies} = this.props.replyStore;
+        const unlisten = browserHistory.listen(function (location) {
+            const {page} = location.query
+            fetchReplies(topicId, { current: page });
+        });
+        unlisten();
     };
 
     render() {
@@ -56,10 +61,10 @@ class ReplyEntryView extends React.Component {
 
         return (
             <div className='reply-detail'>
-                <div>
-                    <ReactMarkdown source={content}></ReactMarkdown>
-                </div>
+                <ReactMarkdown source={content}></ReactMarkdown>
+                <ReplyButton replyId={id}/>
             </div>
         )
     }
 }
+

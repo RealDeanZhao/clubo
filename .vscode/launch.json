@@ -30,7 +30,7 @@
             "restart": false,
             "sourceMaps": false,
             "outDir": null,
-            "localRoot": "${workspaceRoot}/dist",
+            "localRoot": "${workspaceRoot}",
             "remoteRoot": null
         },
         {

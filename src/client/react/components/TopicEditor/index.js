@@ -1,59 +1,55 @@
 import * as React from 'react';
 import * as RBS from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import {browserHistory} from 'react-router';
 
 import {CluboEditor} from '../';
+import form from './form.js';
 
-const editorComponent = props => {
-    return (
-        <CluboEditor
-            onChange={props.input.onChange}
-            value={props.input.value}
-            id='topic-editor-modal'
-            />
-    )
-}
-
+@inject('topicEditorStore')
+@inject('topicStore')
 @observer
 export default class TopicEditorModal extends React.Component {
     close() {
-        // const {dispatch} = this.props;
-        // dispatch(close());
+        const {closeModal} = this.props.topicEditorStore;
+        closeModal();
     }
 
-    submit(values) {
-        // const {dispatch} = this.props;
-        // const unlisten = browserHistory.listen(function (location) {
-        //     let query = {};
-        //     query.page = location.query.page == undefined ? 1 : location.query.page;
-        //     query.recordsPerPage = location.query.recordsPerPage ? 20: location.recordsPerPage;
-        //     dispatch(_add({...values, ...query}));
-        // });
-        // unlisten();
+    handleSubmit() {
+        const values = form.values();
+        const {createTopic, fetchTopics} = this.props.topicStore;
+        const {closeModal} = this.props.topicEditorStore;
+        const unlisten = browserHistory.listen(function (location) {
+            createTopic(values);
+            form.reset();
+            closeModal();
+            fetchTopics();
+        });
+        unlisten();
     }
 
     render() {
 
         require('./topic-editor.css');
-        const {dispatch, show} = this.props;
+        const {show} = this.props.topicEditorStore;
 
         return (
             <div>
-              
+                <form>
                     <RBS.Modal show={show} dialogClassName='topic-editor-modal'>
                         <RBS.Modal.Body>
                             <div>
-                                
+                                <input className="form-control" name={form.$('title').name} value={form.$('title').value} onChange={form.$('title').sync} />
+                                <CluboEditor id='topic-editor-modal' name={form.$('content').name} content={form.$('content').value} onChange={form.$('content').sync }/>
                             </div>
                         </RBS.Modal.Body>
                         <RBS.Modal.Footer>
-                            <RBS.Button className="btn btn-info">Submit</RBS.Button>
+                            <RBS.Button className="btn btn-info" onClick={this.handleSubmit.bind(this) }>Submit</RBS.Button>
                             <RBS.Button onClick={this.close.bind(this) }>Close</RBS.Button>
                         </RBS.Modal.Footer>
                     </RBS.Modal>
-                
+                </form>
             </div>
         );
     }

@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import ReactMarkdown from 'react-markdown';
 
 import {ReplyListContainer} from '../';
+import {ReplyButton} from '../';
 
 @inject('topicStore')
 @observer
@@ -31,11 +32,10 @@ class TopicDetail extends React.Component {
         const { topic } = this.props;
 
         return (
-            <div>
-                <div className='topic-detail'>
-                    <h2 className='topic-detail-title'>{topic.title}</h2>
-                    <ReactMarkdown source={topic.content ? topic.content : ''}></ReactMarkdown>
-                </div>
+            <div className='topic-detail'>
+                <h2 className='topic-detail-title'>{topic.title}</h2>
+                <ReactMarkdown source={topic.content ? topic.content : ''}></ReactMarkdown>
+                <ReplyButton replyId={''}/>
             </div>
         )
     };
