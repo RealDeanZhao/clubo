@@ -19,12 +19,14 @@ class ReplyStore {
         if (query && query.current) {
             this.current = query.current;
         }
+        if (typeof topicId !== 'undefined') {
+            this.topicId = topicId;
+        }
         console.log('start to fetch replies');
         const response = await fetch(`/api/v1/topics/${topicId}/replies?page=${this.current}&recordsPerPage=${this.recordsPerPage}`);
         const result = await response.json();
         this.replies = result.list;
         this.count = result.count;
-        this.topicId = topicId;
     }
 
     @action createReply = async (reply) => {

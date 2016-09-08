@@ -18,14 +18,16 @@ export default class ReplyEditorModal extends React.Component {
 
     handleSubmit() {
         let values = form.values();
-        const {createReply, fetchReplies} = this.props.replyStore;
+        const {createReply, fetchReplies, topicId} = this.props.replyStore;
         const {closeModal, replyId} = this.props.replyEditorStore;
         values.replyId = replyId;
         const unlisten = browserHistory.listen(function (location) {
             createReply(values);
             form.reset();
             closeModal();
-            fetchReplies();
+
+            const {query} = location;
+            fetchReplies(topicId, { current: query.page });
         });
         unlisten();
     }

@@ -10,7 +10,7 @@ import {ReplyButton} from '../';
 @observer
 export default class ReplyList extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         const {topicId} = this.props;
         const {fetchReplies} = this.props.replyStore;
         const unlisten = browserHistory.listen(function (location) {
