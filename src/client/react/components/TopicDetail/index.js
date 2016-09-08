@@ -9,7 +9,7 @@ import {ReplyButton} from '../';
 @inject('topicStore')
 @observer
 export default class TopicDetailContainer extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
         const {params, topicStore} = this.props;
         topicStore.fetchTopic(params.id);
     }

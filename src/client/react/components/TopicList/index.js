@@ -8,7 +8,7 @@ import PaginationContainer from './Pagination';
 @inject('topicStore')
 @observer
 export default class TopicListContainer extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
         const {fetchTopics} = this.props.topicStore;
         const {page} = this.props.location.query
         fetchTopics({ current: page });
