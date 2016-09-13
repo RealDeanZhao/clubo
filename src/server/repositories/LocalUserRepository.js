@@ -1,35 +1,39 @@
-import * as M from '../models';
+import {LocalUserModel} from '../models';
 
 const thinky = require('thinky')();
 const r = thinky.r;
 
 export default class LocalUserRepository {
-    async getUserById(id) {
-        return await M.LocalUserModel.get(id)
+    async getById(id) {
+        return await LocalUserModel.get(id)
             .run();
     }
 
-    async getUserByUserNameAndPassword(username, password) {
-        const users = await M.LocalUserModel.filter({
-            username,
-            password
-        })
-            .run();
-        return users[0];
+    async getByGithubId(githubUserId) {
+        const result = await LocalUserModel.filter({
+            githubUserId
+        }).run();
+
+        return result[0];
     }
 
-    async getUserByLoginName(loginName) {
-        const users = await M.LocalUserModel.filter({ loginName: loginName })
-            .run();
-        return users[0];
+    async create(user) {
+        let model = new LocalUserModel({
+            username: user.username,
+            displayName: user.displayName,
+            githubUserId: user.githubUserId
+        });
+
+        return await model.save();
     }
 
-    async addOrUpdate(user) {
-        let userInDB = await this.getUserByLoginName(user.loginName);
-        if (userInDB) {
-            return await userInDB.save();
-        } else {
-            return await user.save();
+    async update(user) {
+        let userInDb = await this.getById(user.id);
+        if (userInDb) {
+            userInDb.username = user.username;
+            userInDb.displayName = user.displayName;
+            userInDb.active = user.active;
+            return await userInDb.save();
         }
     }
 }

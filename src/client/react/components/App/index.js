@@ -5,8 +5,11 @@ import DevTools from 'mobx-react-devtools';
 import {LoginPanel, NavBar, TopicEditor, ReplyEditor} from '../';
 
 export default class App extends React.Component {
-    render() {
+    componentDidMount(){
 
+    }
+
+    render() {
         require('./app.css');
         const {children, authenticated} = this.props;
       

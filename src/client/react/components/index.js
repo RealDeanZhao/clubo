@@ -8,6 +8,7 @@ import TopicEditor from './TopicEditor';
 import ReplyEditor from './ReplyEditor';
 import ReplyListContainer from './ReplyList';
 import ReplyButton from './ReplyButton';
+import UserForm from './User';
 
 export {
 App,
@@ -19,5 +20,6 @@ TopicEditor,
 CluboEditor,
 ReplyEditor,
 ReplyListContainer,
-ReplyButton
+ReplyButton,
+UserForm
 };

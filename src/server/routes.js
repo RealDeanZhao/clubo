@@ -3,10 +3,13 @@ const passport = require('koa-passport');
 const GitHubStrategy = require('passport-github2');
 const jwt = require('jsonwebtoken');
 
-import {TopicApi, AuthApi, ReplyApi} from './api/v1';
+import {TopicApi, AuthApi, ReplyApi, LocalUserApi} from './api/v1';
+import {LocalUserRepository} from './repositories';
+
 const topicApi = new TopicApi();
 const authApi = new AuthApi();
 const replyApi = new ReplyApi();
+const localUserApi = new LocalUserApi();
 const router = new Router();
 
 import {isAuthencated} from './middlewares';
@@ -27,6 +30,10 @@ export default (app) => {
         .put('/api/v1/topics/:topicId/replies/:id', isAuthencated, replyApi.update)
         .del('/api/v1/topics/:topicId/replies/:id', isAuthencated, replyApi.delete);
 
+    router
+        .post('/api/v1/users/', localUserApi.create)
+        .put('/api/v1/users/:id', localUserApi.update);
+
     router.get('/api/v1/auth/github', passport.authenticate('github'));
 
     router.get('/api/v1/auth', isAuthencated, async function (ctx, next) {
@@ -35,11 +42,20 @@ export default (app) => {
 
     router.get('/api/v1/auth/github/callback',
         async (ctx, next) => {
-            return passport.authenticate('github', (err, user, info, status) => {
+            return passport.authenticate('github', async (err, user, info, status) => {
                 if (user) {
                     console.log('github callback');
                     let token = jwt.sign({ id: user.id }, 'aaaa');
-                    ctx.redirect('/');
+
+                    const localUserRepository = new LocalUserRepository();
+                    const localUser = await localUserRepository.getByGithubId(user.id);
+                    
+                    if (localUser && localUser.active) {
+                        ctx.redirect('/');
+                    } else {
+                        const result = await localUserRepository.create({ githubUserId: user.id });
+                        ctx.redirect(`/users/${result.id}`);
+                    }
                 } else {
                     ctx.redirect('/');
                 }
