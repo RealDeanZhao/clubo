@@ -1,4 +1,5 @@
 import {TopicModel} from '../models/TopicModel';
+import log from '../utils/log';
 
 const thinky = require('thinky')();
 const r = thinky.r;
@@ -17,6 +18,7 @@ export default class TopicRepository {
     async get(id) {
         const result = await TopicModel.filter({ id })
             .run();
+
         return result[0];
     }
     async create(topic) {

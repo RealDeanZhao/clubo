@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 import {TopicApi, AuthApi, ReplyApi, LocalUserApi} from './api/v1';
 import {LocalUserRepository} from './repositories';
+import log from './utils/log';
 
 const topicApi = new TopicApi();
 const authApi = new AuthApi();
@@ -40,15 +41,21 @@ export default (app) => {
         ctx.response.status = 302;
     });
 
+    router.get('/api/v1/auth/logout', async function (ctx, next) {
+        ctx.response.status = 302;
+    });
+
     router.get('/api/v1/auth/github/callback',
         async (ctx, next) => {
             return passport.authenticate('github', async (err, user, info, status) => {
                 if (user) {
-                    console.log('github callback');
+                    log.info('github callback');
                     let token = jwt.sign({ id: user.id }, 'aaaa');
 
                     const localUserRepository = new LocalUserRepository();
                     const localUser = await localUserRepository.getByGithubId(user.id);
+                    
+                    ctx.cookies.set('token', token);
                     
                     if (localUser && localUser.active) {
                         ctx.redirect('/');
@@ -59,12 +66,9 @@ export default (app) => {
                 } else {
                     ctx.redirect('/');
                 }
-                //next();
             })(ctx, next);
         }
     );
-
-
 
     app.use(router.routes());
 }

@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
+import log from '../utils/log';
 
 export default async function (ctx, next) {
-    const token = resolveAuthorizationHeader(ctx.request.header);
+    const token = ctx.cookies.get('token');
+    log.debug(token);
     if (token) {
         const decoded = jwt.verify(token, 'aaaa');
         if (decoded) {
@@ -13,20 +15,3 @@ export default async function (ctx, next) {
         ctx.response.status = 401;
     }
 };
-
-function resolveAuthorizationHeader(header) {
-    if (!header || !header.authorization) {
-        return;
-    }
-
-    var parts = header.authorization.split(' ');
-
-    if (parts.length === 2) {
-        var scheme = parts[0];
-        var credentials = parts[1];
-
-        if (/^Bearer$/i.test(scheme)) {
-            return credentials;
-        }
-    }
-}

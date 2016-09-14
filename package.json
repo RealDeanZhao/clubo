@@ -9,7 +9,7 @@
     "build": "tsc -p ./",
     "build:watch": "tsc -p ./ -w",
     "start": "webpack  && node ./dist/index.js",
-    "dev": "set NODE_ENV=development & node src/server/index.js"
+    "dev": "set NODE_ENV=development & nodemon src/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "koa-passport": "^3.0.0-rc.1",
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
+    "log": "^1.4.0",
     "mobx": "^2.5.1",
     "mobx-react": "^3.5.5",
     "mobx-react-devtools": "^4.2.5",

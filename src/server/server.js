@@ -7,6 +7,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import {match, RouterContext, Router, IndexRoute, Route, createMemoryHistory} from 'react-router';
 import {renderToString} from 'react-dom/server';
+import reactCookie from 'react-cookie';
 
 const Thinky = require('thinky');
 const serve = require('koa-static');
@@ -14,14 +15,13 @@ const serve = require('koa-static');
 import koaRoutes from './routes';
 import reactRoutes from '../client/react/routes';
 import {usePassport} from './middlewares';
-import createState from './createState';
 import * as stores from '../client/react/stores';
+import log from './utils/log';
 
 const app = new Koa();
-const state = createState()
 
 if (__DEVELOPMENT__) {
-    console.log('webpacking');
+    log.info('web packing')
     const webpack = require('webpack');
     const webpackConfig = require('../../webpack.config');
     const webpackDevMiddleware = require('koa-webpack-dev-middleware');
@@ -49,15 +49,16 @@ app.use((ctx, next) => {
     const history = createMemoryHistory(location);
     match({ routes: reactRoutes, location, history }, (error, redirectLocation, renderProps) => {
         if (error) {
-            console.log('500');
-            console.log(error);
+            log.error(error);
         } else if (redirectLocation) {
+            log.debug('status: 302');
             ctx.response.redirect(302, redirectLocation.pathname + redirectLocation.search);
         } else if (renderProps) {
+            log.debug('status: 200');
             if (__DEVELOPMENT__) {
                 global.webpackIsomorphicTools.refresh();
             }
-
+            
             const serverRender = renderToString(
                 <Provider {...stores} >
                     <div>
@@ -85,13 +86,13 @@ app.use((ctx, next) => {
   </body>
 </html>
 `;
+            //unplug();
         } else {
-            console.log('else');
             next();
         }
     });
 });
 
 app.listen(3000, () => {
-    console.log('server is running');
+    console.log('server is running!');
 });

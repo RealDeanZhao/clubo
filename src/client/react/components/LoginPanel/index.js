@@ -6,8 +6,8 @@ import {observer, inject} from 'mobx-react';
 export default class LoginPanel extends React.Component {
 
     render() {
-        const {user} = this.props.userStore;
-        console.log(user);
+        //const {user} = this.props.userStore;
+       
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">Login: </div>

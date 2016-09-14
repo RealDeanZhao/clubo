@@ -9,6 +9,7 @@ import ReplyEditor from './ReplyEditor';
 import ReplyListContainer from './ReplyList';
 import ReplyButton from './ReplyButton';
 import UserForm from './User';
+import {ShowWhenAuthenticated, HideWhenAuthenticated} from './HOC';
 
 export {
 App,
@@ -21,5 +22,7 @@ CluboEditor,
 ReplyEditor,
 ReplyListContainer,
 ReplyButton,
-UserForm
+UserForm,
+ShowWhenAuthenticated,
+HideWhenAuthenticated,
 };
