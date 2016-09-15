@@ -1,4 +1,3 @@
-import {ShowWhenAuthenticated} from './Authenticated';
-import {HideWhenAuthenticated} from './Authenticated';
+import ShowOrHide from './ShowOrHide';
 
-export {ShowWhenAuthenticated, HideWhenAuthenticated}
+export {ShowOrHide}

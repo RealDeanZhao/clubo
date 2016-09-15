@@ -3,22 +3,30 @@ import fetch from 'isomorphic-fetch';
 import reactCookie from 'react-cookie';
 
 class AppStore {
-    @observable isAuthenticated;
+    @observable isAuthenticated = false;
 
     constructor() {
-        this.verifyToken();
+
     }
 
     @action verifyToken = async () => {
         const response = await fetch(`/api/v1/auth`, {
             credentials: 'same-origin'
         });
-        
+
         if (response.status == 401) {
             this.isAuthenticated = false;
         } else {
             this.isAuthenticated = true;
         }
+    }
+
+    @action logout = async () => {
+        const response = await fetch(`/api/v1/auth/logout`, {
+            credentials: 'same-origin'
+        });
+
+        this.isAuthenticated = false;
     }
 }
 

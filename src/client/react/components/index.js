@@ -9,7 +9,7 @@ import ReplyEditor from './ReplyEditor';
 import ReplyListContainer from './ReplyList';
 import ReplyButton from './ReplyButton';
 import UserForm from './User';
-import {ShowWhenAuthenticated, HideWhenAuthenticated} from './HOC';
+import {ShowOrHide} from './HOC';
 
 export {
 App,
@@ -23,6 +23,5 @@ ReplyEditor,
 ReplyListContainer,
 ReplyButton,
 UserForm,
-ShowWhenAuthenticated,
-HideWhenAuthenticated,
+ShowOrHide
 };

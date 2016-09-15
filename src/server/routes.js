@@ -42,7 +42,8 @@ export default (app) => {
     });
 
     router.get('/api/v1/auth/logout', async function (ctx, next) {
-        ctx.response.status = 302;
+        ctx.cookies.set('token', '', { maxAge: -1 });
+        ctx.response.status = 200;
     });
 
     router.get('/api/v1/auth/github/callback',
@@ -54,9 +55,9 @@ export default (app) => {
 
                     const localUserRepository = new LocalUserRepository();
                     const localUser = await localUserRepository.getByGithubId(user.id);
-                    
+
                     ctx.cookies.set('token', token);
-                    
+
                     if (localUser && localUser.active) {
                         ctx.redirect('/');
                     } else {

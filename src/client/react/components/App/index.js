@@ -1,18 +1,22 @@
 import * as React from 'react';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 import reactCookie from 'react-cookie';
 
-import {LoginPanel, NavBar, TopicEditor, ReplyEditor, HideWhenAuthenticated} from '../';
+import {LoginPanel, NavBar, TopicEditor, ReplyEditor, ShowOrHide} from '../';
 
+@inject('appStore')
+@observer
 export default class App extends React.Component {
     componentDidMount() {
-
+        const {verifyToken} = this.props.appStore;
+        verifyToken();
     }
 
     render() {
         require('./app.css');
-        const {children, authenticated} = this.props;
+        const {children} = this.props;
+        const {isAuthenticated} = this.props.appStore;
 
         return (
             <div className='app-clubo'>
@@ -28,7 +32,7 @@ export default class App extends React.Component {
                                 {children}
                             </main>
                             <aside className='col-md-2 sidebar'>
-                                <HideWhenAuthenticated component={<LoginPanel/>}/>
+                                <ShowOrHide component={<LoginPanel/>} show={!isAuthenticated}/>
                             </aside>
                         </div>
                     </div>
