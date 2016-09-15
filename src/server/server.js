@@ -7,7 +7,6 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
 import {match, RouterContext, Router, IndexRoute, Route, createMemoryHistory} from 'react-router';
 import {renderToString} from 'react-dom/server';
-import reactCookie from 'react-cookie';
 
 const Thinky = require('thinky');
 const serve = require('koa-static');

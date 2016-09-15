@@ -1,5 +1,4 @@
 import {TopicRepository} from '../../repositories';
-import cookie from 'react-cookie';
 
 const topicRepository = new TopicRepository();
 

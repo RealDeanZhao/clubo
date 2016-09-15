@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {observer, inject} from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
-import reactCookie from 'react-cookie';
 
 import {LoginPanel, NavBar, TopicEditor, ReplyEditor, ShowOrHide} from '../';
 

@@ -1,6 +1,5 @@
 import { observable, action, runInAction, autorun} from 'mobx';
 import fetch from 'isomorphic-fetch';
-import reactCookie from 'react-cookie';
 
 class AppStore {
     @observable isAuthenticated = false;
