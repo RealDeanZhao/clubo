@@ -18,13 +18,18 @@ export default class TopicListContainer extends React.Component {
         const {topicStore} = this.props;
 
         return (
-            <TopicListView topics={topicStore.topics} />
+            <div>
+                <TopicListView topics={topicStore.topics} />
+                <PaginationContainer/>
+            </div>
         );
     };
 }
 
 class TopicListView extends React.Component {
     render() {
+        require('./styles.css');
+
         const {topics} = this.props;
         const view = topics.map(function (topic) {
             return (
@@ -32,10 +37,10 @@ class TopicListView extends React.Component {
             );
         }, this);
         return (
-            <ul>
+            <div className='topic-list-container'>
+                <div>List Header</div>
                 {view}
-                <PaginationContainer/>
-            </ul>
+            </div>
         );
     };
 
@@ -43,23 +48,28 @@ class TopicListView extends React.Component {
 
 class TopicEntryView extends React.Component {
     render() {
+        require('./styles.css');
+
         return (
-            <li className="list-group-item">
-                <div>
-                    <span className="pull-right">
-                        <span title="Replies">
-                            {this.props.replyCount}
-                        </span>
-                        <span>/</span>
-                        <span title='Views'>
-                            {this.props.visitCount}
-                        </span>
-                    </span>
+            <div className='topic-list-item'>
+                <div className='topic-list-item-header'>
+
+                </div>
+
+                <h4 className='topic-list-item-body'>
                     <Link className='topic_title' to={'/topics/detail/' + this.props.id}>
                         {this.props.title}
                     </Link>
+                </h4>
+                <div className='topic-list-item-footer'>
+                    <span>
+                        Replies: {this.props.replyCount}
+                    </span>
+                    <span title='Views'>
+                        Views: {this.props.visitCount}
+                    </span>
                 </div>
-            </li >
+            </div >
         )
     };
 }

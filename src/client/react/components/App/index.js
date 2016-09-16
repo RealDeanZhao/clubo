@@ -13,31 +13,34 @@ export default class App extends React.Component {
     }
 
     render() {
-        require('./app.css');
+        require('./styles.css');
         const {children} = this.props;
         const {isAuthenticated} = this.props.appStore;
 
         return (
-            <div className='app-clubo'>
+            <div>
                 <DevTools/>
-                <NavBar></NavBar>
-                <section className='content-wrap'>
-                    <div className='containter'>
-                        <div className='row'>
-                            <aside className='col-md-1 sidebar'>
-
-                            </aside>
-                            <main className='col-md-9 main-content'>
-                                {children}
-                            </main>
-                            <aside className='col-md-2 sidebar'>
+                <div className='app-container'>
+                    {/*<NavBar></NavBar>*/}
+                    <div className='left-sidebar'>
+                        <div className='left-sidebar-wrapper'>
+                            <div className='top'>
+                                <a>Item 1</a>
+                            </div>
+                            <div className='bottom'>
                                 <ShowOrHide component={<LoginPanel/>} show={!isAuthenticated}/>
-                            </aside>
+                            </div>
                         </div>
                     </div>
-                </section>
-                <TopicEditor/>
-                <ReplyEditor/>
+                    <div className='main-content'>{children}</div>
+                    <div className='right-sidebar'>
+                        <div className='right-sidebar-wrapper'>
+                            
+                        </div>
+                    </div>
+                    <TopicEditor/>
+                    <ReplyEditor/>
+                </div>
             </div>
         );
     }
