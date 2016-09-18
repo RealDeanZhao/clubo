@@ -26,10 +26,6 @@
     padding-bottom: 5px;
 }
 
-.app-container .right-sidebar {
-    flex: 1 0 100px;
-}
-
 .app-container .right-sidebar .right-sidebar-wrapper {
     position: fixed;
     top: 0; right: 0;
@@ -40,4 +36,13 @@
 .app-container .main-content {
     flex: 8;
     margin: 0px 10px 10px 0px;
+    min-height: 100vh;
+}
+
+.app-container .main-content-left {
+    flex: 1 0 100px;
+}
+
+.app-container .main-content-right {
+    flex: 1 0 100px;
 }

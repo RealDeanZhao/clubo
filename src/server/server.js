@@ -75,6 +75,7 @@ app.use((ctx, next) => {
   <head>
     <meta charset="utf-8">
     <title>Clubo</title>
+    <script src="https://use.fontawesome.com/7707674361.js"></script>
     <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
