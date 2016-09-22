@@ -42,7 +42,7 @@ app.use(bodyParser());
 
 usePassport(app);
 
-app.use(serve('.'));
+app.use(serve(path.resolve(__dirname, "../../dist")));
 
 koaRoutes(app);
 

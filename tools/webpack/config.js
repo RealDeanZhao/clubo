@@ -77,8 +77,11 @@ function getEntry() {
       // Register vendors here
       vendor: [
         'babel-polyfill',
-        'react', 'react-dom',
-        'react-router'
+        'react',
+        'react-dom',
+        'react-router',
+        'mobx',
+        'mobx-react'
       ],
     };
   }
