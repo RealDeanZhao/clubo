@@ -14,39 +14,40 @@ const localUserApi = new LocalUserApi();
 const router = new Router();
 
 import {isAuthencated} from './middlewares';
+import config from '../config';
 
 export default (app) => {
+    log.debug('initialize routes');
+    router
+        .get(config.server.topic.getAll, topicApi.getAll)
+        .get(config.server.topic.get, topicApi.get)
+        .post(config.server.topic.create, topicApi.create)
+        .put(config.server.topic.update, isAuthencated, topicApi.update)
+        .del(config.server.topic.delete, isAuthencated, topicApi.delete);
 
     router
-        .get('/api/v1/topics', topicApi.getAll)
-        .get('/api/v1/topics/:id', topicApi.get)
-        .post('/api/v1/topics/', topicApi.create)
-        .put('/api/v1/topics/:id', isAuthencated, topicApi.update)
-        .del('/api/v1/topics/:id', isAuthencated, topicApi.delete);
+        .get(config.server.reply.getAll, replyApi.getAll)
+        .get(config.server.reply.get, replyApi.get)
+        .post(config.server.reply.create, replyApi.create)
+        .put(config.server.reply.update, isAuthencated, replyApi.update)
+        .del(config.server.reply.delete, isAuthencated, replyApi.delete);
 
     router
-        .get('/api/v1/topics/:topicId/replies', replyApi.getAll)
-        .get('/api/v1/topics/:topicId/replies/:id', replyApi.get)
-        .post('/api/v1/topics/:topicId/replies/', replyApi.create)
-        .put('/api/v1/topics/:topicId/replies/:id', isAuthencated, replyApi.update)
-        .del('/api/v1/topics/:topicId/replies/:id', isAuthencated, replyApi.delete);
+        .post(config.server.localUser.create, localUserApi.create)
+        .put(config.server.localUser.update, localUserApi.update);
 
-    router
-        .post('/api/v1/users/', localUserApi.create)
-        .put('/api/v1/users/:id', localUserApi.update);
+    router.get(config.server.auth.github, passport.authenticate('github'));
 
-    router.get('/api/v1/auth/github', passport.authenticate('github'));
-
-    router.get('/api/v1/auth', isAuthencated, async function (ctx, next) {
+    router.get(config.server.auth.base, isAuthencated, async function (ctx, next) {
         ctx.response.status = 302;
     });
 
-    router.get('/api/v1/auth/logout', async function (ctx, next) {
+    router.get(config.server.auth.logout, async function (ctx, next) {
         ctx.cookies.set('token', '', { maxAge: -1 });
         ctx.response.status = 200;
     });
 
-    router.get('/api/v1/auth/github/callback',
+    router.get(config.server.auth.githubCallback,
         async (ctx, next) => {
             return passport.authenticate('github', async (err, user, info, status) => {
                 if (user) {
@@ -62,7 +63,7 @@ export default (app) => {
                         ctx.redirect('/');
                     } else {
                         const result = await localUserRepository.create({ githubUserId: user.id });
-                        ctx.redirect(`/users/${result.id}`);
+                        ctx.redirect(`${config.server.localUser.base}/${result.id}`);
                     }
                 } else {
                     ctx.redirect('/');
@@ -73,6 +74,3 @@ export default (app) => {
 
     app.use(router.routes());
 }
-
-
-

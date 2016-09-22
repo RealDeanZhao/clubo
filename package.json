@@ -17,7 +17,7 @@
   },
   "betterScripts": {
     "start": {
-      "command": "clear && nodemon ./src/server/index.js",
+      "command": "nodemon ./src/server/index.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
@@ -29,7 +29,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
-        "PORT": "8080"
+        "PORT": "3001"
       }
     },
     "build": {

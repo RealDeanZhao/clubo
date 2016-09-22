@@ -12,6 +12,5 @@ var WebpackIsomorphicTools = require('webpack-isomorphic-tools');
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicToolsConfig)
     .development(global.__DEV__)
     .server(rootDir, function () {
-        console.log('rootDir is:' + rootDir);
         require('./server');
     });

@@ -1,6 +1,8 @@
 import { observable, action, runInAction, autorun} from 'mobx';
 import fetch from 'isomorphic-fetch';
 
+import config from '../../../../config';
+
 class ReplyStore {
     @observable replies = [];
     @observable topicId = '';

@@ -1,10 +1,13 @@
 import {ReplyModel} from '../models/ReplyModel';
+import log from '../utils/log';
+
 const thinky = require('thinky')();
 const r = thinky.r;
 
 export default class ReplyRepository {
     async getAll(query) {
         const {topicId, recordsPerPage, page} = query;
+        log.debug(query);
         return await ReplyModel
             .orderBy({ index: r.desc('updateAt') })
             .filter({ topicId })

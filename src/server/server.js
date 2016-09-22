@@ -17,6 +17,7 @@ import reactRoutes from '../client/react/routes';
 import {usePassport} from './middlewares';
 import * as stores from '../client/react/stores';
 import log from './utils/log';
+import config from '../config';
 
 const app = new Koa();
 
@@ -42,7 +43,7 @@ app.use(bodyParser());
 
 usePassport(app);
 
-app.use(serve(path.resolve(__dirname, "../../dist")));
+app.use(serve(config.directories.dist));
 
 koaRoutes(app);
 
@@ -69,7 +70,7 @@ app.use((ctx, next) => {
                     </div>
                 </Provider>
             );
-            log.debug('2');
+
             try {
                 ctx.response.set('content-type', 'text/html');
                 ctx.response.status = 200;
@@ -84,6 +85,6 @@ app.use((ctx, next) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('server is running!');
+app.listen(config.server.port, () => {
+    console.log(`server is running, port ${config.server.port}`);
 });
