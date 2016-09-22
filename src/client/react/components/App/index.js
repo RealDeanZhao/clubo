@@ -8,6 +8,7 @@ import GithubSignInButton from '../Buttons/GithubSignInButton';
 import SignOutButton from '../Buttons/SignOutButton';
 import HomePageButton from '../Buttons/HomePageButton';
 import CreateTopicButton from '../Buttons/CreateTopicButton';
+import './styles.css';
 
 @inject('appStore')
 @observer
@@ -18,14 +19,13 @@ export default class App extends React.Component {
     }
 
     render() {
-        require('./styles.css');
+        
         const {children} = this.props;
 
         return (
             <div>
                 <DevTools/>
                 <div className='app-container'>
-                    {/*<NavBar></NavBar>*/}
                     <div className='left-sidebar'>
                         <div className='nav'>
                             <CreateTopicButton />

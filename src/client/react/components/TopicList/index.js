@@ -4,6 +4,7 @@ import {observer, inject} from 'mobx-react';
 import {Link} from 'react-router';
 
 import PaginationContainer from './Pagination';
+import './styles.css';
 
 @inject('topicStore')
 @observer
@@ -28,8 +29,6 @@ export default class TopicListContainer extends React.Component {
 
 class TopicListView extends React.Component {
     render() {
-        require('./styles.css');
-
         const {topics} = this.props;
         const view = topics.map(function (topic) {
             return (
@@ -48,8 +47,6 @@ class TopicListView extends React.Component {
 
 class TopicEntryView extends React.Component {
     render() {
-        require('./styles.css');
-
         return (
             <div className='topic-list-item'>
                 <div className='topic-list-item-header'>

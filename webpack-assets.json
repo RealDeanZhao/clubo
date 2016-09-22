@@ -1,32 +1,29 @@
 {
   "javascript": {
-    "main": "/bundle.js"
+    "app": "/app.17d61c8c50820c561b33.js"
   },
   "styles": {},
   "assets": {
     "./src/client/react/components/App/styles.css": {
-      "_style": ".app-container {\n    display: flex;\n}\n\n.app-container .left-sidebar {\n    flex: 1 1;\n    background: #2a2a2a;\n    display: flex;\n    flex-direction: column;\n    height: 100vh;\n}\n\n.left-sidebar .nav {\n    flex: 1 1 150px;\n    display: flex;\n    flex-direction: column;\n}\n\n.left-sidebar .nav  a {\n    color:#999999;\n    text-shadow:0 1px 0 black;\n    padding:10px 15px;\n    text-align: left;\n}\n\n.left-sidebar .nav  a:hover {\n    background-color: #e78170;\n    color:white;\n    text-shadow:0 1px 0 #de533a;\n}\n\n.app-container .main-content {\n    flex: 8 3;\n    position: relative;\n    overflow-y: auto;\n}\n\n.app-container .main-content .main-content-inner{\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 80%;\n    height: 100%;\n}\n\n.app-container .main-content-left {\n    flex: 2.5 0;\n}\n\n"
+      "_style": ".app-container {\n    display: -ms-flexbox;\n    display: flex;\n}\n\n.app-container .left-sidebar {\n    -ms-flex: 1 1;\n        flex: 1 1;\n    background: #2a2a2a;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n    height: 100vh;\n}\n\n.left-sidebar .nav {\n    -ms-flex: 1 1 150px;\n        flex: 1 1 150px;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n}\n\n.left-sidebar .nav  a {\n    color:#999999;\n    text-shadow:0 1px 0 black;\n    padding:10px 15px;\n    text-align: left;\n}\n\n.left-sidebar .nav  a:hover {\n    background-color: #e78170;\n    color:white;\n    text-shadow:0 1px 0 #de533a;\n}\n\n.app-container .main-content {\n    -ms-flex: 8 3;\n        flex: 8 3;\n    position: relative;\n    overflow-y: auto;\n}\n\n.app-container .main-content .main-content-inner{\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 80%;\n    height: 100%;\n}\n\n.app-container .main-content-left {\n    -ms-flex: 2.5 0;\n        flex: 2.5 0;\n}\n\n"
     },
-    "./src/client/react/components/TopicList/styles.css": {
-      "_style": ".topic-list-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.topic-list-container .topic-list-item {\n    /* border: 5px solid mediumvioletred; */\n    height: 100px;\n    border-top: 1px dashed #d9d9d9 ;\n\n    display: flex;\n    flex-direction: column;\n}\n\n.topic-list-container .topic-list-item .topic-list-item-body a{\n     color: #555555;\n     text-decoration: none;\n} \n\n.topic-list-container .topic-list-item .topic-list-item-header{\n     margin: 0;\n}\n\n.topic-list-container .topic-list-item .topic-list-item-footer{\n    font-size: 12px;\n    line-height:20px;\n}\n \n.topic-list-container .topic-list-item .topic-list-item-footer span{\n    color: #999999\n}\n "
-    },
-    "./src/client/react/components/TopicDetail/topic-detail.css": {
-      "_style": ".topic-detail {\n    background-color: white;\n    padding: 2em;\n    border-color: #e1e1e1;\n}\n\n.topic-detail-title {\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-bottom-color: black;\n    padding-bottom: 10px;\n}"
-    },
-    "./src/client/react/components/CluboEditor/clubo-editor.css": {
+    "./src/client/react/components/CluboEditor/styles.css": {
       "_style": ".clubo-editor {\n    height: 500px;\n    display : block;\n    overflow-y:scroll;\n    width: 100%;\n}\n\n.clubo-editor-modal {\n    width: 77%;\n}\n\n.clubo-editor-previewer {\n    height: 500px;\n    display : block;\n    overflow-y:scroll;\n    width: 100%;\n    background-color: white;\n}"
     },
-    "./src/client/react/components/TopicEditor/topic-editor.css": {
-      "_style": ".topic-editor-modal {\n    width: 77%;\n}\n"
-    },
-    "./src/client/react/components/ReplyEditor/reply-editor.css": {
+    "./src/client/react/components/ReplyEditor/styles.css": {
       "_style": ".reply-editor-modal {\n    width: 77%;\n}\n"
     },
-    "./src/client/react/components/ReplyList/reply-list.css": {
-      "_style": ".reply-list {\n    margin-top: 2em;\n}\n\n.reply-list-header {\n    background-color: #f6f6f6;\n    height: 40px;\n    padding: 10px;\n}"
+    "./src/client/react/components/ReplyList/styles.css": {
+      "_style": ".reply-list {\n    margin-top: 2em;\n}\n\n.reply-list-header {\n    background-color: #f6f6f6;\n    height: 40px;\n    padding: 10px;\n}\n\n.reply-detail {\n    background-color: white;\n    padding: 2em;\n    margin-bottom: 3px;\n}\n"
     },
-    "./src/client/react/components/ReplyList/reply-detail.css": {
-      "_style": ".reply-detail {\n    background-color: white;\n    padding: 2em;\n    margin-bottom: 3px;\n}\n"
+    "./src/client/react/components/TopicDetail/styles.css": {
+      "_style": ".topic-detail {\n    background-color: white;\n    padding: 2em;\n    border-color: #e1e1e1;\n}\n\n.topic-detail-title {\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-bottom-color: black;\n    padding-bottom: 10px;\n}"
+    },
+    "./src/client/react/components/TopicEditor/styles.css": {
+      "_style": ".topic-editor-modal {\n    width: 77%;\n}\n"
+    },
+    "./src/client/react/components/TopicList/styles.css": {
+      "_style": ".topic-list-container {\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n}\n\n.topic-list-container .topic-list-item {\n    /* border: 5px solid mediumvioletred; */\n    height: 100px;\n    border-top: 1px dashed #d9d9d9 ;\n\n    display: -ms-flexbox;\n\n    display: flex;\n    -ms-flex-direction: column;\n        flex-direction: column;\n}\n\n.topic-list-container .topic-list-item .topic-list-item-body a{\n     color: #555555;\n     text-decoration: none;\n} \n\n.topic-list-container .topic-list-item .topic-list-item-header{\n     margin: 0;\n}\n\n.topic-list-container .topic-list-item .topic-list-item-footer{\n    font-size: 12px;\n    line-height:20px;\n}\n \n.topic-list-container .topic-list-item .topic-list-item-footer span{\n    color: #999999\n}\n "
     }
   }
 }

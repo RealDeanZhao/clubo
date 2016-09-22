@@ -4,12 +4,50 @@
   "description": "club o",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "typings-install": "typings install",
-    "build": "tsc -p ./",
-    "build:watch": "tsc -p ./ -w",
-    "start": "webpack  && node ./dist/index.js",
-    "dev": "set NODE_ENV=development & nodemon src/server/index.js"
+    "start": "better-npm-run start",
+    "start:production": "npm run build && npm run start:prod",
+    "start:prod": "better-npm-run start:prod",
+    "build": "npm run clean:build && better-npm-run build",
+    "test": "better-npm-run test",
+    "test:watch": "npm test -- --no-single-run",
+    "clean:all": "npm run clean:build && npm run clean:coverage",
+    "clean:build": "better-npm-run clean:build",
+    "clean:coverage": "better-npm-run clean:coverage",
+    "coveralls": "better-npm-run coveralls && npm run test:clean"
+  },
+  "betterScripts": {
+    "start": {
+      "command": "clear && nodemon ./src/server/index.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development",
+        "PORT": "3000"
+      }
+    },
+    "start:prod": {
+      "command": "node ./src/server/index.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "production",
+        "PORT": "8080"
+      }
+    },
+    "build": {
+      "command": "webpack --progress --display-error-details --config ./tools/webpack",
+      "env": {
+        "NODE_ENV": "production",
+        "BABEL_ENV": "es"
+      }
+    },
+    "clean:build": {
+      "command": "rimraf ./dist"
+    },
+    "clean:coverage": {
+      "command": "rimraf ./coverage"
+    },
+    "coveralls": {
+      "command": "cat ./coverage/lcov/lcov.info | coveralls"
+    }
   },
   "repository": {
     "type": "git",
@@ -49,39 +87,48 @@
     "thinky": "^2.3.4"
   },
   "devDependencies": {
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
+    "autoprefixer": "^6.4.1",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-istanbul": "^2.0.1",
+    "babel-plugin-lodash": "^3.2.9",
+    "babel-plugin-module-resolver": "^2.2.0",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-react-display-name": "^6.8.0",
-    "babel-plugin-transform-runtime": "^6.12.0",
-    "babel-plugin-typecheck": "^3.9.0",
-    "babel-polyfill": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-plugin-transform-react-constant-elements": "^6.9.1",
+    "babel-plugin-transform-react-inline-elements": "^6.8.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-latest": "^6.14.0",
     "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-runtime": "^6.11.6",
+    "babel-register": "^6.14.0",
+    "better-npm-run": "0.0.11",
     "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
+    "image-webpack-loader": "^2.0.0",
+    "imports-loader": "^0.6.5",
     "isomorphic-fetch": "^2.2.1",
     "json-loader": "^0.5.4",
     "koa-webpack-dev-middleware": "^1.2.1",
     "koa-webpack-hot-middleware": "^1.0.3",
-    "nodemon": "^1.9.2",
-    "react-hot-loader": "^1.3.0",
-    "react-transform-catch-errors": "^1.0.2",
-    "react-transform-hmr": "^1.0.4",
-    "redbox-react": "^1.2.10",
+    "nodemon": "^1.10.2",
+    "postcss": "^5.2.0",
+    "postcss-loader": "^0.13.0",
+    "react-hot-loader": "^3.0.0-beta.4",
+    "redbox-react": "^1.3.1",
+    "rimraf": "^2.5.4",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
+    "stylelint-webpack-plugin": "^0.3.1",
     "ts-loader": "^0.8.2",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.12.1",
-    "webpack-isomorphic-tools": "^2.5.7"
+    "webpack": "^2.1.0-beta.24",
+    "webpack-dev-middleware": "^1.8.1",
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-isomorphic-tools": "^2.5.8"
   }
 }

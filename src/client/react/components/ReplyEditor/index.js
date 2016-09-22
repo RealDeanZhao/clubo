@@ -6,6 +6,7 @@ import {browserHistory} from 'react-router';
 
 import {CluboEditor} from '../';
 import form from './form';
+import './styles.css';
 
 @inject('replyEditorStore')
 @inject('replyStore')
@@ -33,7 +34,6 @@ export default class ReplyEditorModal extends React.Component {
     }
 
     render() {
-        require('./reply-editor.css');
         const {show} = this.props.replyEditorStore;
 
         return (

@@ -7,3 +7,9 @@
     height: 40px;
     padding: 10px;
 }
+
+.reply-detail {
+    background-color: white;
+    padding: 2em;
+    margin-bottom: 3px;
+}

@@ -3,6 +3,7 @@ import * as RBS from 'react-bootstrap';
 import { Editor, EditorState, ContentState } from 'draft-js';
 
 import CluboEditorPreviewer from './Previewer';
+import './styles.css';
 
 export default class CluboEditor extends React.Component {
     constructor(props) {
@@ -24,7 +25,6 @@ export default class CluboEditor extends React.Component {
     };
 
     render() {
-        require('./clubo-editor.css');
         const {id} = this.props;
         return (
             <div>

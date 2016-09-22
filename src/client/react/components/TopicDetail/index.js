@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 
 import {ReplyListContainer} from '../';
 import {ReplyButton} from '../';
+import './styles.css';
 
 @inject('topicStore')
 @observer
@@ -28,7 +29,6 @@ export default class TopicDetailContainer extends React.Component {
 
 class TopicDetail extends React.Component {
     render() {
-        require('./topic-detail.css');
         const { topic } = this.props;
 
         return (

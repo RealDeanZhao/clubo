@@ -14,7 +14,7 @@ export default class SignOutButton extends React.Component {
 
 const InnerComponent = ({isAuthenticated, logout}) => {
     if (isAuthenticated) {
-       return <a className="fa fa-sign-out fa-2x" onClick = {logout}>Sign Out</a>;
+       return <a onClick = {logout}><span className="fa fa-sign-out fa-2x" aria-hidden="true"> Sign Out </span></a>;
     } else {
         return null;
     }

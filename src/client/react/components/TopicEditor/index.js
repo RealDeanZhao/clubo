@@ -6,6 +6,7 @@ import {browserHistory} from 'react-router';
 
 import {CluboEditor} from '../';
 import form from './form.js';
+import './styles.css';
 
 @inject('topicEditorStore')
 @inject('topicStore')
@@ -30,8 +31,6 @@ export default class TopicEditorModal extends React.Component {
     }
 
     render() {
-
-        require('./topic-editor.css');
         const {show} = this.props.topicEditorStore;
 
         return (

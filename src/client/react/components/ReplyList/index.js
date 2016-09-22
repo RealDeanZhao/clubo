@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 
 import PaginationContainer from './Pagination';
 import {ReplyButton} from '../';
+import './styles.css';
 
 @inject('replyStore')
 @observer
@@ -21,7 +22,6 @@ export default class ReplyList extends React.Component {
     };
 
     render() {
-        require('./reply-list.css');
         const {topicId} = this.props;
         const {replies} = this.props.replyStore;
 
@@ -56,7 +56,7 @@ class ReplyListView extends React.Component {
 }
 class ReplyEntryView extends React.Component {
     render() {
-        require('./reply-detail.css');
+
         const {content, topicId, id} = this.props;
 
         return (

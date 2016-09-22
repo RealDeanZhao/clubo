@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 
 export default class EditorPreviewer extends React.Component {
     render() {
-        require('./clubo-editor.css');
+        require('./styles.css');
         const {source} = this.props;
 
         return (
